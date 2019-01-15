@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Panel</title>
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/discord.11.4.2.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+</head>
+
+<body>
+    <table class="content">
+        <th class="top">
+            <div>
+                <div>
+                    <p class='border header'><img src='http://cdn.onlinewebfonts.com/svg/img_7412.png'
+                        class="fasIMG invert"> Last Messages</p>
+                    <div id="lastMessages" class="scrollable"></div>
+                    <button id="clearChat"><i class="fas fa-broom"></i> Clean</button>
+                    <select id="guilds"></select><br>
+                    <select id="channels"></select><br>
+                    <textarea class='send' id="toSend"></textarea><br>
+                    <button id="send" class="blue"><i class="fas fa-share-square"></i> Send</button>
+                    <button id="delLast" class="red"><i class="far fa-calendar-times"></i> Delete Last Message</button>
+                </div>
+        </th>
+        <th class="top">
+            <div>
+                <div>
+                    <p id='guildName' class="border header"><img src="https://image.flaticon.com/icons/png/512/36/36773.png"
+                        class="fasIMG invert"> Informations</p>
+                    <div id="guildInfo" class="scrollable"></div>
+                    <button id='leaveGuild' class="red"><i class="fas fa-sign-out-alt"></i> Leave Guild</button><br>
+                    <button id='invite' class="blue"><i class="far fa-envelope"></i> Invite</button><br><br>
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>Auto-Scroll</legend>
+                        <label class="switch">
+                            <input id="chk1" type="checkbox" value="last">
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="last">Last Messages</label><br /><br />
+                        <label class="switch">
+                            <input id="chk2" type="checkbox" value="chatCheck" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <label id='channelNameLabel' for="chatCheck">Chat</label><br /><br />
+                        <label class="switch">
+                            <input id="chk3" type="checkbox" value="animCheck" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="animCheck">Enable auto-scrolling animation</label><br /><br />
+                    </fieldset>
+                </div>
+        </th>
+        <th class="top big">
+            <div>
+                <p id='channelName' class="border header"><img src='https://static.thenounproject.com/png/332789-200.png'
+                    class="fasIMG invert"> Chat</p>
+                <div id="chat" class="scrollable"></div>
+                <button id='refreshToken' class="red demi"><i class="fas fa-key"></i> Refresh Token</button><button id="btnrRefreshChat"
+                    class="demi"><i class="fas fa-sync-alt"></i> Refresh Chat</button>
+            </div>
+            </div>
+        </th>
+    </table>
+</body>
+
+</html>
