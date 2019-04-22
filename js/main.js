@@ -1,3 +1,6 @@
+const client = new Discord.Client();
+client.login(token);
+
 function escapeHtml(text) {
     return text
         .replace(/&/g, "&amp;")
@@ -27,9 +30,6 @@ if (!localStorage.getItem("token") || localStorage.getItem("token") === "") {
     localStorage.setItem("token", token);
 }
 token = localStorage.getItem("token");
-
-const client = new Discord.Client();
-client.login(token);
 
 function updateChannel(client) {
     var channel;
@@ -66,7 +66,7 @@ function updateChannel(client) {
                         msgArray.forEach((msg) => {
                             var date = new Date(msg[1].createdAt);
                             var timestamp = `${leadingZero(date.getDate())}/${leadingZero(date.getMonth() + 1)}/${date.getFullYear()} ${leadingZero(date.getHours() + 1)}:${leadingZero(date.getMinutes())}`;
-                            html = `<br><b>${escapeHtml(msg[1].author.username)} [${timestamp}] <button class="mini" value="<@!${msg[1].author.id}>" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button><button class="mini" value="${msg[0]}" onclick="dlt(this.value)"> <i class="fas fa-trash-alt"></i> </button></b> ${escapeHtml(msg[1].content)}`
+                            html = `<br><b>${escapeHtml(msg[1].author.username)} [${timestamp}] <button class="mini" value="<@!${msg[1].author.id}>" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button><button class="mini" value="${msg[0]}" onclick="dlt(this.value)"> <i class="fas fa-trash-alt"></i> </button></b> ${escapeHtml(msg[1].content)}`;
                             $("#chat").html($("#chat").html() + html);
                         });
                     }
@@ -121,7 +121,7 @@ ${guild.roles.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>"
 Channels :<br>
 ${guild.channels.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}<br><br>
 Emojis :<br>
-${guildEmojis.join("<br>")}`)
+${guildEmojis.join("<br>")}`);
     }
 
     setTimeout(() => {
@@ -145,7 +145,7 @@ function fetchGuilds(client) {
 
 function sendMessage(client) {
     if ($("#toSend").val() === "") {
-        $("#send").html("<i class='fas fa-times'></i> Send [ERROR]")
+        $("#send").html("<i class='fas fa-times'></i> Send [ERROR]");
         setTimeout(() => {
             $("#send").html("<i class='fas fa-share-square'></i> Send");
         }, 2000);
@@ -167,7 +167,7 @@ function addText(value) {
 
 function dlt(value) {
     if (window.confirm("Are you sure ?")) {
-        client.channels.find((channel) => channel.id === $("#channels").val()).fetchMessage(value).then((msg) => msg.delete())
+        client.channels.find((channel) => channel.id === $("#channels").val()).fetchMessage(value).then((msg) => msg.delete());
     }
 }
 
@@ -175,7 +175,7 @@ $(document).ready(() => {
 
     $("#refreshToken").click(() => {
         if (window.confirm("Are you sure ?")) {
-            localStorage.setItem("token", "")
+            localStorage.setItem("token", "");
             window.location.reload(true);
         } else {
             return;
@@ -255,7 +255,7 @@ $(document).ready(() => {
 
     $("#delLast").click(() => {
         if (client.user.lastMessage === null) {
-            $("#delLast").html("<i class='fas fa-times'></i> Delete Last Message [ERROR]")
+            $("#delLast").html("<i class='fas fa-times'></i> Delete Last Message [ERROR]");
             setTimeout(() => {
                 $("#delLast").html("<i class='far fa-calendar-times'></i> Delete Last Message");
             }, 2000);
@@ -289,7 +289,7 @@ $(document).ready(() => {
                 alert(invite.code);
             });
         } else {
-            $("#invite").html("<i class='fas fa-times'></i> Invite [ERROR]")
+            $("#invite").html("<i class='fas fa-times'></i> Invite [ERROR]");
             setTimeout(() => {
                 $("#invite").html("<i class='far fa-envelope'></i> Invite");
             }, 2000);
