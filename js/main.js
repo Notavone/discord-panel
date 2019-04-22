@@ -1,5 +1,14 @@
+var token;
+if (!localStorage.getItem("token") || localStorage.getItem("token") === "") {
+    token = prompt("token", "");
+    localStorage.setItem("token", token);
+}
+token = localStorage.getItem("token");
+
 const client = new Discord.Client();
-client.login(token);
+client.login(token).catch(() => {
+    console.log("No token provided or token is invalid");
+});
 
 function escapeHtml(text) {
     return text
@@ -23,13 +32,6 @@ function leadingZero(number) {
     }
     return number;
 }
-
-var token;
-if (!localStorage.getItem("token") || localStorage.getItem("token") === "") {
-    token = prompt("token", "");
-    localStorage.setItem("token", token);
-}
-token = localStorage.getItem("token");
 
 function updateChannel(client) {
     var channel;
