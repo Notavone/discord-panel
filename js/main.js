@@ -26,7 +26,7 @@ function toggleVisibility(DOM) {
         $(DOM).animate({
             opacity: 1,
             height: "toggle"
-        }, 700)
+        }, 700);
     } else {
         $(DOM).animate({
             opacity: 0,

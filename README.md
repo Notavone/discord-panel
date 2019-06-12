@@ -1,5 +1,7 @@
 # Nøtavøne's discord bot panel
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d499e4a1863349ffb7366f6b9970082f)](https://www.codacy.com/app/Notavone/discord-panel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Notavone/discord-panel&amp;utm_campaign=Badge_Grade)
+
 Created by Nøtavøne, [Support](http://discord.gg/VucSArh)
 
 ## Getting Started
