@@ -49,7 +49,7 @@ div {
     filter: invert(100%);
 }
 
-td {
+.small {
     width: 28.5%;
 }
 
@@ -57,7 +57,7 @@ td {
     width: 650px;
 }
 
-table {
+.content {
     background-color: var(--contentColor);
     padding: 10px;
     border-radius: 5px;
@@ -119,7 +119,6 @@ a {
 .emojiImg {
     width: 45px;
     height: 45px;
-    border: 0.5px solid var(--textColor);
 }
 
 /*///////////////////////////////////////////
@@ -210,7 +209,7 @@ button:hover {
 .mini {
     width: auto;
     height: 20px;
-    padding: 0 0 0 0;
+    padding: 1px 2px 1px 2px;
     border-radius: 6px;
     font: 13.5px Arial;
 }

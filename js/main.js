@@ -21,7 +21,7 @@ function leadingZero(number) {
     return number;
 }
 
-function toggleVisibility(DOM) {
+function toggleVisibilityHeight(DOM) {
     if ($(DOM).css("display") === "none") {
         $(DOM).animate({
             opacity: 1,
@@ -31,7 +31,21 @@ function toggleVisibility(DOM) {
         $(DOM).animate({
             opacity: 0,
             height: "toggle"
-        }, 500)
+        }, 500);
+    }
+}
+
+function toggleVisibilityWidth(DOM) {
+    if ($(DOM).css("display") === "none") {
+        $(DOM).animate({
+            opacity: 1,
+            width: "toggle"
+        }, 700);
+    } else {
+        $(DOM).animate({
+            opacity: 0,
+            width: "toggle"
+        }, 500);
     }
 }
 

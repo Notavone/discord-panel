@@ -7,30 +7,29 @@
 
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 
 <body>
-    <table>
+    <table class="content">
         <tr class="top">
-            <td>
+            <td class="small">
                 <div>
                     <p class='border header'><img src='http://cdn.onlinewebfonts.com/svg/img_7412.png' class="fasIMG invert"> Last Messages</p>
                     <div id="lastMessages" class="scrollable"></div>
-                    <button id="clearChat"><i class="fas fa-broom"></i> Clear Last Messages Section</button>
+                    <button id="clearChat">♻ Clear Last Messages Section</button>
                     <select id="guilds"></select><br>
                     <select id="channels"></select><br>
                     <textarea class='send' id="toSend" placeholder="Write the content of your message"></textarea><br>
-                    <button id="send" class="blue"><i class="fas fa-share-square"></i> Send</button>
-                    <button id="delLast" class="red"><i class="far fa-calendar-times"></i> Delete Last Message</button>
+                    <button id="send" class="blue">↩ Send</button>
+                    <button id="delLast" class="red">🗓 Delete Last Message</button>
                 </div>
             </td>
-            <td>
+            <td class="small">
                 <div>
                     <p id='guildName' class="border header"><img src="https://image.flaticon.com/icons/png/512/36/36773.png" class="fasIMG invert"> Informations</p>
                     <div id="guildInfo" class="scrollable"></div>
-                    <button id='leaveGuild' class="red"><i class="fas fa-sign-out-alt"></i> Leave Guild</button><br>
-                    <button id='invite' class="blue"><i class="far fa-envelope"></i> Invite</button><br><br>
+                    <button id='leaveGuild' class="red">🚪 Leave Guild</button><br>
+                    <button id='invite' class="blue">✉ Invite</button><br><br>
                 </div>
                 <div>
                     <fieldset>
@@ -57,7 +56,7 @@
                 <div>
                     <p id='channelName' class="border header"><img src='https://static.thenounproject.com/png/332789-200.png' class="fasIMG invert"> Chat</p>
                     <div id="chat" class="scrollable"></div>
-                    <button id='refreshToken' class="red demi"><i class="fas fa-key"></i> Edit token</button><button id="btnrRefreshChat" class="demi"><i class="fas fa-sync-alt"></i> Refresh Chat</button>
+                    <button id='refreshToken' class="red demi">🔑 Edit token</button><button id="btnrRefreshChat" class="demi">🔁 Refresh Chat</button>
                 </div>
             </td>
         </tr>
