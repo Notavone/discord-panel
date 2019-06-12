@@ -20,3 +20,21 @@ function leadingZero(number) {
     }
     return number;
 }
+
+function toggleVisibility(DOM) {
+    if ($(DOM).css("display") === "none") {
+        $(DOM).animate({
+            opacity: 1,
+            height: "toggle"
+        }, 700)
+    } else {
+        $(DOM).animate({
+            opacity: 0,
+            height: "toggle"
+        }, 500)
+    }
+}
+
+function addText(value) {
+    $("#toSend").val(`${$("#toSend").val()}${value} `);
+}

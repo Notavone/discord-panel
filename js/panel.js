@@ -1,26 +1,129 @@
-function updateChannel(client) {
-    let channel;
-    let user;
-    let msgArray = [];
-    let html;
-    let date;
-    let timestamp;
+$(document).ready(() => {
 
-    $("#chat").html("");
+    /*///////////////////////////////////////////
+                    FUNCTIONS
+    //////////////////////////////////////////*/
 
-    setTimeout(() => {
+    function fetchGuilds() {
+        $("#channels").children("option").remove();
+        $("#guilds").children("option").remove();
+
+        client.guilds.forEach((guild) => {
+            $("#guilds").append(`<option value="${guild.id}">${escapeHtml(guild.name)}</option>`);
+        });
+        $("#guilds").append("<option value='DM'>[DM]</option>");
+
+        setTimeout(() => {
+            updtateGuild();
+        }, 250);
+    }
+
+    function updtateGuild() {
+        let usersArray = [];
+        let guildEmojis = [];
+        let guild;
+
+        $("#channels").children("option").remove();
+
         switch ($("#guilds").val()) {
             case "DM":
-                user = client.users.find((user) => user.id === $("#channels").val());
-                channel = client.channels.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
+                client.users.forEach((user) => {
+                    if (!user.bot) {
+                        usersArray.push(`${escapeHtml(user.username.toLowerCase())}    ||sortedbyønlyøne||    ${user.id}    ||sortedbyønlyøne||    ${escapeHtml(user.username)}`);
+                    }
+                });
+                usersArray.sort();
+                for (let i = 0; i < usersArray.length; i++) {
+                    usersArray[i] = usersArray[i].split("    ||sortedbyønlyøne||    ");
+                    $("#channels").append(`<option value="${usersArray[i][1]}">${escapeHtml(usersArray[i][2])} (${usersArray[i][1]})</option>`);
+                }
+                break;
 
-                $("#guildName").html(`<img src="${user.avatarURL||"./img/pp_discord.png"}" class="avatarIMG"> ${escapeHtml(user.username)}`);
-                $("#guildInfo").html(`User ID : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button>`);
+            default:
+                guild = client.guilds.find((g) => g.id === $("#guilds").val());
 
-                $("#channelNameLabel").text(`Chat [${user.username}]`);
-                $("#channelName").html(`<img src="https://static.thenounproject.com/png/332789-200.png" class="fasIMG invert"> #${escapeHtml(user.username)}`);
+                guild.emojis.forEach((emoji) => {
+                    if (emoji.animated) {
+                        guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<a:${emoji.identifier}>')">`)
+                    } else {
+                        guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')">`)
+                    };
+                });
 
-                if (channel !== null) {
+                guild.channels.filter((chan) => chan.type === "text").forEach((channel) => {
+                    if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
+                        $("#channels").append(`<option value="${channel.id}">${escapeHtml(channel.name)}</option>`);
+                    }
+                });
+
+                $("#guildName").html(`<img src="${guild.iconURL || "./img/pp_discord.png"}" class="avatarIMG"> ${escapeHtml(guild.name)}`);
+                $("#guildInfo").html(`
+Owner: ${guild.owner.user.tag} <button value=" <@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)"> <i class="fas fa-at"></i></button><br>
+Members : ${guild.members.size}<br>
+Channels (voice) : ${guild.channels.filter((chan) => chan.type === "voice").size}<br>
+Channels (text) : ${guild.channels.filter((chan) => chan.type === "text").size}<br><br>
+
+<button onclick="toggleVisibility('#guildRoles')">Roles</button>
+<div id="guildRoles" style="display:none; opacity: 0;">${guild.roles.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>
+
+<button onclick="toggleVisibility('#guildChannels')">Channels</button>
+<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>
+
+<button onclick="toggleVisibility('#guildEmojis')">Emojis</button>
+<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>
+`);
+
+                break;
+        }
+
+        setTimeout(() => {
+            updateChannel();
+        }, 250);
+    }
+
+    function updateChannel() {
+        let channel;
+        let user;
+        let msgArray = [];
+        let html;
+        let date;
+        let timestamp;
+
+        $("#chat").empty();
+
+        setTimeout(() => {
+            switch ($("#guilds").val()) {
+                case "DM":
+                    user = client.users.find((user) => user.id === $("#channels").val());
+                    channel = client.channels.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
+
+                    $("#guildName").html(`<img src="${user.avatarURL || "./img/pp_discord.png"}" class="avatarIMG"> ${escapeHtml(user.username)}`);
+                    $("#guildInfo").html(`User ID : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button>`);
+
+                    $("#channelNameLabel").text(`Chat [${user.username}]`);
+                    $("#channelName").html(`<img src="https://static.thenounproject.com/png/332789-200.png" class="fasIMG invert"> #${escapeHtml(user.username)}`);
+
+                    if (channel !== null) {
+                        channel.fetchMessages().then((messages) => {
+                            msgArray = Array.from(messages).reverse();
+                            msgArray.forEach((msg) => {
+                                date = new Date(msg[1].createdAt);
+                                timestamp = `${leadingZero(date.getDate())}/${leadingZero(date.getMonth() + 1)}/${date.getFullYear()} ${leadingZero(date.getHours() + 1)}:${leadingZero(date.getMinutes())}`;
+                                html = `<br><b>${escapeHtml(msg[1].author.username)} [${timestamp}] <button class="mini" value="<@!${msg[1].author.id}>" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button></b> ${escapeHtml(msg[1].content)}`;
+                                $("#chat").html($("#chat").html() + html);
+                            });
+                        }).catch((err) => {
+                            return;
+                        });
+                    }
+                    break;
+
+                default:
+                    channel = client.channels.find((c) => c.id === $("#channels").val());
+
+                    $("#channelNameLabel").text(`Chat [${channel.name}]`);
+                    $("#channelName").html(`<img src="https://static.thenounproject.com/png/332789-200.png" class="fasIMG invert"> #${escapeHtml(channel.name)}`);
+
                     channel.fetchMessages().then((messages) => {
                         msgArray = Array.from(messages).reverse();
                         msgArray.forEach((msg) => {
@@ -32,148 +135,47 @@ function updateChannel(client) {
                     }).catch((err) => {
                         return;
                     });
-                }
-                break;
-
-            default:
-                channel = client.channels.find((c) => c.id === $("#channels").val());
-
-                $("#channelNameLabel").text(`Chat [${channel.name}]`);
-                $("#channelName").html(`<img src="https://static.thenounproject.com/png/332789-200.png" class="fasIMG invert"> #${escapeHtml(channel.name)}`);
-
-                channel.fetchMessages().then((messages) => {
-                    msgArray = Array.from(messages).reverse();
-                    msgArray.forEach((msg) => {
-                        date = new Date(msg[1].createdAt);
-                        timestamp = `${leadingZero(date.getDate())}/${leadingZero(date.getMonth() + 1)}/${date.getFullYear()} ${leadingZero(date.getHours() + 1)}:${leadingZero(date.getMinutes())}`;
-                        html = `<br><b>${escapeHtml(msg[1].author.username)} [${timestamp}] <button class="mini" value="<@!${msg[1].author.id}>" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button><button class="mini" value="${msg[0]}" onclick="dlt(this.value)"> <i class="fas fa-trash-alt"></i> </button></b> ${escapeHtml(msg[1].content)}`;
-                        $("#chat").html($("#chat").html() + html);
-                    });
-                }).catch((err) => {
-                    return;
-                });
-                break;
-        }
-    }, 500);
-}
-
-function updtateGuild(client) {
-    let usersArray = [];
-    let guildEmojis = [];
-    let guild;
-
-    $("#channels").children("option").remove();
-
-    switch ($("#guilds").val()) {
-        case "DM":
-            client.users.forEach((user) => {
-                if (!user.bot) {
-                    usersArray.push(`${escapeHtml(user.username.toLowerCase())}    ||sortedbyønlyøne||    ${user.id}    ||sortedbyønlyøne||    ${escapeHtml(user.username)}`);
-                }
-            });
-            usersArray.sort();
-            for (let i = 0; i < usersArray.length; i++) {
-                usersArray[i] = usersArray[i].split("    ||sortedbyønlyøne||    ");
-                $("#channels").append(`<option value="${usersArray[i][1]}">${escapeHtml(usersArray[i][2])} (${usersArray[i][1]})</option>`);
+                    break;
             }
-            break;
+        }, 500);
+    }
 
-        default:
-            guild = client.guilds.find((g) => g.id === $("#guilds").val());
-
-            guild.emojis.forEach((emoji) => {
-                if (emoji.animated) {
-                    guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<a:${emoji.identifier}>')">`)
-                } else {
-                    guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')">`)
-                };
-            });
-
-            guild.channels.filter((chan) => chan.type === "text").forEach((channel) => {
-                if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
-                    $("#channels").append(`<option value="${channel.id}">${escapeHtml(channel.name)}</option>`);
-                }
-            });
-
-            if ($("#guilds").val() === "DM") {} else {
-
-                $("#guildName").html(`<img src="${guild.iconURL || "./img/pp_discord.png"}" class="avatarIMG"> ${escapeHtml(guild.name)}`);
-                $("#guildInfo").html(`
-Owner: ${guild.owner.user.tag} <button value=" <@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)"> <i class="fas fa-at"></i> </button><br>
-Members counter : ${guild.members.size}<br>
-Channels counter (voice) : ${guild.channels.filter((chan) => chan.type === "voice").size}<br>
-Channels counter (text) : ${guild.channels.filter((chan) => chan.type === "text").size}<br><br>
-Roles :<br>
-${guild.roles.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}<br><br>
-Channels :<br>
-${guild.channels.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}<br><br>
-Emojis :<br>
-${guildEmojis.join(" ")}`);
-            }
+    function sendMessage() {
+        if ($("#toSend").val() === "") {
+            $("#send").html("<i class='fas fa-times'></i> Send [ERROR : EMPTY MESSAGE]");
             setTimeout(() => {
-                updateChannel(client);
-            }, 250);
-            break;
-    }
-}
-
-function fetchGuilds(client) {
-    $("#channels").children("option").remove();
-    $("#guilds").children("option").remove();
-
-    client.guilds.forEach((guild) => {
-        $("#guilds").append(`<option value="${guild.id}">${escapeHtml(guild.name)}</option>`);
-    });
-    $("#guilds").append("<option value='DM'>[DM]</option>");
-
-    setTimeout(() => {
-        updtateGuild(client);
-    }, 250);
-}
-
-function sendMessage(client) {
-    if ($("#toSend").val() === "") {
-        $("#send").html("<i class='fas fa-times'></i> Send [ERROR : EMPTY MESSAGE]");
-        setTimeout(() => {
-            $("#send").html("<i class='fas fa-share-square'></i> Send");
-        }, 2000);
-    } else {
-        if ($("#guilds").val() === "DM") {
-            var user = client.users.find((user) => user.id === $("#channels").val());
-            user.send($("#toSend").val());
+                $("#send").html("<i class='fas fa-share-square'></i> Send");
+            }, 2000);
         } else {
-            client.channels.find((channel) => channel.id === $("#channels").val()).send($("#toSend").val());
-        }
-        $("#toSend").val("");
-    }
-}
-
-function addText(value) {
-    $("#toSend").val(`${$("#toSend").val()}${value} `);
-}
-
-function dlt(value) {
-    if (window.confirm("Are you sure ?")) {
-        client.channels.find((channel) => channel.id === $("#channels").val()).fetchMessage(value).then((msg) => msg.delete());
-    }
-}
-
-function scrollAnim(DOM1, DOM2, time) {
-    if (document.querySelector(DOM1).checked) {
-        if (document.querySelector("#chk3").checked) {
-            $(DOM2).animate({
-                scrollTop: $(DOM2)[0].scrollHeight - $(DOM2).height()
-            }, time);
-        } else {
-            $(DOM2).scrollTop($(DOM2)[0].scrollHeight - $(DOM2).height());
+            if ($("#guilds").val() === "DM") {
+                var user = client.users.find((user) => user.id === $("#channels").val());
+                user.send($("#toSend").val());
+            } else {
+                client.channels.find((channel) => channel.id === $("#channels").val()).send($("#toSend").val());
+            }
+            $("#toSend").val("");
         }
     }
-}
 
-$(document).ready(() => {
+    function scrollAnim(DOM1, DOM2, time) {
+        if (document.querySelector(DOM1).checked) {
+            if (document.querySelector("#chk3").checked) {
+                $(DOM2).animate({
+                    scrollTop: $(DOM2)[0].scrollHeight - $(DOM2).height()
+                }, time);
+            } else {
+                $(DOM2).scrollTop($(DOM2)[0].scrollHeight - $(DOM2).height());
+            }
+        }
+    }
+
+    /*///////////////////////////////////////////
+                    TOKEN
+    //////////////////////////////////////////*/
+
     var token;
     if (!localStorage.getItem("token") || localStorage.getItem("token") === "" || localStorage.getItem("token") === null) {
-        token = prompt("token", "");
+        token = prompt("Please enter your discord bot token", "");
         localStorage.setItem("token", token);
     }
     token = localStorage.getItem("token");
@@ -182,7 +184,6 @@ $(document).ready(() => {
     client.login(token).catch(() => {
         alert("No token provided or token is invalid");
     });
-    $("#lastMessages").html(getSavedValue("lastMessages"));
 
     /*///////////////////////////////////////////
                     DISCORD EVENTS
@@ -191,7 +192,7 @@ $(document).ready(() => {
     client.on("message", (message) => {
         if (message.channel.type !== "text") {
             if ($("#guilds").val() === "DM") {
-                updateChannel(client);
+                updateChannel();
             }
         } else {
             if (!message.author.bot) {
@@ -200,40 +201,40 @@ $(document).ready(() => {
             localStorage.setItem("lastMessages", $("#lastMessages").html());
 
             if (message.channel.id === $("#channels").val()) {
-                updateChannel(client);
+                updateChannel();
             }
         }
     });
 
     client.on("ready", () => {
-        console.log("Discord is READY!");
-        fetchGuilds(client);
+        $("#lastMessages").html(getSavedValue("lastMessages"));
+        fetchGuilds();
     });
 
     client.on("messageDelete", (message) => {
-        if (message.channel.id === $("#channels").val()) updateChannel(client);
-        if ($("#guilds").val() === "DM" && message.author.id === $("#channels").val()) updateChannel(client);
+        if (message.channel.id === $("#channels").val()) updateChannel();
+        if ($("#guilds").val() === "DM" && message.author.id === $("#channels").val()) updateChannel();
     });
 
     client.on("messageUpdate", (oldMessage, newMessage) => {
-        if (oldMessage.channel.id === $("#channels").val()) updateChannel(client);
-        if ($("#guilds").val() === "DM" && oldMessage.author.id === $("#channels").val()) updateChannel(client);
+        if (oldMessage.channel.id === $("#channels").val()) updateChannel();
+        if ($("#guilds").val() === "DM" && oldMessage.author.id === $("#channels").val()) updateChannel();
     });
 
     client.on("guildCreate", (guild) => {
-        fetchGuilds(client);
+        fetchGuilds();
     });
 
     client.on("guildDelete", (guild) => {
-        fetchGuilds(client);
+        fetchGuilds();
     });
 
     client.on("guildMemberAdd", (member) => {
-        fetchGuilds(client);
+        fetchGuilds();
     });
 
     client.on("guildMemberRemove", (member) => {
-        fetchGuilds(client);
+        fetchGuilds();
     });
 
     /*///////////////////////////////////////////
@@ -241,11 +242,11 @@ $(document).ready(() => {
     //////////////////////////////////////////*/
 
     $(document).on("change", "#guilds", () => {
-        updtateGuild(client);
+        updtateGuild();
     });
 
     $(document).on("change", "#channels", () => {
-        updateChannel(client);
+        updateChannel();
     });
 
     /*///////////////////////////////////////////
@@ -262,7 +263,7 @@ $(document).ready(() => {
     });
 
     $("#send").click(() => {
-        sendMessage(client);
+        sendMessage();
     });
 
     $("#delLast").click(() => {
@@ -275,7 +276,7 @@ $(document).ready(() => {
         } else {
             try {
                 client.user.lastMessage.delete();
-                updateChannel(client);
+                updateChannel();
             } catch (error) {
                 return;
             }
@@ -284,7 +285,7 @@ $(document).ready(() => {
 
     $("#clearChat").click(() => {
         localStorage.setItem("lastMessages", "");
-        $("#lastMessages").html("");
+        $("#lastMessages").empty();
     });
 
     $("#leaveGuild").click(() => {
@@ -320,7 +321,7 @@ $(document).ready(() => {
 
     $("#toSend").keyup((event) => {
         var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode === "13") {
+        if (keycode === 13) {
             event.preventDefault();
             $("#send").click();
         }
@@ -349,7 +350,7 @@ $(document).ready(() => {
 
     $("#btnrRefreshChat").click(() => {
         $("#btnrRefreshChat").html("<i class='fas fa-sync fa-spin'></i> Refresh Chat");
-        updateChannel(client);
+        updateChannel();
         setTimeout(() => {
             $("#btnrRefreshChat").html("<i class='fas fa-sync-alt'></i> Refresh Chat");
         }, 2000);
