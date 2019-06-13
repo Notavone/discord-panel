@@ -7,7 +7,7 @@ $(document).ready(() => {
     function createMessage(message) {
         let userTag = escapeHtml(message[1].author.tag);
         let userId = message[1].author.id;
-        let userAvatar = `<img src="${message[1].author.avatarURL || "./img/pp_discord.png"}" class="avatarIMG" style="display:inline"/>`;
+        let userAvatar = `<img src="${message[1].author.avatarURL || "./img/discord_defaults_avatars/5.png"}" class="avatarIMG" style="display:inline"/>`;
         let creationDate = new Date(message[1].createdAt);
         let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
         let html;
@@ -27,7 +27,7 @@ $(document).ready(() => {
         $("#channels").children("option").remove();
         $("#guilds").children("option").remove();
 
-        if(client.guilds.size === 0) {
+        if (client.guilds.size === 0) {
             return;
         }
 
@@ -52,7 +52,7 @@ $(document).ready(() => {
             case "DM":
 
                 // includes client self user and clyde
-                if(client.users.size <= 2) {
+                if (client.users.size <= 2) {
                     return;
                 }
 
@@ -73,27 +73,15 @@ $(document).ready(() => {
             default:
                 guild = client.guilds.find((g) => g.id === $("#guilds").val());
 
-                if(guild.channels.filter((chan) => chan.type === "text").size === 0) {
-                    return;
+                if (guild.channels.filter((chan) => chan.type === "text").size > 0) {
+                    guild.channels.filter((chan) => chan.type === "text").forEach((channel) => {
+                        if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
+                            $("#channels").append(`<option value="${channel.id}">${escapeHtml(channel.name)}</option>`);
+                        }
+                    });
                 }
 
-                guild.emojis.forEach((emoji) => {
-                    if (emoji.animated) {
-                        guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<a:${emoji.identifier}>')"/>`);
-                    } else {
-                        guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
-                    }
-                });
-                guild.members.forEach((member) => {
-                    guildMembers.push(`<img style="display: inline;" class="avatarIMG" src="${member.user.avatarURL || "./img/pp_discord.png"}"/> ${member.user.tag} <button value="<@!${member.user.id}>" onclick="addText(this.value)" class="mini">@</button>`);
-                });
-                guild.channels.filter((chan) => chan.type === "text").forEach((channel) => {
-                    if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
-                        $("#channels").append(`<option value="${channel.id}">${escapeHtml(channel.name)}</option>`);
-                    }
-                });
-
-                $("#guildName").html(`<img src="${guild.iconURL || "./img/pp_discord.png"}" class="avatarIMG"/> ${escapeHtml(guild.name)}`);
+                $("#guildName").html(`<img src="${guild.iconURL || "./img/discord_defaults_avatars/5.png"}" class="avatarIMG"/> ${escapeHtml(guild.name)}`);
 
                 // General informations
                 html += `Owner: ${guild.owner.user.tag} <button value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)">@</button><br>`;
@@ -102,6 +90,9 @@ $(document).ready(() => {
                 html += `Channels (text) : ${guild.channels.filter((chan) => chan.type === "text").size}<br><br>`;
 
                 // Members button
+                guild.members.forEach((member) => {
+                    guildMembers.push(`<img style="display: inline;" class="avatarIMG" src="${member.user.avatarURL || "./img/discord_defaults_avatars/5.png"}"/> ${member.user.tag} <button value="<@!${member.user.id}>" onclick="addText(this.value)" class="mini">@</button>`);
+                });
                 html += "<button onclick='toggleVisibilityHeight(`#guildMembers`)'>Members</button>";
                 html += `<div id="guildMembers" style="display:none; opacity: 0;">${guildMembers.join("<br>")}</div>`;
 
@@ -110,12 +101,23 @@ $(document).ready(() => {
                 html += `<div id="guildRoles" style="display:none; opacity: 0;">${guild.roles.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>`
 
                 // Channels button
-                html += "<button onclick='toggleVisibilityHeight(`#guildChannels`)'>Channels</button>";
-                html += `<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`
+                if (guild.channels.size > 0) {
+                    html += "<button onclick='toggleVisibilityHeight(`#guildChannels`)'>Channels</button>";
+                    html += `<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`
+                }
 
                 // Emojis button
-                html += "<button onclick='toggleVisibilityHeight(`#guildEmojis`)'>Emojis</button>";
-                html += `<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>`
+                if (guild.emojis.size > 0) {
+                    guild.emojis.forEach((emoji) => {
+                        if (emoji.animated) {
+                            guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<a:${emoji.identifier}>')"/>`);
+                        } else {
+                            guildEmojis.push(`<img class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
+                        }
+                    });
+                    html += "<button onclick='toggleVisibilityHeight(`#guildEmojis`)'>Emojis</button>";
+                    html += `<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>`
+                }
 
                 $("#guildInfo").html(html);
                 break;
@@ -137,9 +139,10 @@ $(document).ready(() => {
         switch ($("#guilds").val()) {
             case "DM":
                 user = client.users.find((user) => user.id === $("#channels").val());
+
                 channel = client.channels.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
 
-                $("#guildName").html(`<img src="${user.avatarURL || "./img/pp_discord.png"}" class="avatarIMG"/> ${escapeHtml(user.username)}`);
+                $("#guildName").html(`<img src="${user.avatarURL || "./img/discord_defaults_avatars/5.png"}" class="avatarIMG"/> ${escapeHtml(user.username)}`);
                 $("#guildInfo").html(`User ID : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
 
                 $("#channelNameLabel").text(`Chat [${user.username}]`);
@@ -159,6 +162,10 @@ $(document).ready(() => {
 
             default:
                 channel = client.channels.find((c) => c.id === $("#channels").val());
+
+                if (channel === null) {
+                    return;
+                }
 
                 $("#channelNameLabel").text(`Chat [${channel.name}]`);
                 $("#channelName").html(`<img src="https://static.thenounproject.com/png/332789-200.png" class="fasIMG invert"/> #${escapeHtml(channel.name)}`);
@@ -270,6 +277,42 @@ $(document).ready(() => {
 
     client.on("guildMemberRemove", (member) => {
         fetchGuilds();
+    });
+
+    client.on("channelCreate", (channel) => {
+        if (channel.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
+    });
+
+    client.on("channelDelete", (channel) => {
+        if (channel.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
+    });
+
+    client.on("channelUpdate", (oldChannel) => {
+        if (oldChannel.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
+    });
+
+    client.on("emojiCreate", (emoji) => {
+        if (emoji.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
+    });
+
+    client.on("emojiDelete", (emoji) => {
+        if (emoji.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
+    });
+
+    client.on("emojiUpdate", (oldEmoji) => {
+        if (oldEmoji.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
     });
 
     /*///////////////////////////////////////////
