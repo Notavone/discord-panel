@@ -271,12 +271,22 @@ $(document).ready(() => {
         fetchGuilds();
     });
 
+    client.on("guildUpdate", (oldGuild) => {
+        if (guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
+    });
+
     client.on("guildMemberAdd", (member) => {
-        fetchGuilds();
+        if (member.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
     });
 
     client.on("guildMemberRemove", (member) => {
-        fetchGuilds();
+        if (member.guild.id === $('#guilds').val()) {
+            updtateGuild();
+        }
     });
 
     client.on("channelCreate", (channel) => {
