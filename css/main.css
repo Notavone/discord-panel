@@ -45,6 +45,11 @@ div {
     transform: translateY(26%);
 }
 
+.emojiImg {
+    width: 45px;
+    height: 45px;
+}
+
 .invert {
     filter: invert(100%);
 }
@@ -114,11 +119,6 @@ a {
 
 .send {
     height: 60px;
-}
-
-.emojiImg {
-    width: 45px;
-    height: 45px;
 }
 
 /*///////////////////////////////////////////
