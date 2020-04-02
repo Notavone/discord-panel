@@ -50,14 +50,15 @@ function toggleVisibilityWidth(DOM) {
 }
 
 function addText(value) {
-    $("#toSend").val(`${$("#toSend").val()}${value} `);
+    let toSend = $("#toSend");
+    toSend.val(`${toSend.val()}${value} `);
 }
 
 function tempChange(DOM, text, time) {
     let newText = `${$(DOM).text().replace(text, "")} ${text}`;
 
     $(DOM).html(newText);
-    
+
     setTimeout(() => {
         $(DOM).html(newText.replace(text, ""));
     }, time);
