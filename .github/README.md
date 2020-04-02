@@ -7,10 +7,10 @@
 
 ## What makes this special ? 💎
 
-*  ⌛ **Easy installation :** just open the [panel](../index.html).
-*  🔒 **Security :** your token is stocked locally, no risk of it being stolen.
-*  📌 **User Friendly :** intuitive design, don't spend hours figuring out how to do something.
-*  👀 **Open source :** you have an idea ? just take the code and build something out of it !
+*   ⌛ **Easy installation :** just open the [panel](../index.html).
+*   🔒 **Security :** your token is stocked locally, no risk of it being stolen.
+*   📌 **User Friendly :** intuitive design, don't spend hours figuring out how to do something.
+*   👀 **Open source :** you have an idea ? just take the code and build something out of it !
 
 ## Built With 🔧
 

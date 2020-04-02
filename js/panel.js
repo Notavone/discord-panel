@@ -1,4 +1,20 @@
 $(document).ready(() => {
+    /*///////////////////////////////////////////
+                TOKEN
+    //////////////////////////////////////////*/
+
+    let token;
+    if (!localStorage.getItem("token") || localStorage.getItem("token") === "" || localStorage.getItem("token") === null) {
+        token = prompt("Please enter your discord bot token", "");
+        localStorage.setItem("token", token);
+    }
+    token = localStorage.getItem("token");
+
+    const client = new Discord.Client();
+    client.login(token).catch(() => {
+        alert("No token provided or token is invalid");
+    });
+
     const guilds = $("#guilds");
     const channels = $("#channels");
     const channelNameLabel = $("#channelNameLabel");
@@ -10,51 +26,6 @@ $(document).ready(() => {
     /*///////////////////////////////////////////
                     FUNCTIONS
     //////////////////////////////////////////*/
-
-    function createMessage(message) {
-        let userTag = escapeHtml(message[1].author.tag);
-        let userId = message[1].author.id;
-        let avatarUrl = message[1].author.avatarURL() || `./img/discord_defaults_avatars/${message[1].author.discriminator % 5}.png`;
-        let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a>`;
-        let creationDate = new Date(message[1].createdAt);
-        let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
-        let html;
-        let attachments = "";
-
-        Array.from(message[1].attachments).forEach((attachment) => {
-            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">file</a> `
-        });
-
-        if (message[1].type === "GUILD_MEMBER_JOIN") {
-            html = `${userAvatar} ${userTag} joined the server <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
-        } else if (message[1].content === "") {
-            html = `${userAvatar} ${userTag} sent some file(s) <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
-        } else {
-            html = `${userAvatar} ${userTag} <span class="font-size-mini">${timestamp}</span> <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>${escapeHtml(message[1].content)}<br>`;
-        }
-
-        if (attachments !== "") {
-            html += `Attachments : ${attachments}<br>`
-        }
-
-        return html;
-    }
-
-    function fetchGuilds() {
-        channels.children("option").remove();
-        guilds.children("option").remove();
-
-        if (client.guilds.cache.size === 0) {
-            return;
-        }
-
-        client.guilds.cache.forEach((guild) => {
-            guilds.append(`<option value="${guild.id}">${escapeHtml(guild.name)}</option>`);
-        });
-        guilds.append("<option value='DM'>[DM]</option>");
-
-        updateGuild();
-    }
 
     function updateGuild() {
         let usersArray = [];
@@ -116,7 +87,7 @@ $(document).ready(() => {
             // Channels button
             if (guild.channels.cache.size > 0) {
                 html += "<button onclick='toggleVisibilityHeight(`#guildChannels`)'>Channels</button>";
-                html += `<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`
+                html += `<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`;
             }
 
             // Emoji button
@@ -136,6 +107,51 @@ $(document).ready(() => {
         }
 
         updateChannel();
+    }
+
+    function createMessage(message) {
+        let userTag = escapeHtml(message[1].author.tag);
+        let userId = message[1].author.id;
+        let avatarUrl = message[1].author.avatarURL() || `./img/discord_defaults_avatars/${message[1].author.discriminator % 5}.png`;
+        let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a>`;
+        let creationDate = new Date(message[1].createdAt);
+        let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
+        let html;
+        let attachments = "";
+
+        Array.from(message[1].attachments).forEach((attachment) => {
+            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">file</a> `;
+        });
+
+        if (message[1].type === "GUILD_MEMBER_JOIN") {
+            html = `${userAvatar} ${userTag} joined the server <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+        } else if (message[1].content === "") {
+            html = `${userAvatar} ${userTag} sent some file(s) <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+        } else {
+            html = `${userAvatar} ${userTag} <span class="font-size-mini">${timestamp}</span> <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>${escapeHtml(message[1].content)}<br>`;
+        }
+
+        if (attachments !== "") {
+            html += `Attachments : ${attachments}<br>`;
+        }
+
+        return html;
+    }
+
+    function fetchGuilds() {
+        channels.children("option").remove();
+        guilds.children("option").remove();
+
+        if (client.guilds.cache.size === 0) {
+            return;
+        }
+
+        client.guilds.cache.forEach((guild) => {
+            guilds.append(`<option value="${guild.id}">${escapeHtml(guild.name)}</option>`);
+        });
+        guilds.append("<option value='DM'>[DM]</option>");
+
+        updateGuild();
     }
 
     function updateChannel() {
@@ -207,22 +223,6 @@ $(document).ready(() => {
     }
 
     /*///////////////////////////////////////////
-                    TOKEN
-    //////////////////////////////////////////*/
-
-    let token;
-    if (!localStorage.getItem("token") || localStorage.getItem("token") === "" || localStorage.getItem("token") === null) {
-        token = prompt("Please enter your discord bot token", "");
-        localStorage.setItem("token", token);
-    }
-    token = localStorage.getItem("token");
-
-    const client = new Discord.Client();
-    client.login(token).catch(() => {
-        alert("No token provided or token is invalid");
-    });
-
-    /*///////////////////////////////////////////
                     DISCORD EVENTS
     //////////////////////////////////////////*/
     client.on("message", (message) => {
@@ -267,7 +267,7 @@ $(document).ready(() => {
     });
 
     client.on("guildUpdate", (oldGuild) => {
-        if (guild.id === guilds.val()) {
+        if (oldGuild.id === guilds.val()) {
             updateGuild();
         }
     });
