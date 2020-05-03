@@ -20,3 +20,4 @@
 ## Authors 📝
 
 *   **[Nøtavøne](https://github.com/notavone)** - *Initial work*
+*   **[ziomciopoziomcio](https://github.com/ziomciopoziomcio)** - *White mode*
