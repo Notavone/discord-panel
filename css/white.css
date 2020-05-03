@@ -51,9 +51,6 @@ div {
     height: 45px;
 }
 
-.invert {
-    filter: invert(100%);
-}
 
 .small {
     width: 28.5%;
@@ -295,3 +292,4 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
