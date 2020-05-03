@@ -1,70 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Panel</title>
 
     <link rel="icon" href="favicon.ico">
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
     <link rel="stylesheet" href="./css/main.css">
-
 </head>
 
 <body>
-<div class="container-fluid">
-    <div class="row content">
-        <div class="col-3">
-            <p class='border header'><img class="avatarIMG" src='./img/icon/clock.png'> Last Messages</p>
-            <div class="scrollable" id="lastMessages"></div>
-            <button id="clearChat">♻ Clear Last Messages Section</button>
-            <select id="guilds"></select><br>
-            <select id="channels"></select><br>
-            <textarea class='send' id="toSend" placeholder="Write the content of your message"></textarea><br>
-            <button class="blue" id="send">↩ Send (ENTER)</button>
-            <!-- TODO Fix code apparently not working in this version of discord.js
-            <button id="delLast" class="red">🗓 Delete Last Message</button>-->
-        </div>
-        <div class="col-3">
-            <p class="border header" id='guildName'><img class="avatarIMG" src="./img/icon/info.png"> Informations</p>
-            <div class="scrollable" id="guildInfo"></div>
-            <button class="red" id='leaveGuild'>🚪 Leave Guild</button>
-            <br>
-            <button class="blue" id='invite'>✉ Invite</button>
-            <br><br>
-            <fieldset>
-                <legend>Auto-Scroll</legend>
-                <label class="switch">
-                    <input checked id="chk1" type="checkbox" value="last">
-                    <span class="slider round"></span>
-                </label>
-                <label for="last">Last Messages</label><br/><br/>
-                <label class="switch">
-                    <input checked id="chk2" type="checkbox" value="chatCheck">
-                    <span class="slider round"></span>
-                </label>
-                <label for="chatCheck" id='channelNameLabel'>Chat</label><br/><br/>
-                <label class="switch">
-                    <input id="chk3" type="checkbox" value="animCheck">
-                    <span class="slider round"></span>
-                </label>
-                <label for="animCheck">Enable auto-scrolling animation</label><br/><br/>
-            </fieldset>
-        </div>
-        <div class="col-6">
-            <p class="border header" id='channelName'><img class="avatarIMG" src='./img/icon/chat.png'> Chat</p>
-            <div class="scrollable" id="chat"></div>
-            <button class="red demi" id='refreshToken'>🔑 Edit token</button>
-            <button class="demi" id="btnrRefreshChat">🔁 Refresh Chat</button>
-            <a href="white.html"><button>☀ White mode</button></a>
-        </div>
-    </div>
-</div>
+    <table class="content">
+        <tr class="top">
+            <td class="small">
+                <div>
+                    <p class='border header'><img src='http://cdn.onlinewebfonts.com/svg/img_7412.png' class="fasIMG invert"> Last Messages</p>
+                    <div id="lastMessages" class="scrollable"></div>
+                    <button id="clearChat">♻ Clear Last Messages Section</button>
+                    <select id="guilds"></select><br>
+                    <select id="channels"></select><br>
+                    <textarea class='send' id="toSend" placeholder="Write the content of your message"></textarea><br>
+                    <button id="send" class="blue">↩ Send</button>
+                    <button id="delLast" class="red">🗓 Delete Last Message</button>
+                </div>
+            </td>
+            <td class="small">
+                <div>
+                    <p id='guildName' class="border header"><img src="https://image.flaticon.com/icons/png/512/36/36773.png" class="fasIMG invert"> Informations</p>
+                    <div id="guildInfo" class="scrollable"></div>
+                    <button id='leaveGuild' class="red">🚪 Leave Guild</button><br>
+                    <button id='invite' class="blue">✉ Invite</button><br><br>
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>Auto-Scroll</legend>
+                        <label class="switch">
+                            <input id="chk1" type="checkbox" value="last">
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="last">Last Messages</label><br /><br />
+                        <label class="switch">
+                            <input id="chk2" type="checkbox" value="chatCheck" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <label id='channelNameLabel' for="chatCheck">Chat</label><br /><br />
+                        <label class="switch">
+                            <input id="chk3" type="checkbox" value="animCheck" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="animCheck">Enable auto-scrolling animation</label><br /><br />
+                    </fieldset>
+                </div>
+            </td>
+            <td class="big">
+                <div>
+                    <p id='channelName' class="border header"><img src='https://static.thenounproject.com/png/332789-200.png' class="fasIMG invert"> Chat</p>
+                    <div id="chat" class="scrollable"></div>
+                    <button id='refreshToken' class="red demi">🔑 Edit token</button><button id="btnrRefreshChat" class="demi">🔁 Odśwież czat</button>
+					<a href="white.html"><button>☀ White mode</button></a>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="js/discord.12.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/discord.11.4.2.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/panel.js"></script>
 </html>
