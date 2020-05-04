@@ -10,6 +10,16 @@
 </head>
 
 <body>
+<div id="myNav" class="overlay">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <div class="overlay-content">
+    <a href="index.html">English</a>
+    <a href="indexpl.html">Polish (Polski)</a>
+  </div>
+
+</div>
     <table class="content">
         <tr class="top">
             <td class="small">
@@ -58,6 +68,7 @@
                     <div id="chat" class="scrollable"></div>
                     <button id='refreshToken' class="red demi">🔑 Edit token</button><button id="btnrRefreshChat" class="demi">🔁 Odśwież czat</button>
 					<a href="white.html"><button>☀ White mode</button></a>
+					<button onclick="openNav()">Languages</button>
                 </div>
             </td>
         </tr>
@@ -68,4 +79,5 @@
 <script type="text/javascript" src="./js/discord.11.4.2.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/panel.js"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
 </html>
