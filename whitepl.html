@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Panel</title>
+
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="./css/white.css">
+</head>
+
+<body>
+<div id="myNav" class="overlay">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <div class="overlay-content">
+    <a href="white.html">English</a>
+    <a href="whitepl.html">Polish (Polski)</a>
+  </div>
+
+</div>
+    <table class="content">
+        <tr class="top">
+            <td class="small">
+                <div>
+                    <p class='border header'><img src='http://cdn.onlinewebfonts.com/svg/img_7412.png' class="fasIMG invert"> Ostatnie wiadomości</p>
+                    <div id="lastMessages" class="scrollable"></div>
+                    <button id="clearChat">♻ Usuń ostatnie wiadomości</button>
+                    <select id="guilds"></select><br>
+                    <select id="channels"></select><br>
+                    <textarea class='send' id="toSend" placeholder="Napisz swoją wiadomość"></textarea><br>
+                    <button id="send" class="blue">↩ Wyślij</button>
+                    <button id="delLast" class="red">🗓 Usuń ostatnią wiadomość</button>
+                </div>
+            </td>
+            <td class="small">
+                <div>
+                    <p id='guildName' class="border header"><img src="https://image.flaticon.com/icons/png/512/36/36773.png" class="fasIMG invert"> Informacje</p>
+                    <div id="guildInfo" class="scrollable"></div>
+                    <button id='leaveGuild' class="red">🚪 Opuść serwer</button><br>
+                    <button id='invite' class="blue">✉ Zaproś</button><br><br>
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>Auto-Scroll</legend>
+                        <label class="switch">
+                            <input id="chk1" type="checkbox" value="last">
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="last">Ostatnie wiadomości</label><br /><br />
+                        <label class="switch">
+                            <input id="chk2" type="checkbox" value="chatCheck" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <label id='channelNameLabel' for="chatCheck">Chat</label><br /><br />
+                        <label class="switch">
+                            <input id="chk3" type="checkbox" value="animCheck" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="animCheck">Animacja auto-scrolowania</label><br /><br />
+                    </fieldset>
+                </div>
+            </td>
+            <td class="big">
+                <div>
+                    <p id='channelName' class="border header"><img src='https://static.thenounproject.com/png/332789-200.png' class="fasIMG invert"> Chat</p>
+                    <div id="chat" class="scrollable"></div>
+                    <button id='refreshToken' class="red demi">🔑 Zmień token</button><button id="btnrRefreshChat" class="demi">🔁 Odśwież czat</button>
+					<a href="indexpl.html"><button>🌙 Tryb Ciemny</button></a>
+					<button onclick="openNav()">Języki</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="./js/discord.11.4.2.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="./js/panel.js"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
+</html>
