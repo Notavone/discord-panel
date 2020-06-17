@@ -227,7 +227,7 @@ $(document).ready(() => {
     //////////////////////////////////////////*/
     client.on("message", (message) => {
         if (Number(message.channel.id) === Number(channels.val()) || Number(message.author.id) === Number(channels.val()) || Number(message.author.id) === Number(client.user.id)) {
-            updateChannel();
+             chat.html(chat.html() + createMessage([[message.id], message]));
         }
         if (message.channel.type !== "dm" && (Number(message.author.id) === Number(client.user.id) || !message.author.bot)) {
             lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${escapeHtml(message.content)}`);
