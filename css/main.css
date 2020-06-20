@@ -31,8 +31,8 @@
   --textColor: #fff;
   --blue: #3180ff;
   --blueHover: #0035ff;
-  --bodyColor: rgb(27, 27, 27);
-  --contentColor: rgb(42, 43, 46);
+  --bodyColor: rgb(26, 26, 27);
+  --contentColor: rgb(39, 39, 41);
 }
 
 * {
@@ -333,7 +333,7 @@ input:checked + .slider::before {
   color: #f1f1f1;
 }
 
-.overlay .closebtn {
+.overlay .closeBtn {
   position: absolute;
   top: 20px;
   right: 45px;
@@ -349,7 +349,7 @@ input:checked + .slider::before {
     font-size: 20px;
   }
 
-  .overlay .closebtn {
+  .overlay .closeBtn {
     font-size: 40px;
     top: 15px;
     right: 35px;

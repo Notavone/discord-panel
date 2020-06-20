@@ -28,7 +28,6 @@ $(document).ready(() => {
     const channelName = $("#channelName");
     const chat = $("#chat");
     const toSend = $("#toSend");
-    const sendFile = $("#sendFile");
     const lastMessages = $("#lastMessages");
     const clearChat = $("#clearChat");
     const send = $("#send");
@@ -161,7 +160,7 @@ $(document).ready(() => {
             if (guild.channels.cache.filter((chan) => chan.type === "text").size > 0) {
                 guild.channels.cache.filter((chan) => chan.type === "text").forEach((channel) => {
                     if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
-                        channels.append(`<option value="${channel.id}">${escapeHtml(channel.name)}</option>`);
+                        channels.append(`<option value="${channel.id}">#${escapeHtml(channel.name)}</option>`);
                     }
                 });
             }
@@ -441,6 +440,14 @@ $(document).ready(() => {
         if (keycode === 13) {
             event.preventDefault();
             send.click();
+        }
+        event.stopPropagation();
+    });
+
+    document.addEventListener("keyup", (event) => {
+        if (event.code === "Escape") {
+            event.preventDefault();
+            closeNav();
         }
         event.stopPropagation();
     });

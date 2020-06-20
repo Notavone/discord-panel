@@ -5,16 +5,21 @@
 
 ## Changelog
 
+### Version 1.2.2
+
+*   Changed the look of the panel
+*   ***Removed*** unused translations
+
+### Version 1.2.1
+
+*   Code cleaning
+
 ### Version 1.2.0
 
 *   **Updated** README with changelog and how to translate sections
 *   **Fixed** the emoji button not appearing due to the recent changes in discord.js and how guildEmojis now works
 *   **Added** a new language button to load a translation of the project (css and a bit of code by [@ziomciopoziomcio](https://github.com/ziomciopoziomcio))
 *   **Tried** a workaround to make the chat more readable in case of spam by [@RobinSchapendonk](https://github.com/RobinSchapendonk) but it's not currently working as intended so i'll make something later
-
-### Version 1.2.1
-
-*   Code cleaning
 
 ## What makes this special ? 💎
 

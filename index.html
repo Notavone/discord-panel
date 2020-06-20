@@ -14,38 +14,47 @@
 
 <body>
 
-<div id="myNav" class="overlay">
+<div id="languageNav" class="overlay">
 
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="javascript:void(0)" class="closeBtn" onclick="closeNav()">&times;</a>
 
     <div class="overlay-content">
         <a href="" onclick="localStorage.setItem('locale', 'en'); location.reload()">English</a>
-        <a href="" onclick="localStorage.setItem('locale', 'fr'); location.reload()">French</a>
-        <a href="">Polish</a>
+        <a href="" onclick="localStorage.setItem('locale', 'fr'); location.reload()">Français</a>
     </div>
 
 </div>
 
 <div class="container-fluid">
     <div class="row content">
+        <div class="col-6">
+            <p class="border header" id='channelName'>Chat</p>
+            <div class="scrollable" id="chat"></div>
+            <select class="demi" id="guilds"></select>
+            <select class="demi " id="channels"></select><br>
+            <textarea class='send' id="toSend" placeholder=""></textarea><br>
+            <button class="blue" id="send"></button>
+            <br>
+            <button class="blue" id='inviteBtn'></button>
+            <!-- TODO Fix code apparently not working in this version of discord.js
+            <button id="delLast" class="blue">🗓 Delete Last Message</button>-->
+        </div>
         <div class="col-3">
             <p id="lastMessagesHead" class='border header'></p>
             <div class="scrollable" id="lastMessages"></div>
             <button id="clearChat"></button>
-            <select id="guilds"></select><br>
-            <select id="channels"></select><br>
-            <textarea class='send' id="toSend" placeholder=""></textarea><br>
-            <button class="blue" id="send"></button>
-            <!-- TODO Fix code apparently not working in this version of discord.js
-            <button id="delLast" class="red">🗓 Delete Last Message</button>-->
+            <br>
+            <button id="refreshChat"></button>
+            <br>
+            <button class="red" id='refreshToken'></button>
+            <br>
+            <button class="red" id="language" onclick="openNav()"></button>
+            <button class="red" id='leaveGuild'></button>
         </div>
         <div class="col-3">
             <p class="border header" id='guildName'></p>
             <div class="scrollable" id="guildInfo"></div>
-            <button class="red" id='leaveGuild'></button>
             <br>
-            <button class="blue" id='inviteBtn'></button>
-            <br><br>
             <fieldset>
                 <legend id="autoScrollHead"></legend>
                 <label class="switch">
@@ -64,13 +73,6 @@
                 </label>
                 <label for="animCheck" id="animCheck"></label><br/><br/>
             </fieldset>
-        </div>
-        <div class="col-6">
-            <p class="border header" id='channelName'>Chat</p>
-            <div class="scrollable" id="chat"></div>
-            <button class="red demi" id='refreshToken'></button>
-            <button class="demi" id="refreshChat"></button>
-            <button id="language" onclick="openNav()"></button>
         </div>
     </div>
 </div>
