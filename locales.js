@@ -1,4 +1,4 @@
-locales = {
+const locales = {
     "en": {
         "text": {
             "clearLastMessages": "Clear Last Messages Section",

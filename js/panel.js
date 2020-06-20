@@ -61,6 +61,75 @@ $(document).ready(() => {
                     FUNCTIONS
     //////////////////////////////////////////*/
 
+    function createMessage(message) {
+        let userTag = escapeHtml(message[1].author.tag);
+        let userId = message[1].author.id;
+        let avatarUrl = message[1].author.avatarURL() || `./img/discord_defaults_avatars/${message[1].author.discriminator % 5}.png`;
+        let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a>`;
+        let creationDate = new Date(message[1].createdAt);
+        let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
+        let html;
+        let attachments = "";
+
+        Array.from(message[1].attachments).forEach((attachment) => {
+            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">${localeFile.text.fileAttachment}</a> `;
+        });
+
+        if (message[1].type === "GUILD_MEMBER_JOIN") {
+            html = `${userAvatar} ${userTag} ${localeFile.text.serverJoin} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+        } else if (message[1].content === "") {
+            html = `${userAvatar} ${userTag} ${localeFile.text.fileSent} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+        } else {
+            html = `${userAvatar} ${userTag} <span class="font-size-mini">${timestamp}</span> <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>${escapeHtml(message[1].content)}<br>`;
+        }
+
+        if (attachments !== "") {
+            html += `${localeFile.text.attachmentTxt} : ${attachments}<br>`;
+        }
+
+        return html;
+    }
+
+    function updateChannel() {
+        let channel;
+        let user;
+
+        chat.empty();
+        if (guilds.val() === "DM") {
+            user = client.users.cache.find((user) => user.id === channels.val());
+
+            channel = client.channels.cache.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
+            let avatarUrl = user.avatarURL() || `./img/discord_defaults_avatars/${user.discriminator % 5}.png`;
+            guildName.html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
+            $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
+
+            channelNameLabel.text(`${localeFile.text.channelNameLabel} [${user.username}]`);
+            channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(user.username)}`);
+
+            if (channel !== undefined) {
+                channel.messages.fetch().then((messages) => {
+                    Array.from(messages).reverse().forEach((msg) => {
+                        chat.html(chat.html() + createMessage(msg));
+                    });
+                });
+            }
+        } else {
+            channel = client.channels.cache.find((c) => c.id === channels.val());
+
+            if (channel === null) {
+                return;
+            }
+
+            channelNameLabel.text(`${localeFile.text.channelNameLabel} [${channel.name}]`);
+            channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(channel.name)}`);
+            channel.messages.fetch().then((messages) => {
+                Array.from(messages).reverse().forEach((msg) => {
+                    chat.html(chat.html() + createMessage(msg));
+                });
+            });
+        }
+    }
+
     function updateGuild() {
         let usersArray = [];
         let guildEmojis = [];
@@ -134,42 +203,13 @@ $(document).ready(() => {
                     }
                 });
                 html += `<button onclick='toggleVisibilityWidth("#guildEmojis")'>${localeFile.infos.emojis}</button>`;
-                html += `<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>`
+                html += `<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>`;
             }
 
             $("#guildInfo").html(html);
         }
 
         updateChannel();
-    }
-
-    function createMessage(message) {
-        let userTag = escapeHtml(message[1].author.tag);
-        let userId = message[1].author.id;
-        let avatarUrl = message[1].author.avatarURL() || `./img/discord_defaults_avatars/${message[1].author.discriminator % 5}.png`;
-        let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a>`;
-        let creationDate = new Date(message[1].createdAt);
-        let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
-        let html;
-        let attachments = "";
-
-        Array.from(message[1].attachments).forEach((attachment) => {
-            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">${localeFile.text.fileAttachment}</a> `;
-        });
-
-        if (message[1].type === "GUILD_MEMBER_JOIN") {
-            html = `${userAvatar} ${userTag} ${localeFile.text.serverJoin} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
-        } else if (message[1].content === "") {
-            html = `${userAvatar} ${userTag} ${localeFile.text.fileSent} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
-        } else {
-            html = `${userAvatar} ${userTag} <span class="font-size-mini">${timestamp}</span> <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>${escapeHtml(message[1].content)}<br>`;
-        }
-
-        if (attachments !== "") {
-            html += `${localeFile.text.attachmentTxt} : ${attachments}<br>`;
-        }
-
-        return html;
     }
 
     function fetchGuilds() {
@@ -186,44 +226,6 @@ $(document).ready(() => {
         guilds.append(`<option value="DM">[${localeFile.text.privateMessages}]</option>`);
 
         updateGuild();
-    }
-
-    function updateChannel() {
-        let channel;
-        let user;
-
-        chat.empty();
-        if (guilds.val() === "DM") {
-            user = client.users.cache.find((user) => user.id === channels.val());
-
-            channel = client.channels.cache.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
-            let avatarUrl = user.avatarURL() || `./img/discord_defaults_avatars/${user.discriminator % 5}.png`;
-            guildName.html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
-            $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
-
-            channelNameLabel.text(`${localeFile.text.channelNameLabel} [${user.username}]`);
-            channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(user.username)}`);
-
-            if (channel !== undefined) {
-                channel.messages.fetch().then((messages) => {
-                    Array.from(messages).reverse().forEach((msg) => {
-                        chat.html(chat.html() + createMessage(msg));
-                    });
-                });
-            }
-        } else {
-            channel = client.channels.cache.find((c) => c.id === channels.val());
-
-            if (channel === null) return;
-
-            channelNameLabel.text(`${localeFile.text.channelNameLabel} [${channel.name}]`);
-            channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(channel.name)}`);
-            channel.messages.fetch().then((messages) => {
-                Array.from(messages).reverse().forEach((msg) => {
-                    chat.html(chat.html() + createMessage(msg));
-                });
-            });
-        }
     }
 
     function sendMessage() {
@@ -272,7 +274,7 @@ $(document).ready(() => {
     });
 
     client.on("ready", () => {
-        $("#lastMessages").html(getSavedValue("lastMessages"));
+        lastMessages.html(localStorage.getItem("lastMessages") || "");
         fetchGuilds();
     });
 
@@ -319,7 +321,10 @@ $(document).ready(() => {
     });
 
     client.on("channelCreate", (channel) => {
-        if (guilds.val() === "[DM]" || channel.type === "dm") return;
+        if (guilds.val() === "[DM]" || channel.type === "dm") {
+            return;
+        }
+
         if (channel.guild.id === guilds.val()) {
             updateGuild();
         }

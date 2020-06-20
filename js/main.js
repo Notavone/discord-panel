@@ -7,13 +7,6 @@ function escapeHtml(text) {
         .replace(/'/g, "&#039;");
 }
 
-function getSavedValue(v) {
-    if (localStorage.getItem(v) === null) {
-        return "";
-    }
-    return localStorage.getItem(v);
-}
-
 function leadingZero(number) {
     if (Number(number) < 10) {
         number = "0" + number;

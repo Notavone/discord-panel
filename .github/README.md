@@ -32,9 +32,9 @@ COMING SOON™
 
 ## Author 📝
 
-| ![](https://github.com/notavone.png?size=100) |
-|:---:|
-|**[💻 Nøtavøne](https://github.com/notavone)**|
+| ![Nøtavøne](https://github.com/notavone.png?size=100) |
+|:-----------------------------------------------------:|
+| **[💻 Nøtavøne](https://github.com/notavone)**        |
 
 ## Contributors 📝
 
