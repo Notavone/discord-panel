@@ -12,6 +12,10 @@
 *   **Added** a new language button to load a translation of the project (css and a bit of code by [@ziomciopoziomcio](https://github.com/ziomciopoziomcio))
 *   **Tried** a workaround to make the chat more readable in case of spam by [@RobinSchapendonk](https://github.com/RobinSchapendonk) but it's not currently working as intended so i'll make something later
 
+### Version 1.2.1
+
+*   Code cleaning
+
 ## What makes this special ? 💎
 
 *   ⌛ **Easy "installation" :** clone the repository, unzip and open [the panel](../index.html).

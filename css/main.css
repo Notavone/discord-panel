@@ -1,6 +1,6 @@
-/*///////////////////////////////////////////
+/* ///////////////////////////////////////////
                     SCROLLBAR
-//////////////////////////////////////////*/
+////////////////////////////////////////// */
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -21,9 +21,9 @@
   transition: background-color 300ms linear;
 }
 
-/*///////////////////////////////////////////
+/* ///////////////////////////////////////////
                     GENERAL
-//////////////////////////////////////////*/
+////////////////////////////////////////// */
 
 :root {
   --red: #d3514c;
@@ -36,7 +36,7 @@
 }
 
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
   outline: none;
   color: var(--textColor);
 }
@@ -144,12 +144,11 @@ button {
   width: 100%;
   height: 35px;
   padding: 6px 0;
-  font: bold 13px Arial;
+  font: bold 13px Arial, sans-serif;
   background-color: var(--bodyColor);
   color: var(--textColor);
   border: 2px solid var(--contentColor);
   border-radius: 2px;
-
 }
 
 button:hover {
@@ -210,7 +209,7 @@ div {
   height: 20px;
   padding: 1px 2px 1px 2px;
   border-radius: 6px;
-  font: 13.5px Arial;
+  font: 13.5px Arial, sans-serif;
 }
 
 /*///////////////////////////////////////////
@@ -253,11 +252,11 @@ legend {
   right: 0;
   bottom: 0;
   background-color: var(--bodyColor);
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 12px;
@@ -265,8 +264,8 @@ legend {
   left: 4px;
   bottom: 3px;
   background-color: var(--textColor);
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -278,11 +277,11 @@ input:checked + .slider:hover {
   transition: background-color 300ms linear;
 }
 
-input:focus + .slider {
+input:checked + .slider:hover {
   box-shadow: 0 0 2px var(--red);
 }
 
-input:checked + .slider:before {
+input:checked + .slider::before {
   -webkit-transform: translateX(12px);
   -ms-transform: translateX(12px);
   transform: translateX(12px);
@@ -292,7 +291,7 @@ input:checked + .slider:before {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.round::before {
   border-radius: 50%;
 }
 
@@ -329,7 +328,8 @@ input:checked + .slider:before {
   transition: 0.3s;
 }
 
-.overlay a:hover, .overlay a:focus {
+.overlay a:hover,
+.overlay a:focus {
   color: #f1f1f1;
 }
 
@@ -346,7 +346,7 @@ input:checked + .slider:before {
   }
 
   .overlay a {
-    font-size: 20px
+    font-size: 20px;
   }
 
   .overlay .closebtn {
@@ -354,4 +354,5 @@ input:checked + .slider:before {
     top: 15px;
     right: 35px;
   }
+
 }

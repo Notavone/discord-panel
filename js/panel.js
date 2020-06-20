@@ -106,7 +106,7 @@ $(document).ready(() => {
             channelNameLabel.text(`${localeFile.text.channelNameLabel} [${user.username}]`);
             channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(user.username)}`);
 
-            if (channel !== undefined) {
+            if (channel !== null) {
                 channel.messages.fetch().then((messages) => {
                     Array.from(messages).reverse().forEach((msg) => {
                         chat.html(chat.html() + createMessage(msg));
