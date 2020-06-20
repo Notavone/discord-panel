@@ -3,16 +3,23 @@ $(document).ready(() => {
                 TOKEN
     //////////////////////////////////////////*/
 
+    let locale;
+    if (!localStorage.getItem("locale") || localStorage.getItem("locale") === "" || localStorage.getItem("locale") === null) {
+        localStorage.setItem("locale", "en");
+    }
+    locale = localStorage.getItem("locale");
+    let localeFile = locales[locale];
+
     let token;
     if (!localStorage.getItem("token") || localStorage.getItem("token") === "" || localStorage.getItem("token") === null) {
-        token = prompt("Please enter your discord bot token", "");
+        token = prompt(localeFile.token.prompt, "");
         localStorage.setItem("token", token);
     }
     token = localStorage.getItem("token");
 
     const client = new Discord.Client();
     client.login(token).catch(() => {
-        alert("No token provided or token is invalid");
+        alert(localeFile.token.invalid);
     });
 
     const guilds = $("#guilds");
@@ -21,7 +28,34 @@ $(document).ready(() => {
     const channelName = $("#channelName");
     const chat = $("#chat");
     const toSend = $("#toSend");
+    const sendFile = $("#sendFile");
     const lastMessages = $("#lastMessages");
+    const clearChat = $("#clearChat");
+    const send = $("#send");
+    const guildName = $("#guildName");
+    const leaveGuild = $("#leaveGuild");
+    const inviteBtn = $("#inviteBtn");
+    const refreshToken = $("#refreshToken");
+    const refreshChat = $("#refreshChat");
+
+    /*///////////////////////////////////////////
+                    LOADING TRANSLATION
+    //////////////////////////////////////////*/
+    $("#lastMessagesHead").html(`<img class="avatarIMG" src='./img/icon/clock.png'> ${localeFile.headings.lastMessages}`);
+    clearChat.html(`♻ ${localeFile.text.clearLastMessages}`);
+    toSend.attr("placeholder", localeFile.text.sendPlaceholder);
+    send.html(`↩ ${localeFile.buttons.send}`);
+    guildName.html(`<img class="avatarIMG" src="./img/icon/info.png"> ${localeFile.headings.guildName}`);
+    leaveGuild.html(`🚪 ${localeFile.buttons.leave}`);
+    inviteBtn.html(`✉ ${localeFile.buttons.invite}`);
+    $("#autoScrollHead").html(localeFile.headings.autoScroll);
+    $("#last").html(localeFile.headings.lastMessages);
+    channelNameLabel.html(localeFile.text.channelNameLabel);
+    $("#animCheck").html(localeFile.text.scrollCheck);
+    channelName.html(`<img class="avatarIMG" src='./img/icon/chat.png'> ${localeFile.text.channelNameLabel}`);
+    refreshToken.html(`🔑 ${localeFile.buttons.editToken}`);
+    refreshChat.html(`🔁 ${localeFile.buttons.refreshChat}`);
+    $("#language").html(`🏳️ ${localeFile.buttons.changeLanguage}`);
 
     /*///////////////////////////////////////////
                     FUNCTIONS
@@ -63,43 +97,43 @@ $(document).ready(() => {
                 });
             }
 
-            $("#guildName").html(`<a href="${guild.iconURL() || "./img/icon/info.png"}" target="_blank"><img alt="" src="${guild.iconURL() || "./img/icon/info.png"}" class="avatarIMG"/></a> ${escapeHtml(guild.name)}`);
+            guildName.html(`<a href="${guild.iconURL() || "./img/icon/info.png"}" target="_blank"><img alt="" src="${guild.iconURL() || "./img/icon/info.png"}" class="avatarIMG"/></a> ${escapeHtml(guild.name)}`);
 
             // General informations
 
-            html += `<br>Owner: ${guild.owner.user.tag} <button value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)">@</button><br>`;
-            html += `Members : ${guild.members.cache.filter((member) => !member.user.bot).size}<br>`;
-            html += `Channels (voice) : ${guild.channels.cache.filter((chan) => chan.type === "voice").size}<br>`;
-            html += `Channels (text) : ${guild.channels.cache.filter((chan) => chan.type === "text").size}<br><br>`;
+            html += `<br>${localeFile.infos.owner}: ${guild.owner.user.tag} <button value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)">@</button><br>`;
+            html += `${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}<br>`;
+            html += `${localeFile.infos.vChannels}: ${guild.channels.cache.filter((chan) => chan.type === "voice").size}<br>`;
+            html += `${localeFile.infos.tChannels}: ${guild.channels.cache.filter((chan) => chan.type === "text").size}<br><br>`;
 
             // Members button
             guild.members.cache.filter((member) => !member.user.bot).forEach((member) => {
                 let avatarUrl = member.user.avatarURL() || `./img/discord_defaults_avatars/${member.user.discriminator % 5}.png`;
                 guildMembers.push(`<a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button value="<@!${member.user.id}>" onclick="addText(this.value)" class="mini">@</button>`);
             });
-            html += "<button onclick='toggleVisibilityHeight(`#guildMembers`)'>Members</button>";
+            html += `<button onclick='toggleVisibilityHeight("#guildMembers")'>${localeFile.infos.members}</button>`;
             html += `<div id="guildMembers" style="display:none; opacity: 0;">${guildMembers.join("<br>")}</div>`;
 
             // Roles button
-            html += "<button onclick='toggleVisibilityHeight(`#guildRoles`)'>Roles</button>";
+            html += `<button onclick='toggleVisibilityHeight("#guildRoles")'>${localeFile.infos.roles}</button>`;
             html += `<div id="guildRoles" style="display:none; opacity: 0;">${guild.roles.cache.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>`;
 
             // Channels button
             if (guild.channels.cache.size > 0) {
-                html += "<button onclick='toggleVisibilityHeight(`#guildChannels`)'>Channels</button>";
+                html += `<button onclick='toggleVisibilityHeight("#guildChannels")'>${localeFile.infos.channels}</button>`;
                 html += `<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`;
             }
 
             // Emoji button
-            if (guild.emojis.size > 0) {
-                guild.emojis.forEach((emoji) => {
+            if (guild.emojis.cache.size > 0) {
+                guild.emojis.cache.forEach((emoji) => {
                     if (emoji.animated) {
                         guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<a:${emoji.identifier}>')"/>`);
                     } else {
                         guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
                     }
                 });
-                html += "<button onclick='toggleVisibilityHeight(`#guildEmojis`)'>Emojis</button>";
+                html += `<button onclick='toggleVisibilityWidth("#guildEmojis")'>${localeFile.infos.emojis}</button>`;
                 html += `<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>`
             }
 
@@ -120,19 +154,19 @@ $(document).ready(() => {
         let attachments = "";
 
         Array.from(message[1].attachments).forEach((attachment) => {
-            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">file</a> `;
+            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">${localeFile.text.fileAttachment}</a> `;
         });
 
         if (message[1].type === "GUILD_MEMBER_JOIN") {
-            html = `${userAvatar} ${userTag} joined the server <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+            html = `${userAvatar} ${userTag} ${localeFile.text.serverJoin} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
         } else if (message[1].content === "") {
-            html = `${userAvatar} ${userTag} sent some file(s) <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+            html = `${userAvatar} ${userTag} ${localeFile.text.fileSent} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
         } else {
             html = `${userAvatar} ${userTag} <span class="font-size-mini">${timestamp}</span> <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>${escapeHtml(message[1].content)}<br>`;
         }
 
         if (attachments !== "") {
-            html += `Attachments : ${attachments}<br>`;
+            html += `${localeFile.text.attachmentTxt} : ${attachments}<br>`;
         }
 
         return html;
@@ -149,7 +183,7 @@ $(document).ready(() => {
         client.guilds.cache.forEach((guild) => {
             guilds.append(`<option value="${guild.id}">${escapeHtml(guild.name)}</option>`);
         });
-        guilds.append("<option value='DM'>[DM]</option>");
+        guilds.append(`<option value="DM">[${localeFile.text.privateMessages}]</option>`);
 
         updateGuild();
     }
@@ -164,10 +198,10 @@ $(document).ready(() => {
 
             channel = client.channels.cache.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
             let avatarUrl = user.avatarURL() || `./img/discord_defaults_avatars/${user.discriminator % 5}.png`;
-            $("#guildName").html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
-            $("#guildInfo").html(`User ID : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
+            guildName.html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
+            $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
 
-            channelNameLabel.text(`Chat [${user.username}]`);
+            channelNameLabel.text(`${localeFile.text.channelNameLabel} [${user.username}]`);
             channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(user.username)}`);
 
             if (channel !== undefined) {
@@ -182,7 +216,7 @@ $(document).ready(() => {
 
             if (channel === null) return;
 
-            channelNameLabel.text(`Chat [${channel.name}]`);
+            channelNameLabel.text(`${localeFile.text.channelNameLabel} [${channel.name}]`);
             channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(channel.name)}`);
             channel.messages.fetch().then((messages) => {
                 Array.from(messages).reverse().forEach((msg) => {
@@ -196,14 +230,14 @@ $(document).ready(() => {
         let user;
 
         if (toSend.val() === "") {
-            tempChange("#send", "[ERROR : EMPTY MESSAGE]", 2000);
+            tempChange("#send", `[${localeFile.errors.emptyMsg}]`, 2000);
         } else {
             if (guilds.val() === "DM") {
                 user = client.users.cache.find((user) => user.id === channels.val());
                 user.send(toSend.val());
             } else {
                 client.channels.cache.find((channel) => channel.id === channels.val()).send(toSend.val()).catch(() => {
-                    tempChange("#send", "[ERROR : MISSING PERMISSIONS]", 2000);
+                    tempChange("#send", `[${localeFile.errors.missingPermissions}]`, 2000);
                 });
             }
             toSend.val("");
@@ -337,14 +371,14 @@ $(document).ready(() => {
                     BUTTONS EVENTS
     //////////////////////////////////////////*/
 
-    $("#refreshToken").click(() => {
-        if (window.confirm("Are you sure ?")) {
+    refreshToken.click(() => {
+        if (window.confirm(localeFile.token.confirmation)) {
             localStorage.setItem("token", "");
-            window.location.reload(true);
+            window.location.reload();
         }
     });
 
-    $("#send").click(() => {
+    send.click(() => {
         sendMessage();
     });
 
@@ -365,31 +399,30 @@ $(document).ready(() => {
     });
     */
 
-
-    $("#clearChat").click(() => {
+    clearChat.click(() => {
         localStorage.setItem("lastMessages", "");
         $("#lastMessages").empty();
     });
 
-    $("#leaveGuild").click(() => {
+    leaveGuild.click(() => {
         if (guilds.val() !== "DM") {
-            if (window.confirm("Leave this guild ?")) {
+            if (window.confirm(localeFile.token.confirmation)) {
                 client.guilds.cache.find((guild) => guild.id === guilds.val()).leave().catch(() => {
-                    tempChange("#leaveGuild", "[ERROR]", 2000);
+                    tempChange("#leaveGuild", `[${localeFile.errors.error}]`, 2000);
                 });
             }
         }
     });
 
-    $("#invite").click(() => {
+    inviteBtn.click(() => {
         if (guilds.val() !== "DM") {
             client.channels.cache.find((channel) => channel.id === channels.val()).createInvite().then((invite) => {
                 alert(`discord.gg/${invite.code}`);
             }).catch(() => {
-                tempChange("#invite", "[ERROR : MISSING PERMISSIONS]", 2000);
+                tempChange("#inviteBtn", `[${localeFile.errors.missingPermissions}]`, 2000);
             });
         } else {
-            tempChange("#invite", "[ERROR : DM]", 2000);
+            tempChange("#inviteBtn", `[${localeFile.errors.dm}]`, 2000);
         }
 
     });
@@ -402,7 +435,7 @@ $(document).ready(() => {
         let keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode === 13) {
             event.preventDefault();
-            $("#send").click();
+            send.click();
         }
         event.stopPropagation();
     });
@@ -427,7 +460,7 @@ $(document).ready(() => {
         }
     });
 
-    $("#btnrRefreshChat").click(() => {
+    refreshChat.click(() => {
         updateChannel();
     });
 
