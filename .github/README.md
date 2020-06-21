@@ -1,5 +1,5 @@
 ## Discord-panel
-![codacy grade](https://img.shields.io/codacy/grade/d499e4a1863349ffb7366f6b9970082f.svg?style=for-the-badge)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/38932906b8a5480baeac1d279a7d09cc)](https://www.codacy.com/manual/jedrzejnie/discord-panel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ziomciopoziomcio/discord-panel&amp;utm_campaign=Badge_Grade)
 ![repo size](https://img.shields.io/github/repo-size/Notavone/discord-panel.svg?style=for-the-badge)
 ![license](https://img.shields.io/github/license/Notavone/discord-panel.svg?style=for-the-badge)
 
