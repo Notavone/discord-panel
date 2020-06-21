@@ -27,8 +27,8 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-6">
-            <p class="border header" id='channelName'>Chat</p>
+        <div class="col-lg-12 col-xl-6">
+            <p class="header" id='channelName'>Chat</p>
             <div class="scrollable" id="chat"></div>
             <select class="demi" id="guilds"></select>
             <select class="demi " id="channels"></select><br>
@@ -39,8 +39,8 @@
             <!-- TODO Fix code apparently not working in this version of discord.js
             <button id="delLast" class="blue">🗓 Delete Last Message</button>-->
         </div>
-        <div class="col-3">
-            <p id="lastMessagesHead" class='border header'></p>
+        <div class="col-sm-12 col-lg-6 col-xl-3">
+            <p id="lastMessagesHead" class='header'></p>
             <div class="scrollable" id="lastMessages"></div>
             <button id="clearChat"></button>
             <br>
@@ -51,8 +51,8 @@
             <button class="red" id="language" onclick="openNav()"></button>
             <button class="red" id='leaveGuild'></button>
         </div>
-        <div class="col-3">
-            <p class="border header" id='guildName'></p>
+        <div class="col-sm-12 col-lg-6 col-xl-3">
+            <p class="header" id='guildName'></p>
             <div class="scrollable" id="guildInfo"></div>
             <br>
             <fieldset>

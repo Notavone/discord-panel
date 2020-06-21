@@ -61,32 +61,67 @@ $(document).ready(() => {
     //////////////////////////////////////////*/
 
     function createMessage(message) {
-        let userTag = escapeHtml(message[1].author.tag);
-        let userId = message[1].author.id;
-        let avatarUrl = message[1].author.avatarURL() || `./img/discord_defaults_avatars/${message[1].author.discriminator % 5}.png`;
-        let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a>`;
-        let creationDate = new Date(message[1].createdAt);
+        let userTag = escapeHtml(message.author.tag);
+        let userId = message.author.id;
+        let avatarUrl = message.author.avatarURL() || `./img/discord_defaults_avatars/${message.author.discriminator % 5}.png`;
+        let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"></a>`;
+        let creationDate = new Date(message.createdAt);
         let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
         let html;
-        let attachments = "";
+        let attachments = [];
 
-        Array.from(message[1].attachments).forEach((attachment) => {
-            attachments += `<a href="${escapeHtml(attachment[1].url)}" target="_blank">${localeFile.text.fileAttachment}</a> `;
+        Array.from(message.attachments).forEach((attachment) => {
+            let attachmentTxt = `<a href="${escapeHtml(attachment[1].url)}" target="_blank">`;
+            if (attachment[1].url.endsWith(".jpg") || attachment[1].url.endsWith(".jpeg") || attachment[1].url.endsWith(".png")) {
+                attachmentTxt += localeFile.fileType.img;
+            } else if (attachment[1].url.endsWith(".docx") || attachment[1].url.endsWith(".odt")) {
+                attachmentTxt += localeFile.fileType.doc;
+            } else if (attachment[1].url.endsWith(".pdf")) {
+                attachmentTxt += localeFile.fileType.pdf;
+            } else {
+                attachmentTxt += localeFile.fileType.unknown;
+            }
+            attachmentTxt += "</a>";
+            attachments.push(attachmentTxt);
         });
 
-        if (message[1].type === "GUILD_MEMBER_JOIN") {
-            html = `${userAvatar} ${userTag} ${localeFile.text.serverJoin} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
-        } else if (message[1].content === "") {
-            html = `${userAvatar} ${userTag} ${localeFile.text.fileSent} <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>`;
+        html = `<p>${userAvatar} ${escapeHtml(userTag)} `;
+
+        if (message.type === "GUILD_MEMBER_JOIN") {
+            html += `${localeFile.text.serverJoin}`;
+        } else if (message.content === "") {
+            html += `${localeFile.text.fileSent}`;
         } else {
-            html = `${userAvatar} ${userTag} <span class="font-size-mini">${timestamp}</span> <button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button><br>${escapeHtml(message[1].content)}<br>`;
+            html += `<span class="font-size-mini">${timestamp}</span> `;
         }
 
-        if (attachments !== "") {
-            html += `${localeFile.text.attachmentTxt} : ${attachments}<br>`;
+        html += `<button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button>`;
+
+        if (message.content !== "") {
+            html += `<br><span class="messageContent">${escapeHtml(message.content)}</span>`
         }
 
-        return html;
+        if (attachments.length > 0) {
+            html += `<br><span class="messageContent">${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</span>`;
+        }
+
+        return `${html} <span class="messageId">${message.id}</span></p>`;
+    }
+
+    function deleteMessage(message) {
+        chat.html().split("<p>").forEach((msg) => {
+            if (msg.includes(`<span class="messageId">${message.id}</span>`)) {
+                chat.html(chat.html().replace(`<p>${msg}`, ""));
+            }
+        });
+    }
+
+    function editMessage(oldMessage, newMessage) {
+        chat.html().split("<p>").forEach((msg) => {
+            if (msg.includes(`<span class="messageId">${oldMessage.id}</span>`)) {
+                chat.html(chat.html().replace("<p>" + msg, "<p>" + msg.replace(`<span class="messageContent">${oldMessage.content}</span>`, `<span class="messageContent">${escapeHtml(newMessage.content)}</span>`)));
+            }
+        });
     }
 
     function updateChannel() {
@@ -108,7 +143,7 @@ $(document).ready(() => {
             if (channel !== null) {
                 channel.messages.fetch().then((messages) => {
                     Array.from(messages).reverse().forEach((msg) => {
-                        chat.html(chat.html() + createMessage(msg));
+                        chat.html(chat.html() + createMessage(msg[1]));
                     });
                 });
             }
@@ -123,7 +158,7 @@ $(document).ready(() => {
             channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(channel.name)}`);
             channel.messages.fetch().then((messages) => {
                 Array.from(messages).reverse().forEach((msg) => {
-                    chat.html(chat.html() + createMessage(msg));
+                    chat.html(chat.html() + createMessage(msg[1]));
                 });
             });
         }
@@ -261,14 +296,20 @@ $(document).ready(() => {
                     DISCORD EVENTS
     //////////////////////////////////////////*/
     client.on("message", (message) => {
-        if (Number(message.channel.id) === Number(channels.val()) || Number(message.author.id) === Number(channels.val()) || Number(message.author.id) === Number(client.user.id)) {
+        if (Number(message.channel.id) === Number(channels.val())) {
+            chat.html(chat.html() + createMessage(message));
+        }
+
+        if ((Number(message.author.id) === Number(channels.val()) || message.author.id === client.user.id) && message.channel.type === "dm") {
             updateChannel();
         }
+
         if (message.channel.type !== "dm" && (Number(message.author.id) === Number(client.user.id) || !message.author.bot)) {
             lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${escapeHtml(message.content)}`);
         } else if (message.channel.type === "dm" && !message.author.bot) {
             lastMessages.html(lastMessages.html() + `<br><b>[DM] ${escapeHtml(message.author.tag)}</b> ${escapeHtml(message.content)}`);
         }
+
         localStorage.setItem("lastMessages", $("#lastMessages").html());
     });
 
@@ -278,17 +319,21 @@ $(document).ready(() => {
     });
 
     client.on("messageDelete", (message) => {
-        if (message.channel.id === channels.val()) {
-            updateChannel();
-        } else if (guilds.val() === "DM" && message.author.id === channels.val()) {
+        if (Number(message.channel.id) === Number(channels.val())) {
+            deleteMessage(message);
+        }
+
+        if ((Number(message.author.id) === Number(channels.val()) || message.author.id === client.user.id) && message.channel.type === "dm") {
             updateChannel();
         }
     });
 
     client.on("messageUpdate", (oldMessage, newMessage) => {
-        if (oldMessage.channel.id === channels.val()) {
-            updateChannel();
-        } else if (guilds.val() === "DM" && oldMessage.author.id === channels.val()) {
+        if (Number(oldMessage.channel.id) === Number(channels.val())) {
+            editMessage(oldMessage, newMessage);
+        }
+
+        if ((Number(oldMessage.author.id) === Number(channels.val()) || oldMessage.author.id === client.user.id) && oldMessage.channel.type === "dm") {
             updateChannel();
         }
     });
@@ -431,6 +476,10 @@ $(document).ready(() => {
 
     });
 
+    refreshChat.click(() => {
+        updateChannel();
+    });
+
     /*///////////////////////////////////////////
                     KEYUP EVENTS
     //////////////////////////////////////////*/
@@ -459,7 +508,7 @@ $(document).ready(() => {
     lastMessages.bind("mousewheel", (event) => {
         if (event.originalEvent.wheelDelta >= 0) {
             $("#chk1")[0].checked = false;
-        } else if ($("#lastMessages")[0].scrollHeight - 700 < $("#lastMessages").scrollTop()) {
+        } else if ($("#lastMessages")[0].scrollHeight - 500 < $("#lastMessages").scrollTop()) {
             $("#chk1")[0].checked = true;
         }
     });
@@ -467,17 +516,13 @@ $(document).ready(() => {
     chat.bind("mousewheel", (event) => {
         if (event.originalEvent.wheelDelta >= 0) {
             $("#chk2")[0].checked = false;
-        } else if ($("#chat")[0].scrollHeight - 700 < $("#chat").scrollTop()) {
+        } else if ($("#chat")[0].scrollHeight - 500 < $("#chat").scrollTop()) {
             $("#chk2")[0].checked = true;
         }
-    });
-
-    refreshChat.click(() => {
-        updateChannel();
     });
 
     setInterval(() => {
         scrollAnim("#chk1", "#lastMessages", 1000);
         scrollAnim("#chk2", "#chat", 250);
-    }, 1000);
+    }, 500);
 });

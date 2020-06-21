@@ -44,6 +44,12 @@ const locales = {
             "prompt": "Please enter your discord bot token",
             "confirmation": "Are you sure ?",
             "invalid": "No token provided or token is invalid"
+        },
+        "fileType": {
+            "unknown": "unknown",
+            "img": "image",
+            "doc": "document",
+            "pdf": "pdf"
         }
     },
     "fr": {
@@ -55,7 +61,7 @@ const locales = {
             "fileAttachment": "fichier",
             "serverJoin": "a rejoint le serveur",
             "fileSent": "a envoyé des fichiers",
-            "attachmentTxt": "Pièces jointes",
+            "attachmentTxt": "Pièce(s) jointe(s)",
             "privateMessages": "MP",
             "userId": "Identifiant"
         },
@@ -91,6 +97,12 @@ const locales = {
             "prompt": "Entre le token de bot",
             "confirmation": "Est-tu certain ?",
             "invalid": "Pas de token ou token invalide"
+        },
+        "fileType": {
+            "unknown": "inconnu",
+            "img": "image",
+            "doc": "document",
+            "pdf": "pdf"
         }
     }
 };

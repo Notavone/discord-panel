@@ -48,10 +48,25 @@ body {
 }
 
 .header {
+  border: 2px solid var(--bodyColor);
+  border-radius: 7px;
   height: 45px;
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.messageId {
+  visibility: hidden;
+}
+
+.messageContent {
+  margin: 0;
 }
 
 .avatarIMG {
@@ -82,17 +97,15 @@ body {
 .content {
   background-color: var(--contentColor);
   padding-top: 10px;
-}
-
-.border {
-  border: 2px solid var(--bodyColor);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 select {
   width: 100%;
   height: 35px;
   border: 2px solid var(--contentColor);
-  border-radius: 2px;
+  border-radius: 7px;
   background-color: var(--bodyColor);
 }
 
@@ -106,7 +119,7 @@ textarea {
   max-height: 100px;
   width: 100%;
   border: 2px solid var(--bodyColor);
-  border-radius: 2px;
+  border-radius: 7px;
   background-color: transparent;
 }
 
@@ -121,11 +134,12 @@ a {
 }
 
 .scrollable {
-  min-height: 300px;
-  max-height: 300px;
+  min-height: 350px;
+  max-height: 350px;
   overflow-y: auto;
   text-align: left;
   border: 2px solid var(--bodyColor);
+  border-radius: 7px;
   font-size: 14px;
   margin: 0 0 0 0;
   word-break: break-all;
@@ -148,14 +162,14 @@ button {
   background-color: var(--bodyColor);
   color: var(--textColor);
   border: 2px solid var(--contentColor);
-  border-radius: 2px;
+  border-radius: 7px;
 }
 
 button:hover {
   background-color: rgb(26, 25, 25);
   border: 2px solid var(--textColor);
-  transition: background-color 600ms;
-  transition: border 300ms ease-in;
+  border-radius: 7px;
+  transition: background-color 600ms, border 200ms ease-in;
   color: var(--textColor);
 }
 
@@ -205,11 +219,13 @@ div {
 }
 
 .mini {
-  width: auto;
-  height: 20px;
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
   padding: 1px 2px 1px 2px;
   border-radius: 6px;
-  font: 13.5px Arial, sans-serif;
+  font: 13px Arial, sans-serif;
 }
 
 /*///////////////////////////////////////////
@@ -229,6 +245,7 @@ fieldset {
 legend {
   text-align: center;
   border: 2px solid var(--bodyColor);
+  border-radius: 7px;
 }
 
 .switch {
@@ -299,7 +316,7 @@ input:checked + .slider::before {
                CURTAIN MENU
 //////////////////////////////////////////*/
 .overlay {
-  height: 0%;
+  height: 0;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -338,21 +355,4 @@ input:checked + .slider::before {
   top: 20px;
   right: 45px;
   font-size: 60px;
-}
-
-@media screen and (max-height: 450px) {
-  .overlay {
-    overflow-y: auto;
-  }
-
-  .overlay a {
-    font-size: 20px;
-  }
-
-  .overlay .closeBtn {
-    font-size: 40px;
-    top: 15px;
-    right: 35px;
-  }
-
 }

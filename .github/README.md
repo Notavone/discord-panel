@@ -5,10 +5,18 @@
 
 ## Changelog
 
+### Version 1.2.3
+
+*   **Fixed** the workaround of [@RobinSchapendonk](https://github.com/RobinSchapendonk)
+*   Deleting/updating a message should no longer refresh the chat but dynamically find and delete/update the message (guilds only)
+*   Auto-scrolling is now a bit quicker to match with the speed of chat updating
+*   **Added** a `border-radius` attribute to a lot of elements
+*   Attachments are now recognised by their file type and displayed as such (images, documents etc..)
+
 ### Version 1.2.2
 
 *   Changed the look of the panel
-*   ***Removed*** unused translations
+*   **Removed** unused translations
 
 ### Version 1.2.1
 
@@ -19,7 +27,7 @@
 *   **Updated** README with changelog and how to translate sections
 *   **Fixed** the emoji button not appearing due to the recent changes in discord.js and how guildEmojis now works
 *   **Added** a new language button to load a translation of the project (css and a bit of code by [@ziomciopoziomcio](https://github.com/ziomciopoziomcio))
-*   **Tried** a workaround to make the chat more readable in case of spam by [@RobinSchapendonk](https://github.com/RobinSchapendonk) but it's not currently working as intended so i'll make something later
+*   ~~**Tried** a workaround to make the chat more readable in case of spam by [@RobinSchapendonk](https://github.com/RobinSchapendonk) but it's not currently working as intended so i'll make something later~~ ([fixed in version 1.2.3](#version-1.2.3))
 
 ## What makes this special ? 💎
 
