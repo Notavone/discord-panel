@@ -1,9 +1,21 @@
 # Discord-panel
+![license](https://img.shields.io/github/license/notavone/discord-panel.svg?style=for-the-badge)
 ![codacy grade](https://img.shields.io/codacy/grade/d499e4a1863349ffb7366f6b9970082f.svg?style=for-the-badge)
-![repo size](https://img.shields.io/github/repo-size/Notavone/discord-panel.svg?style=for-the-badge)
-![license](https://img.shields.io/github/license/Notavone/discord-panel.svg?style=for-the-badge)
+![repo size](https://img.shields.io/github/repo-size/notavone/discord-panel.svg?style=for-the-badge)
+![forks](https://img.shields.io/github/stars/notavone/discord-panel?style=for-the-badge)
 
 ## Changelog
+
+### Version 1.2.4
+
+*   **Added** text formatting
+*   **Added** delete message buttons
+*   More message type are recognised (boost, news, pin)
+*   Accessing DMs will no longer throw an error
+*   **Fixed** emojis not pasting correctly
+*   Servers emoji now displays an image in the chat
+*   Messages will no longer appear in last messages if you're viewing the channel the channel they come from
+*   `Shift`+`Enter` now inserts a line break instead of sending the message
 
 ### Version 1.2.3
 
@@ -56,3 +68,11 @@ COMING SOON™
 ## Contributors 📝
 
 *   **None at the moment 😢**
+
+## Copyrights and Licence
+
+Copyright © 2019-2020 [Nøtavøne <notavone@gmail.com>](https://github.com/notavone)
+
+This project is [GNU](https://github.com/Notavone/discord-panel/blob/master/.github/LICENSE) licensed
+
+***

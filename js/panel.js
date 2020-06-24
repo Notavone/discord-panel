@@ -1,26 +1,5 @@
 $(document).ready(() => {
-    /*///////////////////////////////////////////
-                TOKEN
-    //////////////////////////////////////////*/
-
-    let locale;
-    if (!localStorage.getItem("locale") || localStorage.getItem("locale") === "" || localStorage.getItem("locale") === null) {
-        localStorage.setItem("locale", "en");
-    }
-    locale = localStorage.getItem("locale");
-    let localeFile = locales[locale];
-
-    let token;
-    if (!localStorage.getItem("token") || localStorage.getItem("token") === "" || localStorage.getItem("token") === null) {
-        token = prompt(localeFile.token.prompt, "");
-        localStorage.setItem("token", token);
-    }
-    token = localStorage.getItem("token");
-
-    const client = new Discord.Client();
-    client.login(token).catch(() => {
-        alert(localeFile.token.invalid);
-    });
+    $("html").attr("lang", localeFile.locale);
 
     const guilds = $("#guilds");
     const channels = $("#channels");
@@ -40,43 +19,68 @@ $(document).ready(() => {
     /*///////////////////////////////////////////
                     LOADING TRANSLATION
     //////////////////////////////////////////*/
-    $("#lastMessagesHead").html(`<img class="avatarIMG" src='./img/icon/clock.png'> ${localeFile.headings.lastMessages}`);
-    clearChat.html(`♻ ${localeFile.text.clearLastMessages}`);
-    toSend.attr("placeholder", localeFile.text.sendPlaceholder);
-    send.html(`↩ ${localeFile.buttons.send}`);
-    guildName.html(`<img class="avatarIMG" src="./img/icon/info.png"> ${localeFile.headings.guildName}`);
-    leaveGuild.html(`🚪 ${localeFile.buttons.leave}`);
-    inviteBtn.html(`✉ ${localeFile.buttons.invite}`);
-    $("#autoScrollHead").html(localeFile.headings.autoScroll);
-    $("#last").html(localeFile.headings.lastMessages);
+
+    // Text
     channelNameLabel.html(localeFile.text.channelNameLabel);
     $("#animCheck").html(localeFile.text.scrollCheck);
     channelName.html(`<img class="avatarIMG" src='./img/icon/chat.png'> ${localeFile.text.channelNameLabel}`);
+
+    // Headings
+    guildName.html(`<img class="avatarIMG" src="./img/icon/info.png"> ${localeFile.headings.guildName}`);
+    $("#autoScrollHead").html(localeFile.headings.autoScroll);
+    $("#lastMessagesHead").html(`<img class="avatarIMG" src='./img/icon/clock.png'> ${localeFile.headings.lastMessages}`);
+    $("#last").html(localeFile.headings.lastMessages);
+
+    // Buttons
     refreshToken.html(`🔑 ${localeFile.buttons.editToken}`);
     refreshChat.html(`🔁 ${localeFile.buttons.refreshChat}`);
     $("#language").html(`🏳️ ${localeFile.buttons.changeLanguage}`);
+    leaveGuild.html(`🚪 ${localeFile.buttons.leave}`);
+    inviteBtn.html(`✉ ${localeFile.buttons.invite}`);
+    send.html(`↩ ${localeFile.buttons.send}`);
+    clearChat.html(`♻ ${localeFile.buttons.clearLastMessages}`);
+
+    // Formatting
+    $("#bold").attr("title", localeFile.formatting.bold);
+    $("#emphasis").attr("title", localeFile.formatting.emphasis);
+    $("#underline").attr("title", localeFile.formatting.underline);
+    $("#strike").attr("title", localeFile.formatting.strike);
+    $("#clear").attr("title", localeFile.formatting.clear);
 
     /*///////////////////////////////////////////
                     FUNCTIONS
     //////////////////////////////////////////*/
 
+    function contentReplacement(message) {
+        return escapeHtml(message.content)
+            .replace(/\n/g, "<br>")
+            .replace(/(&lt;a:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`)
+            .replace(/(&lt;:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`);
+    }
+
+    // This function creates a message to display in the chat, takes a Discord.Message as parameter
     function createMessage(message) {
         let userTag = escapeHtml(message.author.tag);
         let userId = message.author.id;
-        let avatarUrl = message.author.avatarURL() || `./img/discord_defaults_avatars/${message.author.discriminator % 5}.png`;
+        let avatarUrl = message.author.avatarURL() || `./img/discord_defaults_avatars/${message.author.discriminator % 5}.png`; // Get the user's avatar, if not, find the color of his default avatar
         let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"></a>`;
         let creationDate = new Date(message.createdAt);
-        let timestamp = `${leadingZero(creationDate.getDate())}/${leadingZero(creationDate.getMonth() + 1)}/${creationDate.getFullYear()} ${leadingZero(creationDate.getHours() + 1)}:${leadingZero(creationDate.getMinutes())}`;
+        let timestamp = `${creationDate.toLocaleDateString(localeFile.locale)} ${creationDate.toLocaleTimeString(localeFile.locale)}`;
         let html;
         let attachments = [];
 
         Array.from(message.attachments).forEach((attachment) => {
-            let attachmentTxt = `<a href="${escapeHtml(attachment[1].url)}" target="_blank">`;
-            if (attachment[1].url.endsWith(".jpg") || attachment[1].url.endsWith(".jpeg") || attachment[1].url.endsWith(".png")) {
+            let attachmentUrl = attachment[1].url;
+            let attachmentTxt = `<a href="${escapeHtml(attachmentUrl)}" target="_blank">`;
+            if (attachmentUrl.endsWith(".jpg") || attachmentUrl.endsWith(".jpeg") || attachmentUrl.endsWith(".png")) {
                 attachmentTxt += localeFile.fileType.img;
-            } else if (attachment[1].url.endsWith(".docx") || attachment[1].url.endsWith(".odt")) {
+            } else if (attachmentUrl.endsWith(".docx") || attachmentUrl.endsWith(".odt")) {
                 attachmentTxt += localeFile.fileType.doc;
-            } else if (attachment[1].url.endsWith(".pdf")) {
+            } else if (attachmentUrl.endsWith(".mp4")) {
+                attachmentTxt += localeFile.fileType.video;
+            } else if (attachmentUrl.endsWith(".mp3")) {
+                attachmentTxt += localeFile.fileType.audio;
+            } else if (attachmentUrl.endsWith(".pdf")) {
                 attachmentTxt += localeFile.fileType.pdf;
             } else {
                 attachmentTxt += localeFile.fileType.unknown;
@@ -87,18 +91,30 @@ $(document).ready(() => {
 
         html = `<p>${userAvatar} ${escapeHtml(userTag)} `;
 
+        // Different types of messages
         if (message.type === "GUILD_MEMBER_JOIN") {
-            html += `${localeFile.text.serverJoin}`;
+            html += `${localeFile.messageType.serverJoin} `;
+        } else if (message.type === "PINS_ADD") {
+            html += `${localeFile.messageType.pin} `;
+        } else if (message.type === "CHANNEL_FOLLOW_ADD") {
+            html += `${localeFile.messageType.channelNews} `;
+        } else if (message.type.includes("USER_PREMIUM_GUILD_SUBSCRIPTION")) {
+            html += `${localeFile.messageType.boost} `; // Covers all levels of boosting
         } else if (message.content === "") {
-            html += `${localeFile.text.fileSent}`;
-        } else {
-            html += `<span class="font-size-mini">${timestamp}</span> `;
+            html += `${localeFile.text.fileSent} `;
         }
 
-        html += `<button class="mini" value="<@!${userId}>" onclick="addText(this.value)">@</button>`;
+        // Timestamp
+        html += `<span class="font-size-mini">${timestamp}</span> `;
+
+        // Buttons
+        html += `<button class="mini" value="<@!${userId}>" onclick="addText(this.value)">😐</button>`;
+        if (message.deletable && ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES"))) {
+            html += `<button class="mini" value="${message.id}" onclick="del(this.value)">🗑️</button>`;
+        }
 
         if (message.content !== "") {
-            html += `<br><span class="messageContent">${escapeHtml(message.content)}</span>`
+            html += `<br><span class="messageContent">${contentReplacement(message)}</span>`
         }
 
         if (attachments.length > 0) {
@@ -119,7 +135,8 @@ $(document).ready(() => {
     function editMessage(oldMessage, newMessage) {
         chat.html().split("<p>").forEach((msg) => {
             if (msg.includes(`<span class="messageId">${oldMessage.id}</span>`)) {
-                chat.html(chat.html().replace("<p>" + msg, "<p>" + msg.replace(`<span class="messageContent">${oldMessage.content}</span>`, `<span class="messageContent">${escapeHtml(newMessage.content)}</span>`)));
+                let displayed = msg.split(`<span class="messageContent">`)[1].split("</span>")[0];
+                chat.html(chat.html().replace("<p>" + msg, "<p>" + msg.replace(`<span class="messageContent">${displayed}</span>`, `<span class="messageContent">${contentReplacement(newMessage)}</span>`)));
             }
         });
     }
@@ -132,7 +149,7 @@ $(document).ready(() => {
         if (guilds.val() === "DM") {
             user = client.users.cache.find((user) => user.id === channels.val());
 
-            channel = client.channels.cache.find((channel) => channel.type === "dm" && channel.recipient.id === user.id);
+            channel = user.dmChannel;
             let avatarUrl = user.avatarURL() || `./img/discord_defaults_avatars/${user.discriminator % 5}.png`;
             guildName.html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
             $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
@@ -204,7 +221,7 @@ $(document).ready(() => {
 
             // General informations
 
-            html += `<br>${localeFile.infos.owner}: ${guild.owner.user.tag} <button value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)">@</button><br>`;
+            html += `${localeFile.infos.owner}: ${guild.owner.user.tag} <button value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)">@</button><br>`;
             html += `${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}<br>`;
             html += `${localeFile.infos.vChannels}: ${guild.channels.cache.filter((chan) => chan.type === "voice").size}<br>`;
             html += `${localeFile.infos.tChannels}: ${guild.channels.cache.filter((chan) => chan.type === "text").size}<br><br>`;
@@ -231,7 +248,7 @@ $(document).ready(() => {
             if (guild.emojis.cache.size > 0) {
                 guild.emojis.cache.forEach((emoji) => {
                     if (emoji.animated) {
-                        guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<a:${emoji.identifier}>')"/>`);
+                        guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<${emoji.identifier}>')"/>`);
                     } else {
                         guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
                     }
@@ -265,18 +282,36 @@ $(document).ready(() => {
     function sendMessage() {
         let user;
 
-        if (toSend.val() === "") {
-            tempChange("#send", `[${localeFile.errors.emptyMsg}]`, 2000);
+        if (toSend.html() === "") {
+            tempChange("#send", `[${localeFile.errors.emptyMsg}]`, 1500);
         } else {
+            let formatted = toSend.html()
+                .replace(/<b>/g, "**")
+                .replace(/<\/b>/g, "**")
+                .replace(/<em>/g, "*")
+                .replace(/<\/em>/g, "*")
+                .replace(/<i>/g, "*")
+                .replace(/<\/i>/g, "*")
+                .replace(/<u>/g, "__")
+                .replace(/<\/u>/g, "__")
+                .replace(/<strike>/g, "~~")
+                .replace(/<\/strike>/g, "~~")
+                .replace(/<s>/g, "~~")
+                .replace(/<\/s>/g, "~~")
+                .replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+                .replace(/&amp;/g, "&")
+                .replace(/<br>/g, "\n");
+
             if (guilds.val() === "DM") {
                 user = client.users.cache.find((user) => user.id === channels.val());
-                user.send(toSend.val());
+                user.send(formatted);
             } else {
-                client.channels.cache.find((channel) => channel.id === channels.val()).send(toSend.val()).catch(() => {
+                client.channels.cache.find((channel) => channel.id === channels.val()).send(formatted).catch(() => {
                     tempChange("#send", `[${localeFile.errors.missingPermissions}]`, 2000);
                 });
             }
-            toSend.val("");
+            toSend.html("");
         }
     }
 
@@ -304,10 +339,14 @@ $(document).ready(() => {
             updateChannel();
         }
 
+        if (message.channel.id === channels.val() || (guilds.val() === "DM" && message.channel.type === "dm" && message.author.id === channels.val())) {
+            return;
+        }
+
         if (message.channel.type !== "dm" && (Number(message.author.id) === Number(client.user.id) || !message.author.bot)) {
-            lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${escapeHtml(message.content)}`);
+            lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${contentReplacement(message)}`);
         } else if (message.channel.type === "dm" && !message.author.bot) {
-            lastMessages.html(lastMessages.html() + `<br><b>[DM] ${escapeHtml(message.author.tag)}</b> ${escapeHtml(message.content)}`);
+            lastMessages.html(lastMessages.html() + `<br><b>[${localeFile.text.privateMessages}] ${escapeHtml(message.author.tag)}</b> ${contentReplacement(message)}`);
         }
 
         localStorage.setItem("lastMessages", $("#lastMessages").html());
@@ -481,16 +520,21 @@ $(document).ready(() => {
     });
 
     /*///////////////////////////////////////////
-                    KEYUP EVENTS
+                    KEY/PASTE EVENTS
     //////////////////////////////////////////*/
 
-    toSend.keyup((event) => {
-        let keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode === 13) {
+    toSend.keypress((event) => {
+        if (!event.shiftKey && event.key === "Enter") {
             event.preventDefault();
             send.click();
         }
         event.stopPropagation();
+    });
+
+    toSend.on("paste", (event) => {
+        event.preventDefault();
+        let text = (event.originalEvent || event).clipboardData.getData('text/plain');
+        document.execCommand("insertHTML", false, text);
     });
 
     document.addEventListener("keyup", (event) => {

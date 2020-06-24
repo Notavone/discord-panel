@@ -1,18 +1,16 @@
 const locales = {
     "en": {
+        "locale": "en",
         "text": {
-            "clearLastMessages": "Clear Last Messages Section",
-            "sendPlaceholder": "Write the content of your message",
             "channelNameLabel": "Chat",
             "scrollCheck": "Enable auto-scrolling animation",
-            "fileAttachment": "file",
-            "serverJoin": "joined the server",
             "fileSent": "sent some file(s)",
             "attachmentTxt": "Attachments",
             "privateMessages": "DM",
             "userId": "User ID"
         },
         "buttons": {
+            "clearLastMessages": "Clear Last Messages",
             "editToken": "Edit token",
             "refreshChat": "Refresh chat",
             "changeLanguage": "Change language",
@@ -45,27 +43,40 @@ const locales = {
             "confirmation": "Are you sure ?",
             "invalid": "No token provided or token is invalid"
         },
+        "messageType": {
+            "serverJoin": "joined the server",
+            "pin": "pinned a message",
+            "channelNews": "added a remote channel news",
+            "boost": "boosted the server"
+        },
         "fileType": {
             "unknown": "unknown",
             "img": "image",
             "doc": "document",
-            "pdf": "pdf"
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Bold",
+            "emphasis": "Emphasis",
+            "underline": "Underline",
+            "strike": "Strikethrough",
+            "clear": "Clear formatting"
         }
     },
     "fr": {
+        "locale": "fr",
         "text": {
-            "clearLastMessages": "Effacer les derniers messages",
-            "sendPlaceholder": "Écris ton message",
             "channelNameLabel": "Chat",
             "scrollCheck": "Activer l'animation de scrolling",
-            "fileAttachment": "fichier",
-            "serverJoin": "a rejoint le serveur",
             "fileSent": "a envoyé des fichiers",
             "attachmentTxt": "Pièce(s) jointe(s)",
             "privateMessages": "MP",
             "userId": "Identifiant"
         },
         "buttons": {
+            "clearLastMessages": "Effacer les derniers messages",
             "editToken": "Mettre à jour le token",
             "refreshChat": "Rafraîchir le chat",
             "changeLanguage": "Changer la langue",
@@ -98,11 +109,26 @@ const locales = {
             "confirmation": "Est-tu certain ?",
             "invalid": "Pas de token ou token invalide"
         },
+        "messageType": {
+            "serverJoin": "a rejoint le serveur",
+            "pin": "a épinglé un message",
+            "channelNews": "a ajouté un salon de mise à jour",
+            "boost": "a boosté le serveur"
+        },
         "fileType": {
             "unknown": "inconnu",
             "img": "image",
             "doc": "document",
-            "pdf": "pdf"
+            "pdf": "pdf",
+            "video": "vidéo",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Gras",
+            "emphasis": "Italique",
+            "underline": "Souligné",
+            "strike": "Barré",
+            "clear": "Effacer la mise en forme"
         }
     }
 };
