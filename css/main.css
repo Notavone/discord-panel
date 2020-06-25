@@ -1,4 +1,18 @@
 /* ///////////////////////////////////////////
+                    GENERAL
+////////////////////////////////////////// */
+
+:root {
+  --red: #d3514c;
+  --redHover: #d41109;
+  --textColor: #fff;
+  --blue: #3180ff;
+  --blueHover: #0035ff;
+  --bodyColor: rgb(26, 26, 27);
+  --contentColor: rgb(39, 39, 41);
+}
+
+/* ///////////////////////////////////////////
                     SCROLLBAR
 ////////////////////////////////////////// */
 
@@ -15,20 +29,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(105, 105, 105, 0.8);
   transition: background-color 300ms linear;
-}
-
-/* ///////////////////////////////////////////
-                    GENERAL
-////////////////////////////////////////// */
-
-:root {
-  --red: #d3514c;
-  --redHover: #d41109;
-  --textColor: #fff;
-  --blue: #3180ff;
-  --blueHover: #0035ff;
-  --bodyColor: rgb(26, 26, 27);
-  --contentColor: rgb(39, 39, 41);
 }
 
 * {
@@ -161,9 +161,9 @@ a {
   background-color: transparent;
 }
 
-/*///////////////////////////////////////////
+/* ///////////////////////////////////////////
                     BUTTONS
-//////////////////////////////////////////*/
+////////////////////////////////////////// */
 
 button {
   width: 100%;
@@ -240,9 +240,9 @@ div {
   font: 13px Arial, sans-serif;
 }
 
-/*///////////////////////////////////////////
+/* ///////////////////////////////////////////
                     AUTO-SCROLL
-//////////////////////////////////////////*/
+////////////////////////////////////////// */
 
 fieldset {
   width: 100%;
@@ -310,9 +310,6 @@ input:checked + .slider {
 input:checked + .slider:hover {
   background-color: var(--redHover);
   transition: background-color 300ms linear;
-}
-
-input:checked + .slider:hover {
   box-shadow: 0 0 2px var(--red);
 }
 
@@ -330,9 +327,9 @@ input:checked + .slider::before {
   border-radius: 50%;
 }
 
-/*///////////////////////////////////////////
+/* ///////////////////////////////////////////
                CURTAIN MENU
-//////////////////////////////////////////*/
+////////////////////////////////////////// */
 .overlay {
   height: 0;
   width: 100%;

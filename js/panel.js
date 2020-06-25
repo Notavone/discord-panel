@@ -114,7 +114,7 @@ $(document).ready(() => {
         }
 
         if (message.content !== "") {
-            html += `<br><span class="messageContent">${contentReplacement(message)}</span>`
+            html += `<br><span class="messageContent">${contentReplacement(message)}</span>`;
         }
 
         if (attachments.length > 0) {
@@ -385,21 +385,33 @@ $(document).ready(() => {
         fetchGuilds();
     });
 
-    client.on("guildUpdate", (oldGuild) => {
+    function selectChannelOnReload(channel) {
+        $(`#channels option[value="${channel}"]`).prop('selected', true);
+        setTimeout(() => {
+            refreshChat.click();
+        }, 1000);
+    }
+
+    client.on("guildUpdate", (oldGuild, newGuild) => {
         if (oldGuild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
     client.on("guildMemberAdd", (member) => {
         if (member.guild.id === guilds.val()) {
             updateGuild();
+            selectChannelOnReload()
         }
     });
 
     client.on("guildMemberRemove", (member) => {
         if (member.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
@@ -409,37 +421,49 @@ $(document).ready(() => {
         }
 
         if (channel.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
     client.on("channelDelete", (channel) => {
         if (channel.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
     client.on("channelUpdate", (oldChannel) => {
         if (oldChannel.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
     client.on("emojiCreate", (emoji) => {
         if (emoji.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
     client.on("emojiDelete", (emoji) => {
         if (emoji.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
     client.on("emojiUpdate", (oldEmoji) => {
         if (oldEmoji.guild.id === guilds.val()) {
+            let channel = channels.val();
             updateGuild();
+            selectChannelOnReload(channel)
         }
     });
 
