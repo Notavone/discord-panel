@@ -9,7 +9,7 @@
 ### Version 1.2.5
 
 *   Code cleaning
-*   `updateGuild()` events will trigger `selectChannelOnReload()` to automatically select the channel you were in before the guild updated (fixes #10)
+*   `updateGuild()` events will trigger `selectChannelOnReload()` to automatically select the channel you were in before the guild updated
 
 ### Version 1.2.4
 
@@ -25,7 +25,7 @@
 ### Version 1.2.3
 
 *   **Fixed** the workaround of [@RobinSchapendonk](https://github.com/RobinSchapendonk)
-*   Deleting/updating a message should no longer refresh the chat but dynamically find and delete/update the message (guilds only, fixes #7)
+*   Deleting/updating a message should no longer refresh the chat but dynamically find and delete/update the message (guilds only)
 *   Auto-scrolling is now a bit quicker to match with the speed of chat updating
 *   **Added** a `border-radius` attribute to a lot of elements
 *   Attachments are now recognised by their file type and displayed as such (images, documents etc..)

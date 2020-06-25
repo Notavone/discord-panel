@@ -315,6 +315,13 @@ $(document).ready(() => {
         }
     }
 
+    function selectChannelOnReload(channel) {
+        $(`#channels option[value="${channel}"]`).prop('selected', true);
+        setTimeout(() => {
+            refreshChat.click();
+        }, 1000);
+    }
+
     function scrollAnim(DOM1, DOM2, time) {
         if (document.querySelector(DOM1).checked) {
             if (document.querySelector("#chk3").checked) {
@@ -384,13 +391,6 @@ $(document).ready(() => {
     client.on("guildDelete", (guild) => {
         fetchGuilds();
     });
-
-    function selectChannelOnReload(channel) {
-        $(`#channels option[value="${channel}"]`).prop('selected', true);
-        setTimeout(() => {
-            refreshChat.click();
-        }, 1000);
-    }
 
     client.on("guildUpdate", (oldGuild, newGuild) => {
         if (oldGuild.id === guilds.val()) {
