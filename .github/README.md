@@ -6,6 +6,10 @@
 
 ## Changelog
 
+### Version 1.2.6
+*   **Updated** discord.js to master
+*   Language automation
+
 ### Version 1.2.5
 
 *   Code cleaning

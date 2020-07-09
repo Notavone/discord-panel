@@ -343,7 +343,7 @@ input:checked + .slider::before {
   transition: 0.5s;
 }
 
-.overlay-content {
+#overlay-content {
   position: relative;
   top: 25%;
   width: 100%;

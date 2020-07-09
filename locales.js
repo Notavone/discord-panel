@@ -1,6 +1,7 @@
 const locales = {
     "en": {
-        "locale": "en",
+        "cCode": "en",
+        "language": "English",
         "text": {
             "channelNameLabel": "Chat",
             "scrollCheck": "Enable auto-scrolling animation",
@@ -66,7 +67,8 @@ const locales = {
         }
     },
     "fr": {
-        "locale": "fr",
+        "cCode": "fr",
+        "language": "Français",
         "text": {
             "channelNameLabel": "Chat",
             "scrollCheck": "Activer l'animation de scrolling",

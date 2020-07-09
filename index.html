@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html lang="">
 <head>
     <meta charset="utf-8"/>
     <title>Panel</title>
@@ -16,10 +16,7 @@
 
     <a href="javascript:void(0)" class="closeBtn" onclick="closeNav()">&times;</a>
 
-    <div class="overlay-content">
-        <a href="" onclick="localStorage.setItem('locale', 'en'); location.reload()">English</a>
-        <a href="" onclick="localStorage.setItem('locale', 'fr'); location.reload()">Français</a>
-    </div>
+    <div id="overlay-content"></div>
 
 </div>
 
@@ -83,7 +80,7 @@
 </body>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/discord.12.1.1.min.js"></script>
+<script type="text/javascript" src="./js/discord.master.min.js"></script>
 <script type="text/javascript" src="locales.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 <script type="text/javascript" src="./js/panel.js"></script>

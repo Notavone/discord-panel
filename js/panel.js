@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $("html").attr("lang", localeFile.locale);
+    $("html").attr("lang", localeFile.cCode);
 
     const guilds = $("#guilds");
     const channels = $("#channels");
@@ -15,20 +15,25 @@ $(document).ready(() => {
     const inviteBtn = $("#inviteBtn");
     const refreshToken = $("#refreshToken");
     const refreshChat = $("#refreshChat");
+    const overlay = $("#overlay-content");
 
     /*///////////////////////////////////////////
                     LOADING TRANSLATION
     //////////////////////////////////////////*/
 
+    Object.values(locales).forEach((locale) => {
+        overlay.html(overlay.html() + `<a href="" onclick="localStorage.setItem('locale', '${locale.cCode}'); location.reload()">${locale.language}</a>`);
+    });
+
     // Text
     channelNameLabel.html(localeFile.text.channelNameLabel);
     $("#animCheck").html(localeFile.text.scrollCheck);
-    channelName.html(`<img class="avatarIMG" src='./img/icon/chat.png'> ${localeFile.text.channelNameLabel}`);
+    channelName.html(`<img class="avatarIMG" src='./img/icon/chat.png' alt="chat"> ${localeFile.text.channelNameLabel}`);
 
     // Headings
-    guildName.html(`<img class="avatarIMG" src="./img/icon/info.png"> ${localeFile.headings.guildName}`);
+    guildName.html(`<img class="avatarIMG" src="./img/icon/info.png" alt="info"> ${localeFile.headings.guildName}`);
     $("#autoScrollHead").html(localeFile.headings.autoScroll);
-    $("#lastMessagesHead").html(`<img class="avatarIMG" src='./img/icon/clock.png'> ${localeFile.headings.lastMessages}`);
+    $("#lastMessagesHead").html(`<img class="avatarIMG" src='./img/icon/clock.png' alt="clock"> ${localeFile.headings.lastMessages}`);
     $("#last").html(localeFile.headings.lastMessages);
 
     // Buttons
@@ -65,7 +70,7 @@ $(document).ready(() => {
         let avatarUrl = message.author.avatarURL() || `./img/discord_defaults_avatars/${message.author.discriminator % 5}.png`; // Get the user's avatar, if not, find the color of his default avatar
         let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"></a>`;
         let creationDate = new Date(message.createdAt);
-        let timestamp = `${creationDate.toLocaleDateString(localeFile.locale)} ${creationDate.toLocaleTimeString(localeFile.locale)}`;
+        let timestamp = `${creationDate.toLocaleDateString(localeFile.cCode)} ${creationDate.toLocaleTimeString(localeFile.cCode)}`;
         let html;
         let attachments = [];
 
@@ -384,15 +389,15 @@ $(document).ready(() => {
         }
     });
 
-    client.on("guildCreate", (guild) => {
+    client.on("guildCreate", () => {
         fetchGuilds();
     });
 
-    client.on("guildDelete", (guild) => {
+    client.on("guildDelete", () => {
         fetchGuilds();
     });
 
-    client.on("guildUpdate", (oldGuild, newGuild) => {
+    client.on("guildUpdate", (oldGuild,) => {
         if (oldGuild.id === guilds.val()) {
             let channel = channels.val();
             updateGuild();
