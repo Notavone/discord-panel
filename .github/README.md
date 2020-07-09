@@ -9,6 +9,7 @@
 ### Version 1.2.6
 *   **Updated** discord.js to master
 *   Language automation
+*   Github things
 
 ### Version 1.2.5
 
