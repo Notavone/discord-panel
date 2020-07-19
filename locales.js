@@ -139,7 +139,7 @@ const locales = {
         "text": {
             "channelNameLabel": "Chat",
             "scrollCheck": "Schakel automatisch scrollende animatie in",
-            "fileSent": "stuur bestand(en)",
+            "fileSent": "heeft bestand(en) gestuurd",
             "attachmentTxt": "Bijlagen",
             "privateMessages": "DB",
             "userId": "Gebruikersnaam"
@@ -206,7 +206,7 @@ const locales = {
         "text": {
             "channelNameLabel": "Sohbet",
             "scrollCheck": "Otomatik kaydırma animasyonunu etkinleştir",
-            "fileSent": "bazı dosya(lar) gönder",
+            "fileSent": "bazı dosya(lar) gönderdi",
             "attachmentTxt": "Ekler",
             "privateMessages": "DM",
             "userId": "Kullanıcı Kimliği"
