@@ -16,7 +16,7 @@ const locales = {
             "refreshChat": "Refresh chat",
             "changeLanguage": "Change language",
             "send": "Send",
-            "leave": "Leave Guild",
+            "leave": "Leave the Server",
             "invite": "Invite"
         },
         "infos": {
