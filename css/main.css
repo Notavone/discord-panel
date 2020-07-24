@@ -215,13 +215,9 @@ button:hover {
   color: var(--textColor);
 }
 
-.demi {
+.half {
   width: 50%;
   float: left;
-}
-
-.quart {
-  width: 25%;
 }
 
 div {

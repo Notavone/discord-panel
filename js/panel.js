@@ -57,10 +57,17 @@ $(document).ready(() => {
     //////////////////////////////////////////*/
 
     function contentReplacement(message) {
-        return escapeHtml(message.content)
+        let content = escapeHtml(message.content)
             .replace(/\n/g, "<br>")
             .replace(/(&lt;a:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`)
             .replace(/(&lt;:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`);
+
+        content = replaceMarkdown(content, "***", "<b><em>", "</em></b>", "&ast;&ast;&ast;");
+        content = replaceMarkdown(content, "**", "<b>", "</b>", "&ast;&ast;");
+        content = replaceMarkdown(content, "*", "<em>", "</em>", "&ast;");
+        content = replaceMarkdown(content, "__", "<u>", "</u>", "&lowbar;&lowbar;");
+        content = replaceMarkdown(content, "~~", "<s>", "</s>", "&tilde;&tilde;");
+        return content;
     }
 
     // This function creates a message to display in the chat, takes a Discord.Message as parameter
@@ -69,8 +76,7 @@ $(document).ready(() => {
         let userId = message.author.id;
         let avatarUrl = message.author.avatarURL() || `./img/discord_defaults_avatars/${message.author.discriminator % 5}.png`; // Get the user's avatar, if not, find the color of his default avatar
         let userAvatar = `<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"></a>`;
-        let creationDate = new Date(message.createdAt);
-        let timestamp = `${creationDate.toLocaleDateString(localeFile.cCode)} ${creationDate.toLocaleTimeString(localeFile.cCode)}`;
+        let timestamp = formatTimestamp(message.createdAt);
         let html;
         let attachments = [];
 
@@ -94,7 +100,7 @@ $(document).ready(() => {
             attachments.push(attachmentTxt);
         });
 
-        html = `<p>${userAvatar} ${escapeHtml(userTag)} `;
+        html = `<div id="${message.id}">${userAvatar} ${escapeHtml(userTag)} `;
 
         // Different types of messages
         if (message.type === "GUILD_MEMBER_JOIN") {
@@ -109,41 +115,25 @@ $(document).ready(() => {
             html += `${localeFile.text.fileSent} `;
         }
 
-        // Timestamp
-        html += `<span class="font-size-mini">${timestamp}</span> `;
+        // Timestamp & mention button
+        html += `<span class="font-size-mini">${timestamp}</span> <button class="mini" data-value="<@!${userId}>" onclick="addText(this.dataset.value)">😐</button>`;
 
-        // Buttons
-        html += `<button class="mini" value="<@!${userId}>" onclick="addText(this.value)">😐</button>`;
+        // Delete button
         if (message.deletable && ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES"))) {
-            html += `<button class="mini" value="${message.id}" onclick="del(this.value)">🗑️</button>`;
+            html += `<button class="mini" data-value="${message.id}" onclick="del(this.dataset.value)">🗑️</button>`;
         }
 
         if (message.content !== "") {
             html += `<br><span class="messageContent">${contentReplacement(message)}</span>`;
+        } else {
+            html += `<span class="messageContent"></span>`;
         }
 
         if (attachments.length > 0) {
             html += `<br><span class="messageContent">${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</span>`;
         }
 
-        return `${html} <span class="messageId">${message.id}</span></p>`;
-    }
-
-    function deleteMessage(message) {
-        chat.html().split("<p>").forEach((msg) => {
-            if (msg.includes(`<span class="messageId">${message.id}</span>`)) {
-                chat.html(chat.html().replace(`<p>${msg}`, ""));
-            }
-        });
-    }
-
-    function editMessage(oldMessage, newMessage) {
-        chat.html().split("<p>").forEach((msg) => {
-            if (msg.includes(`<span class="messageId">${oldMessage.id}</span>`)) {
-                let displayed = msg.split(`<span class="messageContent">`)[1].split("</span>")[0];
-                chat.html(chat.html().replace("<p>" + msg, "<p>" + msg.replace(`<span class="messageContent">${displayed}</span>`, `<span class="messageContent">${contentReplacement(newMessage)}</span>`)));
-            }
-        });
+        return `${html}</div>`;
     }
 
     function updateChannel() {
@@ -157,7 +147,7 @@ $(document).ready(() => {
             channel = user.dmChannel;
             let avatarUrl = user.avatarURL() || `./img/discord_defaults_avatars/${user.discriminator % 5}.png`;
             guildName.html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
-            $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" value="<@!${user.id}>" onclick="addText(this.value)">@</button>`);
+            $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" data-value="<@!${user.id}>" onclick="addText(this.dataset.value)">@</button>`);
 
             channelNameLabel.text(`${localeFile.text.channelNameLabel} [${user.username}]`);
             channelName.html(`<img alt="" src="./img/icon/chat.png" class="avatarIMG"/> #${escapeHtml(user.username)}`);
@@ -224,9 +214,8 @@ $(document).ready(() => {
 
             guildName.html(`<a href="${guild.iconURL() || "./img/icon/info.png"}" target="_blank"><img alt="" src="${guild.iconURL() || "./img/icon/info.png"}" class="avatarIMG"/></a> ${escapeHtml(guild.name)}`);
 
-            // General informations
-
-            html += `${localeFile.infos.owner}: ${guild.owner.user.tag} <button value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.value)">@</button><br>`;
+            // General information
+            html += `${localeFile.infos.owner}: ${guild.owner.user.tag} <button data-value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.dataset.value)">@</button><br>`;
             html += `${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}<br>`;
             html += `${localeFile.infos.vChannels}: ${guild.channels.cache.filter((chan) => chan.type === "voice").size}<br>`;
             html += `${localeFile.infos.tChannels}: ${guild.channels.cache.filter((chan) => chan.type === "text").size}<br><br>`;
@@ -234,7 +223,7 @@ $(document).ready(() => {
             // Members button
             guild.members.cache.filter((member) => !member.user.bot).forEach((member) => {
                 let avatarUrl = member.user.avatarURL() || `./img/discord_defaults_avatars/${member.user.discriminator % 5}.png`;
-                guildMembers.push(`<a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button value="<@!${member.user.id}>" onclick="addText(this.value)" class="mini">@</button>`);
+                guildMembers.push(`<a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button data-value="<@!${member.user.id}>" onclick="addText(this.dataset.value)" class="mini">@</button>`);
             });
             html += `<button onclick='toggleVisibilityHeight("#guildMembers")'>${localeFile.infos.members}</button>`;
             html += `<div id="guildMembers" style="display:none; opacity: 0;">${guildMembers.join("<br>")}</div>`;
@@ -371,7 +360,7 @@ $(document).ready(() => {
 
     client.on("messageDelete", (message) => {
         if (Number(message.channel.id) === Number(channels.val())) {
-            deleteMessage(message);
+            $(`#${message.id}`).remove();
         }
 
         if ((Number(message.author.id) === Number(channels.val()) || message.author.id === client.user.id) && message.channel.type === "dm") {
@@ -381,7 +370,8 @@ $(document).ready(() => {
 
     client.on("messageUpdate", (oldMessage, newMessage) => {
         if (Number(oldMessage.channel.id) === Number(channels.val())) {
-            editMessage(oldMessage, newMessage);
+            $(`#${oldMessage.id} > span.font-size-mini`).html(`Edited at : ${formatTimestamp(newMessage.editedAt)}`);
+            $(`#${oldMessage.id} > span.messageContent`).html(contentReplacement(newMessage));
         }
 
         if ((Number(oldMessage.author.id) === Number(channels.val()) || oldMessage.author.id === client.user.id) && oldMessage.channel.type === "dm") {
@@ -499,23 +489,6 @@ $(document).ready(() => {
         sendMessage();
     });
 
-    /* TODO Fix code apparently not working in this version of discord.js
-    $("#delLast").click(() => {
-        console.log(client.user);
-        if (client.user.lastMessage === null) {
-            tempChange("#delLast", "[ERROR]", 2000);
-            return;
-        } else {
-            try {
-                client.user.lastMessage.delete();
-                updateChannel();
-            } catch (error) {
-                return;
-            }
-        }
-    });
-    */
-
     clearChat.click(() => {
         localStorage.setItem("lastMessages", "");
         $("#lastMessages").empty();
@@ -579,17 +552,17 @@ $(document).ready(() => {
     //////////////////////////////////////////*/
 
     lastMessages.bind("mousewheel", (event) => {
-        if (event.originalEvent.wheelDelta >= 0) {
+        if (event.originalEvent.deltaY < 0) {
             $("#chk1")[0].checked = false;
-        } else if ($("#lastMessages")[0].scrollHeight - 500 < $("#lastMessages").scrollTop()) {
+        } else if (event.originalEvent.deltaY > 0 && $("#lastMessages").scrollTop() + $("#lastMessages").innerHeight() >= $("#lastMessages")[0].scrollHeight - 80) {
             $("#chk1")[0].checked = true;
         }
     });
 
     chat.bind("mousewheel", (event) => {
-        if (event.originalEvent.wheelDelta >= 0) {
+        if (event.originalEvent.deltaY < 0) {
             $("#chk2")[0].checked = false;
-        } else if ($("#chat")[0].scrollHeight - 500 < $("#chat").scrollTop()) {
+        } else if (event.originalEvent.deltaY > 0 && $("#chat").scrollTop() + $("#chat").innerHeight() >= $("#chat")[0].scrollHeight - 80) {
             $("#chk2")[0].checked = true;
         }
     });

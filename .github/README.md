@@ -6,50 +6,16 @@
 
 ## Changelog
 
-### Version 1.2.6
-*   **Updated** discord.js to master
-*   Language automation
-*   Github things
+### Version 1.3.0
 
-### Version 1.2.5
-
-*   Code cleaning
-*   `updateGuild()` events will trigger `selectChannelOnReload()` to automatically select the channel you were in before the guild updated
-
-### Version 1.2.4
-
-*   **Added** text formatting
-*   **Added** delete message buttons
-*   More message type are recognised (boost, news, pin)
-*   Accessing DMs will no longer throw an error
-*   **Fixed** emojis not pasting correctly
-*   Servers emoji now displays an image in the chat
-*   Messages will no longer appear in last messages if you're viewing the channel the channel they come from
-*   `Shift`+`Enter` now inserts a line break instead of sending the message
-
-### Version 1.2.3
-
-*   **Fixed** the workaround of [@RobinSchapendonk](https://github.com/RobinSchapendonk)
-*   Deleting/updating a message should no longer refresh the chat but dynamically find and delete/update the message (guilds only)
-*   Auto-scrolling is now a bit quicker to match with the speed of chat updating
-*   **Added** a `border-radius` attribute to a lot of elements
-*   Attachments are now recognised by their file type and displayed as such (images, documents etc..)
-
-### Version 1.2.2
-
-*   Changed the look of the panel
-*   **Removed** unused translations
-
-### Version 1.2.1
-
-*   Code cleaning
-
-### Version 1.2.0
-
-*   **Updated** README with changelog and how to translate sections
-*   **Fixed** the emoji button not appearing due to the recent changes in discord.js and how guildEmojis now works
-*   **Added** a new language button to load a translation of the project (css and a bit of code by [@ziomciopoziomcio](https://github.com/ziomciopoziomcio))
-*   ~~**Tried** a workaround to make the chat more readable in case of spam by [@RobinSchapendonk](https://github.com/RobinSchapendonk) but it's not currently working as intended so i'll make something later~~ ([fixed in version 1.2.3](#version-1.2.3))
+*  **Updated** the locale code to automatically switch to english in case of missing translations
+*  **Updated** the `contentReplacement()` function to also replace markdown
+*  **Updated** `deleteMessage()` & `editMessage()` to make use of jQuery selectors
+*  **Updated** the mousewheel binding code
+*  **New** function to format any timestamp into local timestamp (`formatTimestamp(dateLike)`)
+*  **New** Dutch locale by LevantHAN
+*  **New** Turkish locale by LevantHAN
+*  **Removed** `deleteMessage()` & `editMessage()` and moved the code into their matching discord events
 
 ## What makes this special ? 💎
 
@@ -65,7 +31,7 @@ COMING SOON™
 
 ## Built With 🔧
 
-*   [discord.js](https://github.com/discordjs/discord.js/blob/webpack/discord.11.4.2.js)
+*   [discord.js](https://github.com/discordjs/discord.js/tree/webpack)
 *   [JQuery](https://jquery.com/)
 *   [Bootstrap](https://getbootstrap.com/)
 
@@ -77,7 +43,9 @@ COMING SOON™
 
 ## Contributors 📝
 
-*   **None at the moment 😢**
+| ![LeventHAN](https://github.com/leventhan.png?size=100) |
+|:-------------------------------------------------------:|
+| **[🌐 LeventHAN](https://github.com/leventhan)**         |
 
 ## Copyrights and Licence
 

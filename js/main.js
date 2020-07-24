@@ -1,9 +1,20 @@
 let locale;
-if (!localStorage.getItem("locale") || localStorage.getItem("locale") === "" || localStorage.getItem("locale") === null) {
+if (!Object.keys(locales).includes(localStorage.getItem("locale"))) {
     localStorage.setItem("locale", "en");
 }
 locale = localStorage.getItem("locale");
 let localeFile = locales[locale];
+
+Object.keys(locales["en"]).forEach((key) => {
+    if (typeof locales["en"][key] === "string") {
+        if (localeFile[key] === ("" || undefined)) localeFile[key] = locales["en"][key];
+    } else if (typeof locales["en"][key] === "object") {
+        if (!localeFile[key]) localeFile[key] = locales["en"][key];
+    } else Object.keys(locales["en"][key]).forEach((subKey) => {
+        if (localeFile[key][subKey] === ("" || undefined)) localeFile[key][subKey] = locales["en"][key][subKey];
+    })
+
+});
 
 let token;
 if (!localStorage.getItem("token") || localStorage.getItem("token") === "" || localStorage.getItem("token") === null) {
@@ -24,6 +35,24 @@ function escapeHtml(text) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+function replaceMarkdown(text, markdown, start, end, join) {
+    if (text === "" || !text.includes(markdown)) return text;
+    else {
+        let content = text.split(markdown);
+        if (content.length > 2) {
+            for (let i = 0; i < content.length; i++) {
+                if (i !== 0 && i % 2 !== 0) {
+                    content[i] = start + content[i] + end;
+                }
+            }
+            return content.join('');
+        } else {
+            return content.join(join || '');
+        }
+
+    }
 }
 
 function toggleVisibilityHeight(DOM) {
@@ -74,6 +103,11 @@ function del(message) {
         let channel = guild.channels.cache.find((c) => c.id === channels.val());
         channel.messages.cache.find((m) => m.id === message).delete().catch();
     }
+}
+
+function formatTimestamp(timestamp) {
+    let date = new Date(timestamp);
+    return `${date.toLocaleDateString(localeFile.cCode)} ${date.toLocaleTimeString(localeFile.cCode)}`;
 }
 
 function tempChange(DOM, text, time) {

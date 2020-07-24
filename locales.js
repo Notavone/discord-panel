@@ -16,7 +16,7 @@ const locales = {
             "refreshChat": "Refresh chat",
             "changeLanguage": "Change language",
             "send": "Send",
-            "leave": "Leave Guild",
+            "leave": "Leave the server",
             "invite": "Invite"
         },
         "infos": {
@@ -131,6 +131,140 @@ const locales = {
             "underline": "Souligné",
             "strike": "Barré",
             "clear": "Effacer la mise en forme"
+        }
+    },
+    "nl": {
+        "cCode": "nl",
+        "language": "Nederlands",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Schakel automatisch scrollende animatie in",
+            "fileSent": "heeft bestand(en) gestuurd",
+            "attachmentTxt": "Bijlagen",
+            "privateMessages": "DB",
+            "userId": "Gebruikersnaam"
+        },
+        "buttons": {
+            "clearLastMessages": "Laatste berichten wissen",
+            "editToken": "Bewerk token",
+            "refreshChat": "Vernieuw Chat",
+            "changeLanguage": "Verander de taal",
+            "send": "Stuur",
+            "leave": "Verlaat de server",
+            "invite": "Nodig uit"
+        },
+        "infos": {
+            "owner": "Eigenaar",
+            "members": "Leden",
+            "vChannels": "Kanalen (spraak)",
+            "tChannels": "Kanalen (tekst)",
+            "roles": "Rollen",
+            "channels": "Kanalen",
+            "emojis": "Emoji's"
+        },
+        "headings": {
+            "lastMessages": "Laatste berichten",
+            "guildName": "Informatie",
+            "autoScroll": "Automatisch scrollen",
+        },
+        "errors": {
+            "error": "FOUT",
+            "dm": "FOUT : DB",
+            "emptyMsg": "FOUT : LEEG BERICHT",
+            "missingPermissions": "FOUT : ONTBREKENDE TOESTEMMINGEN"
+        },
+        "token": {
+            "prompt": "Voer uw discord-bot-token in",
+            "confirmation": "Weet je het zeker ?",
+            "invalid": "Geen token opgegeven of token is ongeldig"
+        },
+        "messageType": {
+            "serverJoin": "is lid geworden van de server",
+            "pin": "heeft een bericht vastgezet",
+            "channelNews": "heeft een nieuw kanaal voor nieuws toegevoegd",
+            "boost": "heeft de server geboost"
+        },
+        "fileType": {
+            "unknown": "onbekend",
+            "img": "beeld",
+            "doc": "document",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Vet",
+            "emphasis": "Cursief",
+            "underline": "Onderstreept",
+            "strike": "Doorgestreept",
+            "clear": "Opmaak wissen"
+        }
+    },
+    "tr": {
+        "cCode": "tr",
+        "language": "Türkçe",
+        "text": {
+            "channelNameLabel": "Sohbet",
+            "scrollCheck": "Otomatik kaydırma animasyonunu etkinleştir",
+            "fileSent": "bazı dosya(lar) gönderdi",
+            "attachmentTxt": "Ekler",
+            "privateMessages": "DM",
+            "userId": "Kullanıcı Kimliği"
+        },
+        "buttons": {
+            "clearLastMessages": "Son Mesajları Temizle",
+            "editToken": "Token'ı düzenle",
+            "refreshChat": "Sohbeti yenile",
+            "changeLanguage": "Dili değiştir",
+            "send": "Gönder",
+            "leave": "Sunucudan Ayrıl",
+            "invite": "Davet et"
+        },
+        "infos": {
+            "owner": "Sahip",
+            "members": "Üyeler",
+            "vChannels": "Kanallar (ses)",
+            "tChannels": "Kanallar (metin)",
+            "roles": "Roller",
+            "channels": "Kanallar",
+            "emojis": "Emojiler"
+        },
+        "headings": {
+            "lastMessages": "Son Mesajlar",
+            "guildName": "Bilgi",
+            "autoScroll": "Otomatik kaydırma",
+        },
+        "errors": {
+            "error": "HATA",
+            "dm": "HATA : DM",
+            "emptyMsg": "HATA : BOŞ MESAJ",
+            "missingPermissions": "HATA : EKSİK İZİNLER"
+        },
+        "token": {
+            "prompt": "Lütfen discord bot token'ınızı girin",
+            "confirmation": "Emin misiniz ?",
+            "invalid": "Belirtilen token yok veya geçersiz"
+        },
+        "messageType": {
+            "serverJoin": "sunucuya katıldı",
+            "pin": "bir mesajı sabitledi",
+            "channelNews": "uzak kanal haberleri ekledi",
+            "boost": "sunucuyu boostladı"
+        },
+        "fileType": {
+            "unknown": "bilinmeyen",
+            "img": "görüntü",
+            "doc": "belge",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "ses"
+        },
+        "formatting": {
+            "bold": "Kalın",
+            "emphasis": "Italik",
+            "underline": "	Altı çizili",
+            "strike": "Üstü çizili",
+            "clear": "Biçimlendirmeyi temizle"
         }
     }
 };
