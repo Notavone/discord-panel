@@ -6,6 +6,13 @@
 
 ## Changelog
 
+### Version 1.3.1
+
+*  **Added** code blocks to markdown formatting
+*  **Added** mention replacement
+*  **Added** embed support (WIP)
+*  **Updated** attachments to directly send images, audios and videos
+ 
 ### Version 1.3.0
 
 *  **Updated** the locale code to automatically switch to english in case of missing translations

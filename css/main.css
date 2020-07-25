@@ -60,6 +60,19 @@ p {
   margin-bottom: 0;
 }
 
+figure {
+  margin: 0;
+}
+
+audio {
+  height: 30px;
+}
+
+video {
+  padding: 5px 0 5px 0;
+  max-width: 50%;
+}
+
 .messageId {
   display: none;
 }
@@ -68,10 +81,32 @@ p {
   margin: 0;
 }
 
+.embeds {
+  margin: 5px 0 0 0;
+  padding: 5px 0 5px 5px;
+  display: block;
+  border-left: 5px solid white;
+  border-radius: 5px;
+  background-color: var(--bodyColor);
+}
+
+.embeds p {
+  display: inline;
+}
+
 .avatarIMG {
   border-radius: 15px;
   height: 30px;
   width: 30px;
+}
+
+.chatImg {
+  padding: 2px;
+  max-width: 50%;
+}
+
+.chatMsg {
+  margin: 6px 0 6px 0;
 }
 
 .emojiImg {
@@ -124,6 +159,7 @@ a {
   min-height: 350px;
   max-height: 350px;
   overflow-y: auto;
+  overflow-x: hidden;
   text-align: left;
   border: 2px solid var(--bodyColor);
   box-shadow: 0 0 5px var(--bodyColor);
@@ -131,6 +167,10 @@ a {
   font-size: 16px;
   margin: 0 0 5px 0;
   word-break: break-word;
+}
+
+.scrollable a {
+  color: var(--blue);
 }
 
 #formatting {
@@ -223,6 +263,18 @@ button:hover {
 div {
   padding-left: 6px;
   padding-right: 6px;
+}
+
+.codeBlock {
+  background-color: var(--bodyColor);
+  border-radius: 7px;
+  display: block;
+}
+
+.code {
+  background-color: var(--bodyColor);
+  border-radius: 3px;
+  display: inline;
 }
 
 .mini {

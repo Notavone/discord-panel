@@ -56,20 +56,6 @@ $(document).ready(() => {
                     FUNCTIONS
     //////////////////////////////////////////*/
 
-    function contentReplacement(message) {
-        let content = escapeHtml(message.content)
-            .replace(/\n/g, "<br>")
-            .replace(/(&lt;a:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`)
-            .replace(/(&lt;:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`);
-
-        content = replaceMarkdown(content, "***", "<b><em>", "</em></b>", "&ast;&ast;&ast;");
-        content = replaceMarkdown(content, "**", "<b>", "</b>", "&ast;&ast;");
-        content = replaceMarkdown(content, "*", "<em>", "</em>", "&ast;");
-        content = replaceMarkdown(content, "__", "<u>", "</u>", "&lowbar;&lowbar;");
-        content = replaceMarkdown(content, "~~", "<s>", "</s>", "&tilde;&tilde;");
-        return content;
-    }
-
     // This function creates a message to display in the chat, takes a Discord.Message as parameter
     function createMessage(message) {
         let userTag = escapeHtml(message.author.tag);
@@ -79,18 +65,20 @@ $(document).ready(() => {
         let timestamp = formatTimestamp(message.createdAt);
         let html;
         let attachments = [];
+        let embeds = [];
+        let links = [];
 
         Array.from(message.attachments).forEach((attachment) => {
             let attachmentUrl = attachment[1].url;
             let attachmentTxt = `<a href="${escapeHtml(attachmentUrl)}" target="_blank">`;
             if (attachmentUrl.endsWith(".jpg") || attachmentUrl.endsWith(".jpeg") || attachmentUrl.endsWith(".png")) {
-                attachmentTxt += localeFile.fileType.img;
+                return embeds.push(`<a href="${attachmentUrl}" target="_blank"><img class="chatImg" src="${attachmentUrl}" alt=""></a>`);
+            } else if (attachmentUrl.endsWith(".mp4")) {
+                return embeds.push(`<figure><figcaption>${attachment[1].name}</figcaption><video controls src="${attachmentUrl}"></video></figure>`);
+            } else if (attachmentUrl.endsWith(".mp3")) {
+                return embeds.push(`<figure><figcaption>${attachment[1].name}</figcaption><audio controls src="${attachmentUrl}"></audio></figure>`);
             } else if (attachmentUrl.endsWith(".docx") || attachmentUrl.endsWith(".odt")) {
                 attachmentTxt += localeFile.fileType.doc;
-            } else if (attachmentUrl.endsWith(".mp4")) {
-                attachmentTxt += localeFile.fileType.video;
-            } else if (attachmentUrl.endsWith(".mp3")) {
-                attachmentTxt += localeFile.fileType.audio;
             } else if (attachmentUrl.endsWith(".pdf")) {
                 attachmentTxt += localeFile.fileType.pdf;
             } else {
@@ -100,7 +88,53 @@ $(document).ready(() => {
             attachments.push(attachmentTxt);
         });
 
-        html = `<div id="${message.id}">${userAvatar} ${escapeHtml(userTag)} `;
+        if (message.embeds.length) message.embeds.forEach((embed) => {
+            let html = "";
+            let fields = [];
+
+            if (embed.url) links.push(embed.url);
+            if (embed.author) {
+                if (embed.author.iconURL) html += `<a href="${embed.author.iconURL}" target="_blank"><img class="avatarIMG" src="${embed.author.iconURL}"> </a>`;
+                if (embed.author.url) {
+                    html += `<a href="${embed.author.url}">${embed.author.name}</a>`;
+                } else {
+                    html += embed.author.name;
+                }
+            }
+
+            if (embed.title) {
+                if (embed.author) html += "<br><br>";
+                html += `<b>${embed.title}</b>`;
+            }
+
+            if (embed.description) {
+                if (embed.author || embed.title) html += "<br><br>";
+                html += contentReplacement(embed.description);
+            }
+
+            if (embed.fields.length > 0) {
+                if (embed.author || embed.title || embed.description) html += "<br><br>";
+                embed.fields.forEach((field) => {
+                    fields.push(`<p><b>${field.name}</b><br>${contentReplacement(field.value)}<p>${field.inline ? "" : "<br>"}`)
+                });
+            }
+            html += fields.join('');
+
+            if (embed.video !== null) {
+                if (embed.author || embed.title || embed.description || fields.length > 0) html += "<br><br>";
+                html += `<video controls src="${embed.video.url}"></video>`;
+            } else if (embed.image !== null) {
+                if (embed.author || embed.title || embed.description || fields.length > 0) html += "<br><br>";
+                html += `<a href="${embed.image.url}" target="_blank"><img class="chatImg" src="${embed.image.url}" alt=""></a>`;
+            } else if (embed.thumbnail !== null) {
+                if (embed.author || embed.title || embed.description || fields.length > 0) html += "<br><br>";
+                html += `<a href="${embed.thumbnail.url}" target="_blank"><img class="chatImg" src="${embed.thumbnail.url}" alt=""></a>`;
+            }
+
+            embeds.push(html)
+        });
+
+        html = `<div class="chatMsg" id="${message.id}">${userAvatar} ${escapeHtml(userTag)} `;
 
         // Different types of messages
         if (message.type === "GUILD_MEMBER_JOIN") {
@@ -111,7 +145,7 @@ $(document).ready(() => {
             html += `${localeFile.messageType.channelNews} `;
         } else if (message.type.includes("USER_PREMIUM_GUILD_SUBSCRIPTION")) {
             html += `${localeFile.messageType.boost} `; // Covers all levels of boosting
-        } else if (message.content === "") {
+        } else if (message.content === "" && attachments.length > 0) {
             html += `${localeFile.text.fileSent} `;
         }
 
@@ -124,12 +158,16 @@ $(document).ready(() => {
         }
 
         if (message.content !== "") {
-            html += `<br><span class="messageContent">${contentReplacement(message)}</span>`;
+            html += `<br><span class="messageContent">${contentReplacement(message.content, links)}</span>`;
         } else {
             html += `<span class="messageContent"></span>`;
         }
 
-        if (attachments.length > 0) {
+        if (embeds.length) {
+            html += `<br><span class="embeds">${embeds.join('')}</span>`;
+        }
+
+        if (attachments.length) {
             html += `<br><span class="messageContent">${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</span>`;
         }
 
@@ -173,6 +211,7 @@ $(document).ready(() => {
                     chat.html(chat.html() + createMessage(msg[1]));
                 });
             });
+            $("#chk2")[0].checked = true;
         }
     }
 
@@ -345,9 +384,9 @@ $(document).ready(() => {
         }
 
         if (message.channel.type !== "dm" && (Number(message.author.id) === Number(client.user.id) || !message.author.bot)) {
-            lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${contentReplacement(message)}`);
+            lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${contentReplacement(message.content)}`);
         } else if (message.channel.type === "dm" && !message.author.bot) {
-            lastMessages.html(lastMessages.html() + `<br><b>[${localeFile.text.privateMessages}] ${escapeHtml(message.author.tag)}</b> ${contentReplacement(message)}`);
+            lastMessages.html(lastMessages.html() + `<br><b>[${localeFile.text.privateMessages}] ${escapeHtml(message.author.tag)}</b> ${contentReplacement(message.content)}`);
         }
 
         localStorage.setItem("lastMessages", $("#lastMessages").html());
@@ -370,8 +409,8 @@ $(document).ready(() => {
 
     client.on("messageUpdate", (oldMessage, newMessage) => {
         if (Number(oldMessage.channel.id) === Number(channels.val())) {
+            $(`#${oldMessage.id}`).replaceWith(createMessage(newMessage));
             $(`#${oldMessage.id} > span.font-size-mini`).html(`Edited at : ${formatTimestamp(newMessage.editedAt)}`);
-            $(`#${oldMessage.id} > span.messageContent`).html(contentReplacement(newMessage));
         }
 
         if ((Number(oldMessage.author.id) === Number(channels.val()) || oldMessage.author.id === client.user.id) && oldMessage.channel.type === "dm") {
