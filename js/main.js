@@ -84,34 +84,6 @@ function contentReplacement(content, links) {
     return content;
 }
 
-function toggleVisibilityHeight(DOM) {
-    if ($(DOM).css("display") === "none") {
-        $(DOM).animate({
-            opacity: 1,
-            height: "toggle"
-        }, 1200);
-    } else {
-        $(DOM).animate({
-            opacity: 0,
-            height: "toggle"
-        }, 1200);
-    }
-}
-
-function toggleVisibilityWidth(DOM) {
-    if ($(DOM).css("display") === "none") {
-        $(DOM).animate({
-            opacity: 1,
-            width: "toggle"
-        }, 200);
-    } else {
-        $(DOM).animate({
-            opacity: 0,
-            width: "toggle"
-        }, 200);
-    }
-}
-
 function addText(value) {
     let toSend = $("#toSend");
     toSend.html(`${toSend.html() + escapeHtml(value)} `);

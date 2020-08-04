@@ -6,6 +6,15 @@
 
 ## Changelog
 
+### Version 1.3.2
+
+*  **Added** a link to the original repo at the bottom of the page
+*  **Added** support for embed, still WIP until fully tested (mainly tested on Twitter embeds, see [this issue](https://github.com/Notavone/discord-panel/issues/16))
+*  **Replaced** header `p` tags by actual headers `h` tags
+*  **Switched** back to discord.12.1.1 because of cross-origin issue with master and stable
+*  **Removed** toggleVisibility functions to replace with a pre-made one is jQuery
+*  **Fixed** mouse wheel event not working on Firefox
+
 ### Version 1.3.1
 
 *  **Added** code blocks to markdown formatting
@@ -39,7 +48,7 @@ COMING SOON™
 ## Built With 🔧
 
 *   [discord.js](https://github.com/discordjs/discord.js/tree/webpack)
-*   [JQuery](https://jquery.com/)
+*   [jQuery](https://jquery.com/)
 *   [Bootstrap](https://getbootstrap.com/)
 
 ## Author 📝

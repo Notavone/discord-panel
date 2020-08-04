@@ -72,11 +72,11 @@ $(document).ready(() => {
             let attachmentUrl = attachment[1].url;
             let attachmentTxt = `<a href="${escapeHtml(attachmentUrl)}" target="_blank">`;
             if (attachmentUrl.endsWith(".jpg") || attachmentUrl.endsWith(".jpeg") || attachmentUrl.endsWith(".png")) {
-                return embeds.push(`<a href="${attachmentUrl}" target="_blank"><img class="chatImg" src="${attachmentUrl}" alt=""></a>`);
+                return embeds.push(`<div><a href="${attachmentUrl}" target="_blank"><img style="max-width: 100%;max-height: 300px;object-fit: scale-down;margin: 5px 0 0 0" src="${attachmentUrl}" alt=""></a></div>`);
             } else if (attachmentUrl.endsWith(".mp4")) {
-                return embeds.push(`<figure><figcaption>${attachment[1].name}</figcaption><video controls src="${attachmentUrl}"></video></figure>`);
+                return embeds.push(`<div><figure><figcaption>${attachment[1].name}</figcaption><video controls src="${attachmentUrl}"></video></figure></div>`);
             } else if (attachmentUrl.endsWith(".mp3")) {
-                return embeds.push(`<figure><figcaption>${attachment[1].name}</figcaption><audio controls src="${attachmentUrl}"></audio></figure>`);
+                return embeds.push(`<div><figure><figcaption>${attachment[1].name}</figcaption><audio controls src="${attachmentUrl}"></audio></figure></div>`);
             } else if (attachmentUrl.endsWith(".docx") || attachmentUrl.endsWith(".odt")) {
                 attachmentTxt += localeFile.fileType.doc;
             } else if (attachmentUrl.endsWith(".pdf")) {
@@ -88,53 +88,92 @@ $(document).ready(() => {
             attachments.push(attachmentTxt);
         });
 
-        if (message.embeds.length) message.embeds.forEach((embed) => {
-            let html = "";
+        if (message.embeds.length) {
+            let embed = message.embeds[0];
+            let images = [];
             let fields = [];
-
+            let html = `<div class="embed" ${embed.hexColor ? `style="border-left: 5px solid ${embed.hexColor}"` : ""}>`;
             if (embed.url) links.push(embed.url);
+
+            if (embed.image) {
+                let length = message.embeds.length;
+                for (let i = 0; i < message.embeds.length; i++) {
+                    let style = "padding: 2px;";
+                    let image = message.embeds[i].image;
+                    if (length === 1) {
+                        style += "border-radius: 8px;width: 100%;height:300px;object-fit: scale-down;";
+                    } else if (length === 2) {
+                        if (i === 0) style += "border-radius: 8px 0 0 8px;width: 50%;height:300px;object-fit: cover;";
+                        else style += "border-radius: 0 8px 8px 0;width: 50%;height:300px;object-fit: cover;";
+                    } else if (length === 3) {
+                        if (i === 0) style += "border-radius: 8px 0 0 8px;width: 50%;height:300px;object-fit: cover;float: left;";
+                        else if (i === 1) style += "border-radius: 0 8px 0 0;width: 50%;height:150px;object-fit: cover;vertical-align: top;float: right;";
+                        else style += "border-radius: 0 0 8px 0;width: 50%;height:150px;object-fit: cover;vertical-align: top;float: right;";
+                    } else {
+                        if (i === 0) style += "border-radius: 8px 0 0 0;width: 50%;height:150px;object-fit: cover;";
+                        if (i === 1) style += "border-radius:  0 8px 0 0;width: 50%;height:150px;object-fit: cover;";
+                        if (i === 2) style += "border-radius:  0 0 0 8px;width: 50%;height:150px;object-fit: cover;";
+                        if (i === 3) style += "border-radius:  0 0 8px 0;width: 50%;height:150px;object-fit: cover;";
+                    }
+
+                    images.push(`<a href="${image.url}" target="_blank"><img style="${style}" src="${image.url}" alt=""></a>`);
+                }
+            }
+
             if (embed.author) {
-                if (embed.author.iconURL) html += `<a href="${embed.author.iconURL}" target="_blank"><img class="avatarIMG" src="${embed.author.iconURL}"> </a>`;
+                html += "<div>";
+                if (embed.author.iconURL) html += `<a href="${embed.author.iconURL}" target="_blank"><img class="avatarIMG" src="${embed.author.iconURL}" alt=""></a>`;
                 if (embed.author.url) {
                     html += `<a href="${embed.author.url}">${embed.author.name}</a>`;
                 } else {
                     html += embed.author.name;
                 }
+                html += "</div>";
             }
 
             if (embed.title) {
-                if (embed.author) html += "<br><br>";
-                html += `<b>${embed.title}</b>`;
+                html += `<div><b>${embed.title}</b></div>`;
             }
 
             if (embed.description) {
-                if (embed.author || embed.title) html += "<br><br>";
-                html += contentReplacement(embed.description);
+                html += `<div style="word-break: break-word;">${contentReplacement(embed.description)}</div>`;
             }
 
             if (embed.fields.length > 0) {
-                if (embed.author || embed.title || embed.description) html += "<br><br>";
+                html += "<div>";
                 embed.fields.forEach((field) => {
-                    fields.push(`<p><b>${field.name}</b><br>${contentReplacement(field.value)}<p>${field.inline ? "" : "<br>"}`)
+                    if (field.inline) {
+                        fields.push(`<span style="display: inline-block;min-width: 50%;word-break: break-word;"><b>${field.name}</b><br>${contentReplacement(field.value)}</span>`)
+                    } else {
+                        fields.push(`<div><b>${field.name}</b><br>${contentReplacement(field.value)}</div>`)
+                    }
                 });
+                html += `${fields.join('')}</div>`;
             }
-            html += fields.join('');
 
             if (embed.video !== null) {
-                if (embed.author || embed.title || embed.description || fields.length > 0) html += "<br><br>";
-                html += `<video controls src="${embed.video.url}"></video>`;
-            } else if (embed.image !== null) {
-                if (embed.author || embed.title || embed.description || fields.length > 0) html += "<br><br>";
-                html += `<a href="${embed.image.url}" target="_blank"><img class="chatImg" src="${embed.image.url}" alt=""></a>`;
+                html += `<div><video controls src="${embed.video.url}"></video></div>`;
+            } else if (images.length) {
+                html += `<div>${images.join('')}</div>`;
             } else if (embed.thumbnail !== null) {
-                if (embed.author || embed.title || embed.description || fields.length > 0) html += "<br><br>";
-                html += `<a href="${embed.thumbnail.url}" target="_blank"><img class="chatImg" src="${embed.thumbnail.url}" alt=""></a>`;
+                html += `<div><a href="${embed.thumbnail.url}" target="_blank"><img style="border-radius: 8px;width: 100%;height:300px;object-fit: cover;" src="${embed.thumbnail.url}" alt=""></a></div>`;
             }
 
+            if (embed.footer) {
+                html += "<div>";
+                if (embed.footer.iconURL) html += `<a href="${embed.footer.iconURL}" target="_blank"><img class="avatarIMG" src="${embed.footer.iconURL}" alt=""></a>`;
+                if (embed.footer.url) {
+                    html += `<a href="${embed.footer.url}">${embed.footer.text}</a>`;
+                } else {
+                    html += embed.footer.text;
+                }
+                html += "</div>";
+            }
+            html += "</div>";
             embeds.push(html)
-        });
+        }
 
-        html = `<div class="chatMsg" id="${message.id}">${userAvatar} ${escapeHtml(userTag)} `;
+        html = `<div class="chatMsg" id="${message.id}"><div>${userAvatar} ${escapeHtml(userTag)} `;
 
         // Different types of messages
         if (message.type === "GUILD_MEMBER_JOIN") {
@@ -156,19 +195,16 @@ $(document).ready(() => {
         if (message.deletable && ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES"))) {
             html += `<button class="mini" data-value="${message.id}" onclick="del(this.dataset.value)">🗑️</button>`;
         }
+        html += "</div>";
 
-        if (message.content !== "") {
-            html += `<br><span class="messageContent">${contentReplacement(message.content, links)}</span>`;
-        } else {
-            html += `<span class="messageContent"></span>`;
-        }
+        html += `<div class="messageContent">${message.content ? contentReplacement(message.content, links) : ""}</div>`;
 
         if (embeds.length) {
-            html += `<br><span class="embeds">${embeds.join('')}</span>`;
+            html += `${embeds.join('')}`;
         }
 
         if (attachments.length) {
-            html += `<br><span class="messageContent">${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</span>`;
+            html += `<div>${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</div>`;
         }
 
         return `${html}</div>`;
@@ -243,8 +279,8 @@ $(document).ready(() => {
         } else {
             guild = client.guilds.cache.find((g) => g.id === guilds.val());
 
-            if (guild.channels.cache.filter((chan) => chan.type === "text").size > 0) {
-                guild.channels.cache.filter((chan) => chan.type === "text").forEach((channel) => {
+            if (guild.channels.cache.filter((c) => c.type === "text").size > 0) {
+                guild.channels.cache.filter((c) => c.type === "text").forEach((channel) => {
                     if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
                         channels.append(`<option value="${channel.id}">#${escapeHtml(channel.name)}</option>`);
                     }
@@ -254,27 +290,21 @@ $(document).ready(() => {
             guildName.html(`<a href="${guild.iconURL() || "./img/icon/info.png"}" target="_blank"><img alt="" src="${guild.iconURL() || "./img/icon/info.png"}" class="avatarIMG"/></a> ${escapeHtml(guild.name)}`);
 
             // General information
-            html += `${localeFile.infos.owner}: ${guild.owner.user.tag} <button data-value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.dataset.value)">@</button><br>`;
-            html += `${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}<br>`;
-            html += `${localeFile.infos.vChannels}: ${guild.channels.cache.filter((chan) => chan.type === "voice").size}<br>`;
-            html += `${localeFile.infos.tChannels}: ${guild.channels.cache.filter((chan) => chan.type === "text").size}<br><br>`;
+            html += `<div>${localeFile.infos.owner}: ${guild.owner.user.tag} <button data-value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.dataset.value)">@</button></div><div>${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}</div><div>${localeFile.infos.vChannels}: ${guild.channels.cache.filter((c) => c.type === "voice").size}</div><div>${localeFile.infos.tChannels}: ${guild.channels.cache.filter((c) => c.type === "text").size}</div><br>`;
 
             // Members button
             guild.members.cache.filter((member) => !member.user.bot).forEach((member) => {
                 let avatarUrl = member.user.avatarURL() || `./img/discord_defaults_avatars/${member.user.discriminator % 5}.png`;
-                guildMembers.push(`<a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button data-value="<@!${member.user.id}>" onclick="addText(this.dataset.value)" class="mini">@</button>`);
+                guildMembers.push(`<div style="margin: 4px 0 4px 0"><a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button data-value="<@!${member.user.id}>" onclick="addText(this.dataset.value)" class="mini">@</button></div>`);
             });
-            html += `<button onclick='toggleVisibilityHeight("#guildMembers")'>${localeFile.infos.members}</button>`;
-            html += `<div id="guildMembers" style="display:none; opacity: 0;">${guildMembers.join("<br>")}</div>`;
+            html += `<button onclick='$("#guildMembers").toggle("fast")'>${localeFile.infos.members}</button><div id="guildMembers" style="display:none;">${guildMembers.join('')}</div>`;
 
             // Roles button
-            html += `<button onclick='toggleVisibilityHeight("#guildRoles")'>${localeFile.infos.roles}</button>`;
-            html += `<div id="guildRoles" style="display:none; opacity: 0;">${guild.roles.cache.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>`;
+            html += `<button onclick='$("#guildRoles").toggle("fast")'>${localeFile.infos.roles}</button><div id="guildRoles" style="display:none;">${guild.roles.cache.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>`;
 
             // Channels button
             if (guild.channels.cache.size > 0) {
-                html += `<button onclick='toggleVisibilityHeight("#guildChannels")'>${localeFile.infos.channels}</button>`;
-                html += `<div id="guildChannels" style="display:none; opacity: 0;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`;
+                html += `<button onclick='$("#guildChannels").toggle("fast")'>${localeFile.infos.channels}</button><div id="guildChannels" style="display:none;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`;
             }
 
             // Emoji button
@@ -286,8 +316,7 @@ $(document).ready(() => {
                         guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
                     }
                 });
-                html += `<button onclick='toggleVisibilityWidth("#guildEmojis")'>${localeFile.infos.emojis}</button>`;
-                html += `<div id="guildEmojis" style="display:none; opacity: 0;">${guildEmojis.join(" ")}</div>`;
+                html += `<button onclick='$("#guildEmojis").toggle("fast")'>${localeFile.infos.emojis}</button><div id="guildEmojis" style="display:none;">${guildEmojis.join(" ")}</div>`;
             }
 
             $("#guildInfo").html(html);
@@ -590,7 +619,7 @@ $(document).ready(() => {
                     AUTO-SCROLL
     //////////////////////////////////////////*/
 
-    lastMessages.bind("mousewheel", (event) => {
+    lastMessages.bind("wheel", (event) => {
         if (event.originalEvent.deltaY < 0) {
             $("#chk1")[0].checked = false;
         } else if (event.originalEvent.deltaY > 0 && $("#lastMessages").scrollTop() + $("#lastMessages").innerHeight() >= $("#lastMessages")[0].scrollHeight - 80) {
@@ -598,7 +627,7 @@ $(document).ready(() => {
         }
     });
 
-    chat.bind("mousewheel", (event) => {
+    chat.bind("wheel", (event) => {
         if (event.originalEvent.deltaY < 0) {
             $("#chk2")[0].checked = false;
         } else if (event.originalEvent.deltaY > 0 && $("#chat").scrollTop() + $("#chat").innerHeight() >= $("#chat")[0].scrollHeight - 80) {
