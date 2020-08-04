@@ -12,7 +12,7 @@
 *  **Added** support for embed, still WIP until fully tested (mainly tested on Twitter embeds, see [this issue](https://github.com/Notavone/discord-panel/issues/16))
 *  **Replaced** header `p` tags by actual headers `h` tags
 *  **Switched** back to discord.12.1.1 because of cross-origin issue with master and stable
-*  **Removed** toggleVisibility functions to replace with a pre-made one is jQuery
+*  **Removed** toggleVisibility functions to replace with a pre-made one in jQuery
 *  **Fixed** mouse wheel event not working on Firefox
 
 ### Version 1.3.1
