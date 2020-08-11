@@ -413,9 +413,9 @@ $(document).ready(() => {
         }
 
         if (message.channel.type !== "dm" && (Number(message.author.id) === Number(client.user.id) || !message.author.bot)) {
-            lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.author.tag)}]</b> ${contentReplacement(message.content)}`);
+            lastMessages.html(lastMessages.html() + `<br>[<b>#${escapeHtml(message.channel.name)} | ${escapeHtml(message.guild.name)} | ${escapeHtml(message.guild.id)} | ${escapeHtml(message.author.tag)} | ${escapeHtml(message.author.id)}] </b> \n${contentReplacement(message.content)}`);
         } else if (message.channel.type === "dm" && !message.author.bot) {
-            lastMessages.html(lastMessages.html() + `<br><b>[${localeFile.text.privateMessages}] ${escapeHtml(message.author.tag)}</b> ${contentReplacement(message.content)}`);
+            lastMessages.html(lastMessages.html() + `<br><b>[${localeFile.text.privateMessages}] ${escapeHtml(message.author.tag)} | ${escapeHtml(message.author.id)} </b> \n${contentReplacement(message.content)}`);
         }
 
         localStorage.setItem("lastMessages", $("#lastMessages").html());

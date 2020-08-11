@@ -66,6 +66,73 @@ const locales = {
             "clear": "Clear formatting"
         }
     },
+    "ru": {
+        "cCode": "ru",
+        "language": "Русский",
+        "text": {
+            "channelNameLabel": "Чат",
+            "scrollCheck": "Включить анимацию автоматической прокрутки",
+            "fileSent": "отправил какой-то файл(ы)",
+            "attachmentTxt": "Фото",
+            "privateMessages": "Лс",
+            "userId": "ID пользователя"
+        },
+        "buttons": {
+            "clearLastMessages": "Отчистить сообщения",
+            "editToken": "Изменить токен",
+            "refreshChat": "Перезапустить чат",
+            "changeLanguage": "Изменить язык",
+            "send": "Отправить",
+            "leave": "Выйти с серверва",
+            "invite": "Инвайт"
+        },
+        "infos": {
+            "owner": "Овнер",
+            "members": "Участников",
+            "vChannels": "Голосовых каналов",
+            "tChannels": "Текстовых каналов",
+            "roles": "Роли",
+            "channels": "Каналы",
+            "emojis": "Смайлики"
+        },
+        "headings": {
+            "lastMessages": "Прошлые сообщения",
+            "guildName": "Информация",
+            "autoScroll": "Auto-Scroll",
+        },
+        "errors": {
+            "error": "Ошибка",
+            "dm": "Ошибка: Лс",
+            "emptyMsg": "Ошибка: Нельзя отправить пустое сообщение",
+            "missingPermissions": "Ошибка: Нету прав"
+        },
+        "token": {
+            "prompt": "Пожалуйста укажите token бота",
+            "confirmation": "Вы уверены?",
+            "invalid": "Токен бота не верный!"
+        },
+        "messageType": {
+            "serverJoin": "Зашел на сервер",
+            "pin": "Закрепеные сообщени",
+            "channelNews": "добавлен удаленный канал новостей",
+            "boost": "Сервер забустен"
+        },
+        "fileType": {
+            "unknown": "неизвестно",
+            "img": "картинка",
+            "doc": "досумент",
+            "pdf": "pdf",
+            "video": "видио",
+            "audio": "аудио"
+        },
+        "formatting": {
+            "bold": "Жирный текст",
+            "emphasis": "Курсивный текст",
+            "underline": "Текст с подчеркиванием",
+            "strike": "Перечекнутый текст",
+            "clear": "Убрать форматирование текста"
+        }
+    },
     "fr": {
         "cCode": "fr",
         "language": "Français",
@@ -267,4 +334,5 @@ const locales = {
             "clear": "Biçimlendirmeyi temizle"
         }
     }
+    
 };
