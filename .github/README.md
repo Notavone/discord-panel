@@ -6,6 +6,10 @@
 
 ## Changelog
 
+### Version 1.3.3
+
+*  **New** Russian translation by Koteich-dev
+
 ### Version 1.3.2
 
 *  **Added** a link to the original repo at the bottom of the page
@@ -29,8 +33,8 @@
 *  **Updated** `deleteMessage()` & `editMessage()` to make use of jQuery selectors
 *  **Updated** the mousewheel binding code
 *  **New** function to format any timestamp into local timestamp (`formatTimestamp(dateLike)`)
-*  **New** Dutch locale by LevantHAN
-*  **New** Turkish locale by LevantHAN
+*  **New** Dutch translation by LevantHAN
+*  **New** Turkish translation by LevantHAN
 *  **Removed** `deleteMessage()` & `editMessage()` and moved the code into their matching discord events
 
 ## What makes this special ? 💎
@@ -59,9 +63,9 @@ COMING SOON™
 
 ## Contributors 📝
 
-| ![LeventHAN](https://github.com/leventhan.png?size=100) |
-|:-------------------------------------------------------:|
-| **[🌐 LeventHAN](https://github.com/leventhan)**         |
+| ![LeventHAN](https://github.com/leventhan.png?size=100) | ![Koteich-dev](https://github.com/Koteich-dev.png?size=100) |
+|:-------------------------------------------------------:|:---------------------------------------------------------:|
+| **[🌐 LeventHAN](https://github.com/leventhan)**        | **[💻 Koteich-dev](https://github.com/Koteich-dev)**        |
 
 ## Copyrights and Licence
 
