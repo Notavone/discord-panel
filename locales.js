@@ -334,5 +334,4 @@ const locales = {
             "clear": "Biçimlendirmeyi temizle"
         }
     }
-    
 };
