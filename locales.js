@@ -66,28 +66,95 @@ const locales = {
             "clear": "Clear formatting"
         }
     },
+"uk": {
+        "cCode": "uk",
+        "language": "Український",
+        "text": {
+            "channelNameLabel": "Чат",
+            "scrollCheck": "Включити автопрокрутку анімації",
+            "fileSent": "послав кілька файл(и)",
+            "attachmentTxt": "Вкладення",
+            "privateMessages": "Особисті повідомлення",
+            "userId": "ID користувача"
+        },
+        "buttons": {
+            "clearLastMessages": "Зрозуміло, Останні Повідомлення",
+            "editToken": "Редагування маркерів",
+            "refreshChat": "Чат оновити",
+            "changeLanguage": "Змінити мову",
+            "send": "Відправити",
+            "leave": "Залишити сервер",
+            "invite": "Запрошуємо"
+        },
+        "infos": {
+            "owner": "Власник",
+            "members": "Члени",
+            "vChannels": "Канали (голос)",
+            "tChannels": "Канали (текст)",
+            "roles": "Ролі",
+            "channels": "Канали",
+            "emojis": "Смайлики"
+        },
+        "headings": {
+            "lastMessages": "Останні Повідомлення",
+            "guildName": "Інформація",
+            "autoScroll": "Авто-Прокрутки",
+        },
+        "errors": {
+            "error": "Помилка",
+            "dm": "Помилка : Особисті повідомлення",
+            "emptyMsg": "Помилка : ПУСТЕ ПОВІДОМЛЕННЯ",
+            "missingPermissions": "Помилка : ВІДСУТНІ ДОЗВОЛИ НА"
+        },
+        "token": {
+            "prompt": "Будь ласка, введіть Ваш розбрат бот маркер",
+            "confirmation": "Ви впевнені ?",
+            "invalid": "Фішка не надані або маркер є недійсним"
+        },
+        "messageType": {
+            "serverJoin": "приєднався до сервера",
+            "pin": "прикололо повідомлення",
+            "channelNews": "додано віддалений канал новини",
+            "boost": "піднято сервер"
+        },
+        "fileType": {
+            "unknown": "невідомо",
+            "img": "зображення",
+            "doc": "документ",
+            "pdf": "pdf",
+            "video": "відео",
+            "audio": "аудіо"
+        },
+        "formatting": {
+            "bold": "Сміливий",
+            "emphasis": "Акцент",
+            "underline": "Підкреслити",
+            "strike": "Закреслення",
+            "clear": "Очистити форматування"
+        }
+    },
     "ru": {
         "cCode": "ru",
         "language": "Русский",
         "text": {
             "channelNameLabel": "Чат",
             "scrollCheck": "Включить анимацию автоматической прокрутки",
-            "fileSent": "отправил какой-то файл(ы)",
+            "fileSent": "отправил файл(ы)",
             "attachmentTxt": "Фото",
             "privateMessages": "Лс",
             "userId": "ID пользователя"
         },
         "buttons": {
-            "clearLastMessages": "Отчистить сообщения",
+            "clearLastMessages": "Очистить сообщения",
             "editToken": "Изменить токен",
-            "refreshChat": "Перезапустить чат",
+            "refreshChat": "Перезагрузить чат",
             "changeLanguage": "Изменить язык",
             "send": "Отправить",
             "leave": "Выйти с серверва",
             "invite": "Инвайт"
         },
         "infos": {
-            "owner": "Овнер",
+            "owner": "Владелец",
             "members": "Участников",
             "vChannels": "Голосовых каналов",
             "tChannels": "Текстовых каналов",
@@ -98,7 +165,7 @@ const locales = {
         "headings": {
             "lastMessages": "Прошлые сообщения",
             "guildName": "Информация",
-            "autoScroll": "Auto-Scroll",
+            "autoScroll": "Авто-Прокрутка",
         },
         "errors": {
             "error": "Ошибка",
@@ -109,20 +176,20 @@ const locales = {
         "token": {
             "prompt": "Пожалуйста укажите token бота",
             "confirmation": "Вы уверены?",
-            "invalid": "Токен бота не верный!"
+            "invalid": "Токен бота неверный!"
         },
         "messageType": {
             "serverJoin": "Зашел на сервер",
-            "pin": "Закрепеные сообщени",
+            "pin": "Закрепленные сообщения",
             "channelNews": "добавлен удаленный канал новостей",
-            "boost": "Сервер забустен"
+            "boost": "забустил сервер"
         },
         "fileType": {
             "unknown": "неизвестно",
-            "img": "картинка",
-            "doc": "досумент",
+            "img": "Картинка",
+            "doc": "документ",
             "pdf": "pdf",
-            "video": "видио",
+            "video": "видео",
             "audio": "аудио"
         },
         "formatting": {
