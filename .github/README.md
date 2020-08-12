@@ -6,6 +6,11 @@
 
 ## Changelog
 
+### Version 1.3.4
+
+*  **New** Ukrainian translation by Payz123
+*  **Updated** contributors
+
 ### Version 1.3.3
 
 *  **New** Russian translation by Koteich-dev
@@ -49,23 +54,25 @@
 
 COMING SOON™
 
+## How to contribute
+
+COMING SOON™
+
 ## Built With 🔧
 
 *   [discord.js](https://github.com/discordjs/discord.js/tree/webpack)
 *   [jQuery](https://jquery.com/)
 *   [Bootstrap](https://getbootstrap.com/)
 
-## Author 📝
-
-| ![Nøtavøne](https://github.com/notavone.png?size=100) |
-|:-----------------------------------------------------:|
-| **[💻 Nøtavøne](https://github.com/notavone)**        |
-
 ## Contributors 📝
 
-| ![LeventHAN](https://github.com/leventhan.png?size=100) | ![Koteich-dev](https://github.com/Koteich-dev.png?size=100) |
-|:-------------------------------------------------------:|:---------------------------------------------------------:|
-| **[🌐 LeventHAN](https://github.com/leventhan)**        | **[💻 Koteich-dev](https://github.com/Koteich-dev)**        |
+### Translation 🌐
+
+| User                                          | Language           |
+| --------------------------------------------- | ------------------ |
+| [LeventHAN](https://github.com/leventhan)     | Dutch, Turkish     |
+| [Koteich_dev](https://github.com/Koteich-dev) | Russian            |
+| [Payz123](https://github.com/Payz123)         | Ukrainian, Russian |
 
 ## Copyrights and Licence
 
