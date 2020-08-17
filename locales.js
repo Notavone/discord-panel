@@ -400,5 +400,206 @@ const locales = {
             "strike": "Üstü çizili",
             "clear": "Biçimlendirmeyi temizle"
         }
+    },
+	"pl": {
+        "cCode": "pl",
+        "language": "Polski",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Włącz animację automatycznego przewijania",
+            "fileSent": "Wysłano plik/pliki",
+            "attachmentTxt": "Załączniki",
+            "privateMessages": "DM",
+            "userId": "ID użytkownika"
+        },
+        "buttons": {
+            "clearLastMessages": "Wyczyść ostatnie wiadomości",
+            "editToken": "Zmień token",
+            "refreshChat": "Odśwież chat",
+            "changeLanguage": "Zmień język",
+            "send": "Wyślij",
+            "leave": "Opuść serwer",
+            "invite": "Zaproś"
+        },
+        "infos": {
+            "owner": "Właściciel",
+            "members": "Członkowie",
+            "vChannels": "Kanały (głosowe)",
+            "tChannels": "Kanały (tekstowe)",
+            "roles": "Role",
+            "channels": "Kanały",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Ostatnie wiadomości",
+            "guildName": "Informacje",
+            "autoScroll": "Automatyczne Scrollowanie",
+        },
+        "errors": {
+            "error": "BŁĄD",
+            "dm": "BŁĄD : DM",
+            "emptyMsg": "BŁĄD : PUSTA WIADOMOŚĆ",
+            "missingPermissions": "BŁĄD : BRAK POZWOLENIA"
+        },
+        "token": {
+            "prompt": "Wprowadź token bota",
+            "confirmation": "Na pewno?",
+            "invalid": "Nie podano tokenu lub token jest niepoprawny"
+        },
+        "messageType": {
+            "serverJoin": "dołączył do serwera",
+            "pin": "przypiął wiadomość",
+            "channelNews": "dodał wiadomość na serwerze zdalnym",
+            "boost": "ulepszył serwer"
+        },
+        "fileType": {
+            "unknown": "nieznany",
+            "img": "obrazek",
+            "doc": "dokument",
+            "pdf": "pdf",
+            "video": "wideo",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Pogrubienie",
+            "emphasis": "Kursywa",
+            "underline": "Podkreślenie",
+            "strike": "Przekreślenie",
+            "clear": "Czyszczenie formatowania"
+        }
+    },
+	"cz": {
+        "cCode": "cz",
+        "language": "Čeština",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Povolit animaci automatického posouvání",
+            "fileSent": "Soubor/soubory byly odeslány",
+            "attachmentTxt": "Přílohy",
+            "privateMessages": "DM",
+            "userId": "ID uživatele"
+        },
+        "buttons": {
+            "clearLastMessages": "Vymazat poslední zprávy",
+            "editToken": "Změňte token",
+            "refreshChat": "Aktualizujte chat",
+            "changeLanguage": "Změnit jazyk",
+            "send": "Poslat",
+            "leave": "Opusťte server",
+            "invite": "Pozvat"
+        },
+        "infos": {
+            "owner": "Majitel",
+            "members": "Členové",
+            "vChannels": "Kanály (hlas)",
+            "tChannels": "Kanály (text)",
+            "roles": "Role",
+            "channels": "Kanály",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Poslední zprávy",
+            "guildName": "Informace",
+            "autoScroll": "Automatické rolování",
+        },
+        "errors": {
+            "error": "CHYBA",
+            "dm": "CHYBA : DM",
+            "emptyMsg": "CHYBA : VYPRÁZDNIT ZPRÁVU",
+            "missingPermissions": "CHYBA : BEZ POVOLENÍ"
+        },
+        "token": {
+            "prompt": "Zadejte token robota",
+            "confirmation": "Zajisté?",
+            "invalid": "Token nebyl zadán nebo je token neplatný"
+        },
+        "messageType": {
+            "serverJoin": "připojil se k serveru",
+            "pin": "zprávu připnul",
+            "channelNews": "přidal zprávu na vzdálený server",
+            "boost": "vylepšil server"
+        },
+        "fileType": {
+            "unknown": "neznámý",
+            "img": "obrázek",
+            "doc": "dokument",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "zvuk"
+        },
+        "formatting": {
+            "bold": "Tučně",
+            "emphasis": "Kurzíva",
+            "underline": "Zdůraznit",
+            "strike": "Přejít",
+            "clear": "Jasné formátování"
+        }
+    },
+	"sk": {
+        "cCode": "sk",
+        "language": "Slovenský",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Povoliť animáciu automatického posúvania",
+            "fileSent": "Súbor/súbory boli odoslané",
+            "attachmentTxt": "Prílohy",
+            "privateMessages": "DM",
+            "userId": "ID užívateľa
+        },
+        "buttons": {
+            "clearLastMessages": "Vymazať poslednej správy"
+            "editToken": "Zmeňte token",
+            "refreshChat": "Aktualizujte chat",
+            "changeLanguage": "Zmeniť jazyk",
+            "send": "Poslat'",
+            "leave": "Opustite server",
+            "invite": "Pozvat'"
+        },
+        "infos": {
+            "owner": "Majitel'",
+            "members": "Členovia",
+            "vChannels": "Kanály (hlas)",
+            "tChannels": "Kanály (text)",
+            "roles": "Role",
+            "channels": "Kanály",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Posledné správy",
+            "guildName": "Informácie",
+            "autoScroll": "Automatické rolovanie",
+        },
+        "errors": {
+            "error": "CHYBA",
+            "dm": "CHYBA : DM",
+            "emptyMsg": "CHYBA : VYPRÁZDNIŤ SPRÁVU",
+            "missingPermissions": "CHYBA : BEZ POVOLENIA"
+        },
+        "token": {
+            "prompt": "Zadejte token robota",
+            "confirmation": "Zaiste?",
+            "invalid": "Token nebol zadaný alebo je token neplatný"
+        },
+        "messageType": {
+            "serverJoin": "pripojil se k serveru",
+            "pin": "správu připnul",
+            "channelNews": "pridal správu na vzdialený server",
+            "boost": "vylepšil server"
+        },
+        "fileType": {
+            "unknown": "neznámy",
+            "img": "obrázok",
+            "doc": "dokument",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "zvuk"
+        },
+        "formatting": {
+            "bold": "Tučne",
+            "emphasis": "Kurzíva",
+            "underline": "Zdôrazniť",
+            "strike": "Prejsť",
+            "clear": "Jasné formátovanie"
+        }
     }
 };
