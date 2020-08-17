@@ -66,7 +66,7 @@ const locales = {
             "clear": "Clear formatting"
         }
     },
-"uk": {
+    "uk": {
         "cCode": "uk",
         "language": "Український",
         "text": {
@@ -401,7 +401,7 @@ const locales = {
             "clear": "Biçimlendirmeyi temizle"
         }
     },
-	"pl": {
+    "pl": {
         "cCode": "pl",
         "language": "Polski",
         "text": {
@@ -468,7 +468,7 @@ const locales = {
             "clear": "Czyszczenie formatowania"
         }
     },
-	"cz": {
+    "cz": {
         "cCode": "cz",
         "language": "Čeština",
         "text": {
@@ -535,7 +535,7 @@ const locales = {
             "clear": "Jasné formátování"
         }
     },
-	"sk": {
+    "sk": {
         "cCode": "sk",
         "language": "Slovenský",
         "text": {
@@ -544,10 +544,10 @@ const locales = {
             "fileSent": "Súbor/súbory boli odoslané",
             "attachmentTxt": "Prílohy",
             "privateMessages": "DM",
-            "userId": "ID užívateľa
+            "userId": "ID užívateľa"
         },
         "buttons": {
-            "clearLastMessages": "Vymazať poslednej správy"
+            "clearLastMessages": "Vymazať poslednej správy",
             "editToken": "Zmeňte token",
             "refreshChat": "Aktualizujte chat",
             "changeLanguage": "Zmeniť jazyk",
