@@ -6,6 +6,14 @@
 
 ## Changelog
 
+### Version 1.3.5
+
+*  **Added** a translation guide for newcomers
+*  **Added** a contribution guide for newcomers
+*  **New** Polish translation by ziomciopoziomcio
+*  **New** Czech translation by ziomciopoziomcio
+*  **New** Slovakian translation by ziomciopoziomcio
+
 ### Version 1.3.4
 
 *  **New** Ukrainian translation by Payz123
@@ -52,11 +60,11 @@
 
 ## How to translate
 
-COMING SOON™
+Please refer to [CONTRIBUTION.md](CONTRIBUTION.md)
 
 ## How to contribute
 
-COMING SOON™
+Please refer to [TRANSLATION.md](TRANSLATION.md)
 
 ## Built With 🔧
 
@@ -68,11 +76,12 @@ COMING SOON™
 
 ### Translation 🌐
 
-| User                                          | Language           |
-| --------------------------------------------- | ------------------ |
-| [LeventHAN](https://github.com/leventhan)     | Dutch, Turkish     |
-| [Koteich_dev](https://github.com/Koteich-dev) | Russian            |
-| [Payz123](https://github.com/Payz123)         | Ukrainian, Russian |
+| Author                                                  | Language                 |
+| ------------------------------------------------------- | ------------------------ |
+| [LeventHAN](https://github.com/leventhan)               | Dutch, Turkish           |
+| [Koteich_dev](https://github.com/Koteich-dev)           | Russian                  |
+| [Payz123](https://github.com/Payz123)                   | Ukrainian, Russian       |
+| [ziomciopoziomcio](https://github.com/ziomciopoziomcio) | Polish, Czech, Slovakian |
 
 ## Copyrights and Licence
 
