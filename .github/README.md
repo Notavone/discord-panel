@@ -82,6 +82,7 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [Koteich_dev](https://github.com/Koteich-dev)           | Russian                  |
 | [Payz123](https://github.com/Payz123)                   | Ukrainian, Russian       |
 | [ziomciopoziomcio](https://github.com/ziomciopoziomcio) | Polish, Czech, Slovakian |
+| [LeafyWrath](https://github.com/LeafyWrath)             | Slovakian                |
 
 ## Copyrights and Licence
 
