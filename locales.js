@@ -537,54 +537,54 @@ const locales = {
     },
     "sk": {
         "cCode": "sk",
-        "language": "Slovenský",
+        "language": "Slovenčina",
         "text": {
-            "channelNameLabel": "Chat",
+            "channelNameLabel": "Čet",
             "scrollCheck": "Povoliť animáciu automatického posúvania",
-            "fileSent": "Súbor/súbory boli odoslané",
+            "fileSent": "Súbor(y) bol(i) odoslané",
             "attachmentTxt": "Prílohy",
             "privateMessages": "DM",
-            "userId": "ID užívateľa"
+            "userId": "ID Užívateľa"
         },
         "buttons": {
-            "clearLastMessages": "Vymazať poslednej správy",
-            "editToken": "Zmeňte token",
-            "refreshChat": "Aktualizujte chat",
+            "clearLastMessages": "Vymazať poesledné správy",
+            "editToken": "Zmeniť token",
+            "refreshChat": "Aktualizovať čet",
             "changeLanguage": "Zmeniť jazyk",
-            "send": "Poslat'",
-            "leave": "Opustite server",
-            "invite": "Pozvat'"
+            "send": "Poslať",
+            "leave": "Opusiť server",
+            "invite": "Pozvať"
         },
         "infos": {
-            "owner": "Majitel'",
+            "owner": "Majiteľ",
             "members": "Členovia",
-            "vChannels": "Kanály (hlas)",
-            "tChannels": "Kanály (text)",
+            "vChannels": "Kanály (hlasové)",
+            "tChannels": "Kanály (textové)",
             "roles": "Role",
             "channels": "Kanály",
-            "emojis": "Emojis"
+            "emojis": "Emodži"
         },
         "headings": {
             "lastMessages": "Posledné správy",
             "guildName": "Informácie",
-            "autoScroll": "Automatické rolovanie",
+            "autoScroll": "Automatické posúvanie",
         },
         "errors": {
             "error": "CHYBA",
             "dm": "CHYBA : DM",
-            "emptyMsg": "CHYBA : VYPRÁZDNIŤ SPRÁVU",
-            "missingPermissions": "CHYBA : BEZ POVOLENIA"
+            "emptyMsg": "CHYBA : PRÁZDNA SPRÁVA",
+            "missingPermissions": "CHYBA : NEDOSTATOČNÉ PRÁVA"
         },
         "token": {
-            "prompt": "Zadejte token robota",
-            "confirmation": "Zaiste?",
-            "invalid": "Token nebol zadaný alebo je token neplatný"
+            "prompt": "Prosím, zadajte Váš bot token.",
+            "confirmation": "Ste si istý?",
+            "invalid": "Token nebol zadaný alebo je neplatný."
         },
         "messageType": {
-            "serverJoin": "pripojil se k serveru",
-            "pin": "správu připnul",
+            "serverJoin": "sa pripojil na server.",
+            "pin": "pripol správu",
             "channelNews": "pridal správu na vzdialený server",
-            "boost": "vylepšil server"
+            "boost": "boostol server"
         },
         "fileType": {
             "unknown": "neznámy",
@@ -595,11 +595,11 @@ const locales = {
             "audio": "zvuk"
         },
         "formatting": {
-            "bold": "Tučne",
-            "emphasis": "Kurzíva",
-            "underline": "Zdôrazniť",
-            "strike": "Prejsť",
-            "clear": "Jasné formátovanie"
+            "bold": "Tučné",
+            "emphasis": "Zvýraznenie",
+            "underline": "Podčiarknutie",
+            "strike": "Prečiarknutie",
+            "clear": "Vypnúť formátovanie"
         }
     }
 };
