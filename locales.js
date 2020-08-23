@@ -150,7 +150,7 @@ const locales = {
             "refreshChat": "Перезагрузить чат",
             "changeLanguage": "Изменить язык",
             "send": "Отправить",
-            "leave": "Выйти с серверва",
+            "leave": "Выйти с сервера",
             "invite": "Инвайт"
         },
         "infos": {
