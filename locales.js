@@ -73,6 +73,7 @@ const locales = {
             "channelNameLabel": "Чат",
             "scrollCheck": "Увімкнути анімацію автоматичної прокрутки.",
             "fileSent": "надіслав файл(и)",
+
             "attachmentTxt": "Вкладення",
             "privateMessages": "Особисті повідомлення",
             "userId": "ID користувача"
@@ -83,8 +84,8 @@ const locales = {
             "refreshChat": "Оновити чат",
             "changeLanguage": "Змінити мову",
             "send": "Відправити",
-            "leave": "Залишити сервер",
-            "invite": "Запрошення"
+            "leave": "Покинути сервер",
+            "invite": "Запрошувальне посилання"
         },
         "infos": {
             "owner": "Власник",
@@ -94,6 +95,7 @@ const locales = {
             "roles": "Ролей",
             "channels": "Каналів загалом",
             "emojis": "Емодзі"
+
         },
         "headings": {
             "lastMessages": "Останні повідомлення",
@@ -107,9 +109,11 @@ const locales = {
             "missingPermissions": "Помилка: ВІДСУТНІ ДОЗВОЛИ"
         },
         "token": {
-            "prompt": "Будь ласка, введіть Ваш токен бота",
+            "prompt": "Будь ласка, введіть токен Вашого бота",
             "confirmation": "Ви впевнені?",
             "invalid": "Схоже що цей токен недійсний, спробуйте ще раз."
+
+            "invalid": "Токен не надано або він не є дійсним"
         },
         "messageType": {
             "serverJoin": "Приєднався до сервера",
