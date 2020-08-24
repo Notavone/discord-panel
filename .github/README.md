@@ -84,6 +84,8 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [ziomciopoziomcio](https://github.com/ziomciopoziomcio) | Polish, Czech, Slovakian |
 | [LeafyWrath](https://github.com/LeafyWrath)             | Slovakian                |
 | [Kulisidi](https://github.com/Kulisidi)                 | Russian, Ukrainian       |
+| [roxxel](https://github.com/roxxel)                     | Ukrainian                |
+| [tuxlabore](https://github.com/tuxlabore)               | Ukrainian                |
 
 ## Copyrights and Licence
 
