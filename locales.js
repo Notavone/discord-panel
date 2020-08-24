@@ -71,7 +71,7 @@ const locales = {
         "language": "Український",
         "text": {
             "channelNameLabel": "Чат",
-            "scrollCheck": "Ввімкнути автопрокрутку анімації",
+            "scrollCheck": "Ввімкнути анімацію автопрокрутки",
             "fileSent": "надiслав файл(и)",
             "attachmentTxt": "Вкладення",
             "privateMessages": "Особисті повідомлення",
