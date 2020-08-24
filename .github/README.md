@@ -83,7 +83,7 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [Payz123](https://github.com/Payz123)                   | Ukrainian, Russian       |
 | [ziomciopoziomcio](https://github.com/ziomciopoziomcio) | Polish, Czech, Slovakian |
 | [LeafyWrath](https://github.com/LeafyWrath)             | Slovakian                |
-| [Kulisidi](https://github.com/Kulisidi)                 | Russian                  |
+| [Kulisidi](https://github.com/Kulisidi)                 | Russian, Ukrainian       |
 
 ## Copyrights and Licence
 
