@@ -71,8 +71,8 @@ const locales = {
         "language": "Український",
         "text": {
             "channelNameLabel": "Чат",
-            "scrollCheck": "Включити автопрокрутку анімації",
-            "fileSent": "послав кілька файл(и)",
+            "scrollCheck": "Ввімкнути автопрокрутку анімації",
+            "fileSent": "надiслав файл(и)",
             "attachmentTxt": "Вкладення",
             "privateMessages": "Особисті повідомлення",
             "userId": "ID користувача"
@@ -80,25 +80,25 @@ const locales = {
         "buttons": {
             "clearLastMessages": "Очистити повідомлення",
             "editToken": "Змінити токен",
-            "refreshChat": "Чат оновити",
+            "refreshChat": "Оновити чат",
             "changeLanguage": "Змінити мову",
             "send": "Відправити",
-            "leave": "Залишити сервер",
-            "invite": "Запрошуємо"
+            "leave": "Покинути сервер",
+            "invite": "Запрошувальне посилання"
         },
         "infos": {
             "owner": "Власник",
-            "members": "Члени",
-            "vChannels": "Канали (голос)",
-            "tChannels": "Канали (текст)",
+            "members": "Учасники",
+            "vChannels": "Канали (голосовi)",
+            "tChannels": "Канали (текстовi)",
             "roles": "Ролі",
             "channels": "Канали",
-            "emojis": "Смайлики"
+            "emojis": "Емодзi"
         },
         "headings": {
             "lastMessages": "Останні Повідомлення",
             "guildName": "Інформація",
-            "autoScroll": "Авто-Прокрутки",
+            "autoScroll": "Авто-Прокрутка",
         },
         "errors": {
             "error": "Помилка",
@@ -107,15 +107,15 @@ const locales = {
             "missingPermissions": "Помилка: ВІДСУТНІ ДОЗВОЛИ НА"
         },
         "token": {
-            "prompt": "Будь ласка, введіть Ваш токен бота",
+            "prompt": "Будь ласка, введіть токен Вашого бота",
             "confirmation": "Ви впевнені?",
-            "invalid": "Токен не надан або він не є дійсним"
+            "invalid": "Токен не надано або він не є дійсним"
         },
         "messageType": {
             "serverJoin": "приєднався до сервера",
             "pin": "закріплено повідомлення",
             "channelNews": "додано віддалений канал новини",
-            "boost": "піднято сервер"
+            "boost": "забустив сервер"
         },
         "fileType": {
             "unknown": "невідомо",
