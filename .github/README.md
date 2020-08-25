@@ -6,6 +6,10 @@
 
 ## Changelog
 
+### Version 1.3.6
+
+*  **Added** an installation guide
+
 ### Version 1.3.5
 
 *  **Added** a translation guide for newcomers
@@ -52,11 +56,20 @@
 
 ## What makes this special ? 💎
 
-*   ⌛ **Easy "installation" :** clone the repository, unzip and open [the panel](../index.html).
+*   ⌛ **Easy installation :** clone the repository, unzip and open [the panel](../index.html).
 *   🔒 **Security :** your bot token is stocked locally, no risk of it being stolen.
 *   📌 **User Friendly :** intuitive design, don't spend hours figuring out how to do something.
 *   👀 **Open source :** you have an idea ? Just take the code and build something out of it !
 *   🌍 **Worldwide :** you can help translate in your language !
+
+## Installation
+
+1.  Download the latest [release](https://github.com/Notavone/discord-panel/releases)
+2.  Extract it with WinRAR, 7zip, WinZip...
+3.  Go to the [Discord Developer Portal](https://discord.com/developers/applications) and grab your bot token
+4.  Open [index.html](../index.html)
+5.  Paste your token, click <kbd>ok</kbd> or hit <kbd>enter</kbd>
+6.  Voila !
 
 ## How to translate
 
