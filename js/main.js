@@ -7,12 +7,20 @@ let localeFile = locales[locale];
 
 Object.keys(locales["en"]).forEach((key) => {
     if (typeof locales["en"][key] === "string") {
-        if (localeFile[key] === ("" || undefined)) localeFile[key] = locales["en"][key];
+        if (localeFile[key] === ("" || undefined)) {
+            localeFile[key] = locales["en"][key];
+        }
     } else if (typeof locales["en"][key] === "object") {
-        if (!localeFile[key]) localeFile[key] = locales["en"][key];
-    } else Object.keys(locales["en"][key]).forEach((subKey) => {
-        if (localeFile[key][subKey] === ("" || undefined)) localeFile[key][subKey] = locales["en"][key][subKey];
-    })
+        if (!localeFile[key]) {
+            localeFile[key] = locales["en"][key];
+        }
+    } else {
+        Object.keys(locales["en"][key]).forEach((subKey) => {
+            if (localeFile[key][subKey] === ("" || undefined)) {
+                localeFile[key][subKey] = locales["en"][key][subKey];
+            }
+        });
+    }
 
 });
 
@@ -38,23 +46,38 @@ function escapeHtml(text) {
 }
 
 function replaceMarkdown(text, markdown, start, end, join) {
-    if (text === "" || !text.includes(markdown)) return text;
-    else {
+    if (text === "" || !text.includes(markdown)) {
+        return text;
+    } else {
         let content = text.split(markdown);
         if (content.length > 2) {
             for (let i = 0; i < content.length; i++) {
                 if (i !== 0 && i % 2 !== 0 && content[i] !== "") {
                     content[i] = start + content[i] + end;
                 } else if (i !== 0 && i % 2 !== 0 && content[i] === "") {
-                    content[i] = join + join
+                    content[i] = join + join;
                 }
             }
-            return content.join('');
+            return content.join("");
         } else {
             return content.join(join);
         }
 
     }
+}
+
+function embedLinks(element) {
+    let html = "<div>";
+    if (element.iconURL) {
+        html += `<a href="${element.iconURL}" target="_blank"><img class="avatarIMG" src="${element.iconURL}" alt=""></a>`;
+    }
+    if (element.url) {
+        html += `<a href="${element.url}">${element.name}</a>`;
+    } else {
+        html += element.name;
+    }
+    html += "</div>";
+    return html;
 }
 
 function contentReplacement(content, links) {
@@ -67,12 +90,16 @@ function contentReplacement(content, links) {
 
     [...content.matchAll(/&lt;@!(\d{18})&gt;/g)].forEach((match) => {
         let user = client.users.cache.find((user) => user.id === match[1]);
-        if (user) content = content.replace(match[0], `@${user.username}`);
+        if (user) {
+            content = content.replace(match[0], `@${user.username}`);
+        }
     });
 
-    if (links && links.length > 0) [...new Set(links)].forEach((link) => {
-        content = content.replace(link, `<a href="${link}" target="_blank">${link}</a>`);
-    });
+    if (links && links.length > 0) {
+        [...new Set(links)].forEach((link) => {
+            content = content.replace(link, `<a href="${link}" target="_blank">${link}</a>`);
+        });
+    }
 
     content = replaceMarkdown(content, "***", "<b><em>", "</em></b>", "***");
     content = replaceMarkdown(content, "**", "<b>", "</b>", "&ast;&ast;");
@@ -93,7 +120,7 @@ function format(command, value) {
     document.execCommand(command, false, value);
 }
 
-function del(message) {
+function delMsg(message) {
     let guilds = $("#guilds");
     let channels = $("#channels");
     if (guilds.val() === "DM") {

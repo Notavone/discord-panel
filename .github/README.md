@@ -6,6 +6,11 @@
 
 ## Changelog
 
+### Version 1.3.7
+
+*  **Fixed** a duplicate in locale.js
+*  **Refactored** the code
+
 ### Version 1.3.6
 
 *  **Added** an installation guide

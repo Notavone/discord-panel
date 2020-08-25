@@ -1,5 +1,4 @@
-$(document).ready(() => {
-    $("html").attr("lang", localeFile.cCode);
+$("html").attr("lang", localeFile.cCode);
 
     const guilds = $("#guilds");
     const channels = $("#channels");
@@ -93,7 +92,9 @@ $(document).ready(() => {
             let images = [];
             let fields = [];
             let html = `<div class="embed" ${embed.hexColor ? `style="border-left: 5px solid ${embed.hexColor}"` : ""}>`;
-            if (embed.url) links.push(embed.url);
+            if (embed.url) {
+                links.push(embed.url);
+            }
 
             if (embed.image) {
                 let length = message.embeds.length;
@@ -103,17 +104,32 @@ $(document).ready(() => {
                     if (length === 1) {
                         style += "border-radius: 8px;width: 100%;height:300px;object-fit: scale-down;";
                     } else if (length === 2) {
-                        if (i === 0) style += "border-radius: 8px 0 0 8px;width: 50%;height:300px;object-fit: cover;";
-                        else style += "border-radius: 0 8px 8px 0;width: 50%;height:300px;object-fit: cover;";
+                        if (i === 0) {
+                            style += "border-radius: 8px 0 0 8px;width: 50%;height:300px;object-fit: cover;";
+                        } else {
+                            style += "border-radius: 0 8px 8px 0;width: 50%;height:300px;object-fit: cover;";
+                        }
                     } else if (length === 3) {
-                        if (i === 0) style += "border-radius: 8px 0 0 8px;width: 50%;height:300px;object-fit: cover;float: left;";
-                        else if (i === 1) style += "border-radius: 0 8px 0 0;width: 50%;height:150px;object-fit: cover;vertical-align: top;float: right;";
-                        else style += "border-radius: 0 0 8px 0;width: 50%;height:150px;object-fit: cover;vertical-align: top;float: right;";
+                        if (i === 0) {
+                            style += "border-radius: 8px 0 0 8px;width: 50%;height:300px;object-fit: cover;float: left;";
+                        } else if (i === 1) {
+                            style += "border-radius: 0 8px 0 0;width: 50%;height:150px;object-fit: cover;vertical-align: top;float: right;";
+                        } else {
+                            style += "border-radius: 0 0 8px 0;width: 50%;height:150px;object-fit: cover;vertical-align: top;float: right;";
+                        }
                     } else {
-                        if (i === 0) style += "border-radius: 8px 0 0 0;width: 50%;height:150px;object-fit: cover;";
-                        if (i === 1) style += "border-radius:  0 8px 0 0;width: 50%;height:150px;object-fit: cover;";
-                        if (i === 2) style += "border-radius:  0 0 0 8px;width: 50%;height:150px;object-fit: cover;";
-                        if (i === 3) style += "border-radius:  0 0 8px 0;width: 50%;height:150px;object-fit: cover;";
+                        if (i === 0) {
+                            style += "border-radius: 8px 0 0 0;width: 50%;height:150px;object-fit: cover;";
+                        }
+                        if (i === 1) {
+                            style += "border-radius:  0 8px 0 0;width: 50%;height:150px;object-fit: cover;";
+                        }
+                        if (i === 2) {
+                            style += "border-radius:  0 0 0 8px;width: 50%;height:150px;object-fit: cover;";
+                        }
+                        if (i === 3) {
+                            style += "border-radius:  0 0 8px 0;width: 50%;height:150px;object-fit: cover;";
+                        }
                     }
 
                     images.push(`<a href="${image.url}" target="_blank"><img style="${style}" src="${image.url}" alt=""></a>`);
@@ -121,14 +137,7 @@ $(document).ready(() => {
             }
 
             if (embed.author) {
-                html += "<div>";
-                if (embed.author.iconURL) html += `<a href="${embed.author.iconURL}" target="_blank"><img class="avatarIMG" src="${embed.author.iconURL}" alt=""></a>`;
-                if (embed.author.url) {
-                    html += `<a href="${embed.author.url}">${embed.author.name}</a>`;
-                } else {
-                    html += embed.author.name;
-                }
-                html += "</div>";
+                html += embedLinks(embed.author);
             }
 
             if (embed.title) {
@@ -143,9 +152,9 @@ $(document).ready(() => {
                 html += "<div>";
                 embed.fields.forEach((field) => {
                     if (field.inline) {
-                        fields.push(`<span style="display: inline-block;min-width: 50%;word-break: break-word;"><b>${field.name}</b><br>${contentReplacement(field.value)}</span>`)
+                        fields.push(`<span style="display: inline-block;min-width: 50%;word-break: break-word;"><b>${field.name}</b><br>${contentReplacement(field.value)}</span>`);
                     } else {
-                        fields.push(`<div><b>${field.name}</b><br>${contentReplacement(field.value)}</div>`)
+                        fields.push(`<div><b>${field.name}</b><br>${contentReplacement(field.value)}</div>`);
                     }
                 });
                 html += `${fields.join('')}</div>`;
@@ -160,17 +169,10 @@ $(document).ready(() => {
             }
 
             if (embed.footer) {
-                html += "<div>";
-                if (embed.footer.iconURL) html += `<a href="${embed.footer.iconURL}" target="_blank"><img class="avatarIMG" src="${embed.footer.iconURL}" alt=""></a>`;
-                if (embed.footer.url) {
-                    html += `<a href="${embed.footer.url}">${embed.footer.text}</a>`;
-                } else {
-                    html += embed.footer.text;
-                }
-                html += "</div>";
+                html += embedLinks(embed.footer);
             }
             html += "</div>";
-            embeds.push(html)
+            embeds.push(html);
         }
 
         html = `<div class="chatMsg" id="${message.id}"><div>${userAvatar} ${escapeHtml(userTag)} `;
@@ -193,14 +195,14 @@ $(document).ready(() => {
 
         // Delete button
         if (message.deletable && ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES"))) {
-            html += `<button class="mini" data-value="${message.id}" onclick="del(this.dataset.value)">🗑️</button>`;
+            html += `<button class="mini" data-value="${message.id}" onclick="delMsg(this.dataset.value)">🗑️</button>`;
         }
         html += "</div>";
 
         html += `<div class="messageContent">${message.content ? contentReplacement(message.content, links) : ""}</div>`;
 
         if (embeds.length) {
-            html += `${embeds.join('')}`;
+            html += `${embeds.join("")}`;
         }
 
         if (attachments.length) {
@@ -345,7 +347,7 @@ $(document).ready(() => {
         let user;
 
         if (toSend.html() === "") {
-            tempChange("#send", `[${localeFile.errors.emptyMsg}]`, 1500);
+            tempChange("#send", `[${localeFile.errors.emptyMsg}]`, 1000);
         } else {
             let formatted = toSend.html()
                 .replace(/<b>/g, "**")
@@ -370,7 +372,7 @@ $(document).ready(() => {
                 user.send(formatted);
             } else {
                 client.channels.cache.find((channel) => channel.id === channels.val()).send(formatted).catch(() => {
-                    tempChange("#send", `[${localeFile.errors.missingPermissions}]`, 2000);
+                    tempChange("#send", `[${localeFile.errors.missingPermissions}]`, 1000);
                 });
             }
             toSend.html("");
@@ -566,21 +568,21 @@ $(document).ready(() => {
         if (guilds.val() !== "DM") {
             if (window.confirm(localeFile.token.confirmation)) {
                 client.guilds.cache.find((guild) => guild.id === guilds.val()).leave().catch(() => {
-                    tempChange("#leaveGuild", `[${localeFile.errors.error}]`, 2000);
+                    tempChange("#leaveGuild", `[${localeFile.errors.error}]`, 1000);
                 });
             }
         }
     });
 
     inviteBtn.click(() => {
-        if (guilds.val() !== "DM") {
+        if (guilds.val() === "DM") {
+            tempChange("#inviteBtn", `[${localeFile.errors.dm}]`, 1000);
+        } else {
             client.channels.cache.find((channel) => channel.id === channels.val()).createInvite().then((invite) => {
                 alert(`discord.gg/${invite.code}`);
             }).catch(() => {
-                tempChange("#inviteBtn", `[${localeFile.errors.missingPermissions}]`, 2000);
+                tempChange("#inviteBtn", `[${localeFile.errors.missingPermissions}]`, 1000);
             });
-        } else {
-            tempChange("#inviteBtn", `[${localeFile.errors.dm}]`, 2000);
         }
 
     });
@@ -622,7 +624,7 @@ $(document).ready(() => {
     lastMessages.bind("wheel", (event) => {
         if (event.originalEvent.deltaY < 0) {
             $("#chk1")[0].checked = false;
-        } else if (event.originalEvent.deltaY > 0 && $("#lastMessages").scrollTop() + $("#lastMessages").innerHeight() >= $("#lastMessages")[0].scrollHeight - 80) {
+        } else if (event.originalEvent.deltaY > 0 && $("#lastMessages").scrollTop() + $("#lastMessages").innerHeight() >= $("#lastMessages")[0].scrollHeight - 100) {
             $("#chk1")[0].checked = true;
         }
     });
@@ -630,13 +632,12 @@ $(document).ready(() => {
     chat.bind("wheel", (event) => {
         if (event.originalEvent.deltaY < 0) {
             $("#chk2")[0].checked = false;
-        } else if (event.originalEvent.deltaY > 0 && $("#chat").scrollTop() + $("#chat").innerHeight() >= $("#chat")[0].scrollHeight - 80) {
+        } else if (event.originalEvent.deltaY > 0 && $("#chat").scrollTop() + $("#chat").innerHeight() >= $("#chat")[0].scrollHeight - 100) {
             $("#chk2")[0].checked = true;
         }
     });
 
-    setInterval(() => {
-        scrollAnim("#chk1", "#lastMessages", 1000);
-        scrollAnim("#chk2", "#chat", 250);
-    }, 500);
-});
+setInterval(() => {
+    scrollAnim("#chk1", "#lastMessages", 1000);
+    scrollAnim("#chk2", "#chat", 100);
+}, 1000);
