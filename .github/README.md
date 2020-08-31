@@ -105,6 +105,12 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [roxxel](https://github.com/roxxel)                     | Ukrainian                |
 | [tuxlabore](https://github.com/tuxlabore)               | Ukrainian                |
 
+### Other 👍
+
+| Author                                              |
+| ----------------------------------------------------|
+| [SincerelyFaust](https://github.com/SincerelyFaust) |
+
 ## Copyrights and Licence
 
 Copyright © 2019-2020 [Nøtavøne <notavone@gmail.com>](https://github.com/notavone)

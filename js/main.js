@@ -121,6 +121,10 @@ function format(command, value) {
 }
 
 function delMsg(message) {
+    if (!message.deletable()) {
+        return;
+    }
+
     let guilds = $("#guilds");
     let channels = $("#channels");
     if (guilds.val() === "DM") {

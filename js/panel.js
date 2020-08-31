@@ -194,7 +194,7 @@ $("html").attr("lang", localeFile.cCode);
         html += `<span class="font-size-mini">${timestamp}</span> <button class="mini" data-value="<@!${userId}>" onclick="addText(this.dataset.value)">😐</button>`;
 
         // Delete button
-        if (message.deletable && ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES"))) {
+        if ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES")) {
             html += `<button class="mini" data-value="${message.id}" onclick="delMsg(this.dataset.value)">🗑️</button>`;
         }
         html += "</div>";
@@ -408,10 +408,6 @@ $("html").attr("lang", localeFile.cCode);
 
         if ((Number(message.author.id) === Number(channels.val()) || message.author.id === client.user.id) && message.channel.type === "dm") {
             updateChannel();
-        }
-
-        if (message.channel.id === channels.val() || (guilds.val() === "DM" && message.channel.type === "dm" && message.author.id === channels.val())) {
-            return;
         }
 
         if (message.channel.type !== "dm" && (Number(message.author.id) === Number(client.user.id) || !message.author.bot)) {
