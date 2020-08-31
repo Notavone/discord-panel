@@ -76,11 +76,11 @@
 5.  Paste your token, click <kbd>ok</kbd> or hit <kbd>enter</kbd>
 6.  Voila !
 
-## How to translate
+## How to contribute
 
 Please refer to [CONTRIBUTION.md](CONTRIBUTION.md)
 
-## How to contribute
+## How to translate
 
 Please refer to [TRANSLATION.md](TRANSLATION.md)
 
