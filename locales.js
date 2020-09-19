@@ -140,7 +140,7 @@ const locales = {
         "language": "Русский",
         "text": {
             "channelNameLabel": "Чат",
-            "scrollCheck": "Включить анимацию для авто-скролла",
+            "scrollCheck": "Включить анимацию",
             "fileSent": "отправил файл(ы)",
             "attachmentTxt": "Фото",
             "privateMessages": "Личные сообщения",
@@ -167,7 +167,7 @@ const locales = {
         "headings": {
             "lastMessages": "Прошлые сообщения",
             "guildName": "Информация",
-            "autoScroll": "Авто-скролл (автоматическая прокрутка)",
+            "autoScroll": "Авто-скролл",
         },
         "errors": {
             "error": "Ошибка",
