@@ -104,6 +104,7 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [Kulisidi](https://github.com/Kulisidi)                 | Russian, Ukrainian       |
 | [roxxel](https://github.com/roxxel)                     | Ukrainian                |
 | [tuxlabore](https://github.com/tuxlabore)               | Ukrainian                |
+| [vlfz](https://github.com/vlfz)                         | Russian                  |
 
 ### Other 👍
 

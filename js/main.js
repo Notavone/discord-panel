@@ -67,14 +67,15 @@ function replaceMarkdown(text, markdown, start, end, join) {
 }
 
 function embedLinks(element) {
+    console.log(element);
     let html = "<div>";
     if (element.iconURL) {
         html += `<a href="${element.iconURL}" target="_blank"><img class="avatarIMG" src="${element.iconURL}" alt=""></a>`;
     }
     if (element.url) {
-        html += `<a href="${element.url}">${element.name}</a>`;
+        html += `<a href="${element.url}">${element.name || element.text}</a>`;
     } else {
-        html += element.name;
+        html += element.name || element.text;
     }
     html += "</div>";
     return html;
@@ -88,8 +89,8 @@ function contentReplacement(content, links) {
         .replace(/(&lt;:(.*?):(\d{18})&gt;)/g, `<img title="\$2" alt="" class="smallEmojiImg" src="https://cdn.discordapp.com/emojis/\$3" onclick="addText('\$1')">`)
         .replace(/\[(.*)]\((.*)\)/g, `<a href="\$2" target="_blank">\$1</a>`);
 
-    [...content.matchAll(/&lt;@!(\d{18})&gt;/g)].forEach((match) => {
-        let user = client.users.cache.find((user) => user.id === match[1]);
+    [...content.matchAll(/&lt;@(!|)(\d{18})&gt;/g)].forEach((match) => {
+        let user = client.users.cache.find((user) => user.id === match[2]);
         if (user) {
             content = content.replace(match[0], `@${user.username}`);
         }
