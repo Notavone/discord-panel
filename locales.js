@@ -602,6 +602,74 @@ const locales = {
             "underline": "Podčiarknutie",
             "strike": "Prečiarknutie",
             "clear": "Vypnúť formátovanie"
+        },
+        
+    },
+    "pt-br": {
+        "cCode": "pt-br",
+        "language": "Portugues Brasil",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Ativar animação de rolagem automatica",
+            "fileSent": "enviou algum(s) arquivos(s)",
+            "attachmentTxt": "Anexos",
+            "privateMessages": "DM",
+            "userId": "User ID"
+        },
+        "buttons": {
+            "clearLastMessages": "Limpar últimas mensagens",
+            "editToken": "Editar Token",
+            "refreshChat": "Atualizar chat",
+            "changeLanguage": "Selecionar Linguagem",
+            "send": "Enviar",
+            "leave": "Sair do Servidor",
+            "invite": "Convidar"
+        },
+        "infos": {
+            "owner": "Dono",
+            "members": "Membros",
+            "vChannels": "Canais de (voz)",
+            "tChannels": "Canais de (texto)",
+            "roles": "Cargos",
+            "channels": "Canais",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Últimas Mensagens",
+            "guildName": "Informações",
+            "autoScroll": "Rolegem automática",
+        },
+        "errors": {
+            "error": "Erro",
+            "dm": "Erro : DM",
+            "emptyMsg": "Erro : Mensagem Vazia ",
+            "missingPermissions": "Erro : Sem permissões suficientes"
+        },
+        "token": {
+            "prompt": "Por favor ensira o TOKEN de seu bot",
+            "confirmation": "Você tem certeza ?",
+            "invalid": "Nenhum token fornecido ou o token é inválido"
+        },
+        "messageType": {
+            "serverJoin": "Entrou no Servidor",
+            "pin": "fixou uma mensagem",
+            "channelNews": "adicionado um canal de notícias remoto",
+            "boost": "impulsionou o servidor"
+        },
+        "fileType": {
+            "unknown": "desconhecido(a)",
+            "img": "imagem",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Negrito",
+            "emphasis": "Ênfase",
+            "underline": "Sublinhado(a)",
+            "strike": "Tachado(a)",
+            "clear": "Limpar formatação"
         }
     }
 };
