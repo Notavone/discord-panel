@@ -602,12 +602,12 @@ const locales = {
             "underline": "Podčiarknutie",
             "strike": "Prečiarknutie",
             "clear": "Vypnúť formátovanie"
-        },
+        }
         
     },
     "pt-br": {
         "cCode": "pt-br",
-        "language": "Portugues Brasil",
+        "language": "Português Brasil",
         "text": {
             "channelNameLabel": "Chat",
             "scrollCheck": "Ativar animação de rolagem automatica",
