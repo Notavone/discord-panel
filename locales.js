@@ -603,5 +603,73 @@ const locales = {
             "strike": "Prečiarknutie",
             "clear": "Vypnúť formátovanie"
         }
-    }
+    },
+    "fi": {
+        "cCode": "fi",
+        "language": "Suomi",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Ota käyttöön automattinen vieritysanimaatio",
+            "fileSent": "lähetti tiedostoja",
+            "attachmentTxt": "Kiinnitykset",
+            
+            "privateMessages": "YV",
+            "userId": "Käyttäjän ID"
+        },
+        "buttons": {
+            "clearLastMessages": "Tyhjennä Viimeisimmät Viestit",
+            "editToken": "Muokkaa tokenia",
+            "refreshChat": "Päivitä chat",
+            "changeLanguage": "Vaihda kieltä",
+            "send": "Lähetä",
+            "leave": "Poistu palvelimelta",
+            "invite": "Kutsu"
+        },
+        "infos": {
+            "owner": "Omistaja",
+            "members": "Jäsenet",
+            "vChannels": "Kanavat (ääni)",
+            "tChannels": "Kanavat (teksti)",
+            "roles": "Roolit",
+            "channels": "Kanavat",
+            "emojis": "Emojit"
+        },
+        "headings": {
+            "lastMessages": "Viimeisimmät Viestit",
+            "guildName": "Informaatio",
+            "autoScroll": "Automaattinen Vieritys",
+        },
+        "errors": {
+            "error": "VIRHE",
+            "dm": "VIRHE : YV",
+            "emptyMsg": "VIRHE : TYHJÄ VIESTI",
+            "missingPermissions": "VIRHE : LUPA ESTETTY"
+        },
+        "token": {
+            "prompt": "Syötä discord bottisi token",
+            "confirmation": "Oletko varma?",
+            "invalid": "Token ei ole syötetty tai token ei ole voimassa"
+        },
+        "messageType": {
+            "serverJoin": "liittyi palvelimelle",
+            "pin": "kiinnitti viestin",
+            "channelNews": "lisäsi etäkanavan uutiset",
+            "boost": "boostasi palvelinta"
+        },
+        "fileType": {
+            "unknown": "tuntematon",
+            "img": "kuva",
+            "doc": "dokumentti",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Lihavoitu",
+            "emphasis": "Painopiste",
+            "underline": "Alaviiva",
+            "strike": "Yliviiva",
+            "clear": "Tyhjennä muotoilu"
+        }
+    },
 };
