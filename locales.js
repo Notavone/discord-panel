@@ -650,10 +650,10 @@ const locales = {
             "invalid": "Nessun token inserito oppure il token è invalido"
         },
         "messageType": {
-            "serverJoin": "entrato nel server",
-            "pin": "citato un messaggio",
-            "channelNews": "aggiunto un canale di news remoto",
-            "boost": "potenziato il server"
+            "serverJoin": "è entrato nel server",
+            "pin": "ha fissato un messaggio",
+            "channelNews": "ha aggiunto un canale di news remoto",
+            "boost": "ha potenziato il server"
         },
         "fileType": {
             "unknown": "non disponibile",
@@ -665,10 +665,10 @@ const locales = {
         },
         "formatting": {
             "bold": "Grassetto",
-            "emphasis": "Italico",
+            "emphasis": "Corsivo",
             "underline": "Sottolineato",
             "strike": "Barrato",
-            "clear": "Giustificato"
+            "clear": "Formattazione ripristinata"
         }
     }
 };
