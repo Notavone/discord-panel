@@ -603,5 +603,72 @@ const locales = {
             "strike": "Prečiarknutie",
             "clear": "Vypnúť formátovanie"
         }
+    },
+    "it": {
+        "cCode": "it",
+        "language": "Italiano",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Abilita scorrimento automatico",
+            "fileSent": "Invia alcuni file(s)",
+            "attachmentTxt": "Allegati",
+            "privateMessages": "DM",
+            "userId": "ID Utente"
+        },
+        "buttons": {
+            "clearLastMessages": "Cancella ultimi messaggi",
+            "editToken": "Modifica token",
+            "refreshChat": "Ricarica chat",
+            "changeLanguage": "Cambia lingua",
+            "send": "Invia",
+            "leave": "Abbandona il server",
+            "invite": "Invita"
+        },
+        "infos": {
+            "owner": "Proprietario",
+            "members": "Membri",
+            "vChannels": "Canali (vocali)",
+            "tChannels": "Canali (testuali)",
+            "roles": "Ruoli",
+            "channels": "Canali",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Ultimi messaggi",
+            "guildName": "Informazioni",
+            "autoScroll": "Scorrimento automatico",
+        },
+        "errors": {
+            "error": "ERRORE",
+            "dm": "ERRORE : DM",
+            "emptyMsg": "ERRORE : MESSAGGIO VUOTO",
+            "missingPermissions": "ERRORE : PERMESSI MANCANTI"
+        },
+        "token": {
+            "prompt": "Per favore inserisci il token del tuo bot",
+            "confirmation": "Sei sicuro ?",
+            "invalid": "Nessun token inserito oppure il token è invalido"
+        },
+        "messageType": {
+            "serverJoin": "entrato nel server",
+            "pin": "citato un messaggio",
+            "channelNews": "aggiunto un canale di news remoto",
+            "boost": "potenziato il server"
+        },
+        "fileType": {
+            "unknown": "non disponibile",
+            "img": "immagine",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Grassetto",
+            "emphasis": "Italico",
+            "underline": "Sottolineato",
+            "strike": "Barrato",
+            "clear": "Giustificato"
+        }
     }
 };
