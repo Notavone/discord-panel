@@ -671,7 +671,7 @@ const locales = {
             "clear": "ลบการจัดข้อความ"
         }
     },
-	"it": {
+    "it": {
         "cCode": "it",
         "language": "Italiano",
         "text": {

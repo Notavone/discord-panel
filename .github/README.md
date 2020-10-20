@@ -8,7 +8,9 @@
 
 ### Version 1.3.8
 
-* **Fixed** languages not showing when there are too many
+*  **Fixed** languages not showing when there are too many
+*  **New** Italian translation by Pyrox
+*  **New** Thai translation by Vatunyoo Suwannapisit
 
 ### Version 1.3.7
 
@@ -109,6 +111,8 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [roxxel](https://github.com/roxxel)                     | Ukrainian                |
 | [tuxlabore](https://github.com/tuxlabore)               | Ukrainian                |
 | [vlfz](https://github.com/vlfz)                         | Russian                  |
+| [Pyrox](https://github.com/Pyr0x1)                      | Italian                  |
+| [Vatunyoo Suwannapisit](https://github.com/kerlos)      | Thai                     |
 
 ### Other 👍
 
