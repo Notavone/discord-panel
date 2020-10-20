@@ -603,5 +603,72 @@ const locales = {
             "strike": "Prečiarknutie",
             "clear": "Vypnúť formátovanie"
         }
+    },
+	"it": {
+        "cCode": "it",
+        "language": "Italiano",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Abilita animazione per lo scroll automatico",
+            "fileSent": "ha inviato uno o più file",
+            "attachmentTxt": "Allegati",
+            "privateMessages": "DM",
+            "userId": "ID Utente"
+        },
+        "buttons": {
+            "clearLastMessages": "Cancella gli ultimi messaggi",
+            "editToken": "Modifica token",
+            "refreshChat": "Aggiorna chat",
+            "changeLanguage": "Cambia lingua",
+            "send": "Invia",
+            "leave": "Esci dal server",
+            "invite": "Invita"
+        },
+        "infos": {
+            "owner": "Proprietario",
+            "members": "membri",
+            "vChannels": "Canali (voce)",
+            "tChannels": "Canali (testo)",
+            "roles": "Ruoli",
+            "channels": "Canali",
+            "emojis": "Emoji"
+        },
+        "headings": {
+            "lastMessages": "Ultimi messaggi",
+            "guildName": "Informazioni",
+            "autoScroll": "Scroll automatico",
+        },
+        "errors": {
+            "error": "ERRORE",
+            "dm": "ERRORE : DM",
+            "emptyMsg": "ERRORE : MESSAGGIO VUOTO",
+            "missingPermissions": "ERRORE : PERMESSI MANCANTI"
+        },
+        "token": {
+            "prompt": "Per favore inserisci il tuo token bot discord",
+            "confirmation": "Sei sicuro?",
+            "invalid": "Token non inserito o non valido"
+        },
+        "messageType": {
+            "serverJoin": "si è unito al server",
+            "pin": "ha fissato un messaggio",
+            "channelNews": "ha aggiunto un canale remoto di notizie",
+            "boost": "ha spinto il server"
+        },
+        "fileType": {
+            "unknown": "sconosciuto",
+            "img": "immagine",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Grassetto",
+            "emphasis": "Corsivo",
+            "underline": "Sottolineato",
+            "strike": "Barrato",
+            "clear": "Ripristina formattazione"
+        }
     }
 };
