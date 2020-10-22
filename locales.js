@@ -676,8 +676,8 @@ const locales = {
         "language": "Italiano",
         "text": {
             "channelNameLabel": "Chat",
-            "scrollCheck": "Abilita animazione per lo scroll automatico",
-            "fileSent": "ha inviato uno o più file",
+            "scrollCheck": "Abilita animazione per lo scorrimento automatico",
+            "fileSent": "ha inviato alcuni file(s)",
             "attachmentTxt": "Allegati",
             "privateMessages": "DM",
             "userId": "ID Utente"
@@ -685,25 +685,25 @@ const locales = {
         "buttons": {
             "clearLastMessages": "Cancella gli ultimi messaggi",
             "editToken": "Modifica token",
-            "refreshChat": "Aggiorna chat",
+            "refreshChat": "Ricarica chat",
             "changeLanguage": "Cambia lingua",
             "send": "Invia",
-            "leave": "Esci dal server",
+            "leave": "Abbandona il server",
             "invite": "Invita"
         },
         "infos": {
             "owner": "Proprietario",
-            "members": "membri",
-            "vChannels": "Canali (voce)",
-            "tChannels": "Canali (testo)",
+            "members": "Membri",
+            "vChannels": "Canali (vocali)",
+            "tChannels": "Canali (testuali)",
             "roles": "Ruoli",
             "channels": "Canali",
-            "emojis": "Emoji"
+            "emojis": "Emojis"
         },
         "headings": {
             "lastMessages": "Ultimi messaggi",
             "guildName": "Informazioni",
-            "autoScroll": "Scroll automatico",
+            "autoScroll": "Scorrimento automatico",
         },
         "errors": {
             "error": "ERRORE",
@@ -712,18 +712,18 @@ const locales = {
             "missingPermissions": "ERRORE : PERMESSI MANCANTI"
         },
         "token": {
-            "prompt": "Per favore inserisci il tuo token bot discord",
-            "confirmation": "Sei sicuro?",
-            "invalid": "Token non inserito o non valido"
+            "prompt": "Per favore inserisci il token del tuo bot",
+            "confirmation": "Sei sicuro ?",
+            "invalid": "Nessun token inserito oppure il token è invalido"
         },
         "messageType": {
-            "serverJoin": "si è unito al server",
+            "serverJoin": "è entrato nel server",
             "pin": "ha fissato un messaggio",
-            "channelNews": "ha aggiunto un canale remoto di notizie",
-            "boost": "ha spinto il server"
+            "channelNews": "ha aggiunto un canale di news remoto",
+            "boost": "ha potenziato il server"
         },
         "fileType": {
-            "unknown": "sconosciuto",
+            "unknown": "non disponibile",
             "img": "immagine",
             "doc": "documento",
             "pdf": "pdf",
@@ -735,7 +735,7 @@ const locales = {
             "emphasis": "Corsivo",
             "underline": "Sottolineato",
             "strike": "Barrato",
-            "clear": "Ripristina formattazione"
+            "clear": "Formattazione ripristinata"
         }
     }
 };
