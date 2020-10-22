@@ -9,7 +9,7 @@
 ### Version 1.3.8
 
 *  **Fixed** languages not showing when there are too many
-*  **New** Italian translation by Pyrox
+*  **New** Italian translation by Pyrox and Antonio Sarro
 *  **New** Thai translation by Vatunyoo Suwannapisit
 
 ### Version 1.3.7
@@ -113,6 +113,7 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [vlfz](https://github.com/vlfz)                         | Russian                  |
 | [Pyrox](https://github.com/Pyr0x1)                      | Italian                  |
 | [Vatunyoo Suwannapisit](https://github.com/kerlos)      | Thai                     |
+| [Antonio Sarro](https://github.com/asarro99)            | Italian                  |
 
 ### Other 👍
 
