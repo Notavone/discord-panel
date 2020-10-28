@@ -140,20 +140,20 @@ const locales = {
         "language": "Русский",
         "text": {
             "channelNameLabel": "Чат",
-            "scrollCheck": "Включить анимацию автоматической прокрутки",
+            "scrollCheck": "Включить анимацию",
             "fileSent": "отправил файл(ы)",
             "attachmentTxt": "Фото",
-            "privateMessages": "Лс",
+            "privateMessages": "Личные сообщения",
             "userId": "ID пользователя"
         },
         "buttons": {
             "clearLastMessages": "Очистить сообщения",
-            "editToken": "Изменить токен",
+            "editToken": "Сменить токен бота",
             "refreshChat": "Перезагрузить чат",
             "changeLanguage": "Изменить язык",
             "send": "Отправить",
             "leave": "Выйти с сервера",
-            "invite": "Инвайт"
+            "invite": "Создать пригласительнуо ссылку"
         },
         "infos": {
             "owner": "Владелец",
@@ -162,35 +162,35 @@ const locales = {
             "tChannels": "Текстовых каналов",
             "roles": "Роли",
             "channels": "Каналы",
-            "emojis": "Смайлики"
+            "emojis": "Эмодзи"
         },
         "headings": {
             "lastMessages": "Прошлые сообщения",
             "guildName": "Информация",
-            "autoScroll": "Авто-Прокрутка",
+            "autoScroll": "Авто-скролл",
         },
         "errors": {
             "error": "Ошибка",
-            "dm": "Ошибка: Лс",
-            "emptyMsg": "Ошибка: Нельзя отправить пустое сообщение",
-            "missingPermissions": "Ошибка: Нету прав"
+            "dm": "Ошибка: у получателя закрыты личные сообщения",
+            "emptyMsg": "Ошибка: зачем отправить пустое сообщение?",
+            "missingPermissions": "Ошибка: недостаточно прав для выполнения запроса"
         },
         "token": {
-            "prompt": "Пожалуйста укажите token бота",
+            "prompt": "Пожалуйста, укажите токен бота для авторизации",
             "confirmation": "Вы уверены?",
-            "invalid": "Токен бота неверный!"
+            "invalid": "Увы, токен бота оказался неверным."
         },
         "messageType": {
-            "serverJoin": "Зашел на сервер",
+            "serverJoin": "зашел на сервер",
             "pin": "Закрепленные сообщения",
             "channelNews": "добавлен удаленный канал новостей",
-            "boost": "забустил сервер"
+            "boost": "дал серверу Nitro-буст"
         },
         "fileType": {
-            "unknown": "неизвестно",
-            "img": "Картинка",
+            "unknown": "неизвестный тип документа",
+            "img": "изображение",
             "doc": "документ",
-            "pdf": "pdf",
+            "pdf": "PDF-документ",
             "video": "видео",
             "audio": "аудио"
         },
@@ -604,71 +604,138 @@ const locales = {
             "clear": "Vypnúť formátovanie"
         }
     },
-	    "en": {
-        "cCode": "en",
-        "language": "English",
+    "th": {
+        "cCode": "th",
+        "language": "ไทย",
         "text": {
-            "channelNameLabel": "Chat",
-            "scrollCheck": "Enable auto-scrolling animation",
-            "fileSent": "sent some file(s)",
-            "attachmentTxt": "Attachments",
-            "privateMessages": "DM",
-            "userId": "User ID"
+            "channelNameLabel": "แชท",
+            "scrollCheck": "เปิดใช้งานอนิเมชั่น auto-scrolling",
+            "fileSent": "ส่งไฟล์เรียบร้อย",
+            "attachmentTxt": "ไฟล์แนบ",
+            "privateMessages": "ข้อความส่วนตัว",
+            "userId": "รหัสผู้ใช้"
         },
         "buttons": {
-            "clearLastMessages": "Clear Last Messages",
-            "editToken": "Edit token",
-            "refreshChat": "Refresh chat",
-            "changeLanguage": "Change language",
-            "send": "Send",
-            "leave": "Leave the server",
-            "invite": "Invite"
+            "clearLastMessages": "ล้างข้อความล่าสุด",
+            "editToken": "แก้ไข token",
+            "refreshChat": "รีเฟรชแชท",
+            "changeLanguage": "เปลี่ยนภาษา",
+            "send": "ส่ง",
+            "leave": "ออกจากเซิฟเวอร์",
+            "invite": "ชวน"
         },
         "infos": {
-            "owner": "Owner",
-            "members": "Members",
-            "vChannels": "Channels (voice)",
-            "tChannels": "Channels (text)",
-            "roles": "Roles",
-            "channels": "Channels",
+            "owner": "เจ้าของ",
+            "members": "สมาชิก",
+            "vChannels": "ช่องเสียง",
+            "tChannels": "ช่องข้อความ",
+            "roles": "ตำแหน่วง",
+            "channels": "ช่อง",
             "emojis": "Emojis"
         },
         "headings": {
-            "lastMessages": "Last Messages",
-            "guildName": "Information",
+            "lastMessages": "ข้อความล่าสุด",
+            "guildName": "ข้อมูล",
             "autoScroll": "Auto-Scroll",
         },
         "errors": {
-            "error": "ERROR",
-            "dm": "ERROR : DM",
-            "emptyMsg": "ERROR : EMPTY MESSAGE",
-            "missingPermissions": "ERROR : MISSING PERMISSIONS"
+            "error": "ข้อผิดพลาด",
+            "dm": "ข้อผิดพลาด : ข้อความส่วนตัว",
+            "emptyMsg": "ข้อผิดพลาด : ข้อความว่าง",
+            "missingPermissions": "ข้อผิดพลาด : ไม่ได้รับอนุญาต"
         },
         "token": {
-            "prompt": "Please enter your discord bot token",
-            "confirmation": "Are you sure ?",
-            "invalid": "No token provided or token is invalid"
+            "prompt": "โปรดใส่ discord token ของบอท",
+            "confirmation": "ยืนยันข้อมูล?",
+            "invalid": "ไม่พบ token หรือ token ผิด"
         },
         "messageType": {
-            "serverJoin": "joined the server",
-            "pin": "pinned a message",
-            "channelNews": "added a remote channel news",
-            "boost": "boosted the server"
+            "serverJoin": "เชื่อมต่อเชิฟเวอร์",
+            "pin": "ปักหมุดข้อความ",
+            "channelNews": "เพิ่มข้อความข่าวช่องอื่น",
+            "boost": "บูสเซิฟเวอร์"
         },
         "fileType": {
-            "unknown": "unknown",
-            "img": "image",
-            "doc": "document",
+            "unknown": "ไม่รู้จัก",
+            "img": "รูป",
+            "doc": "เอกสาร",
+            "pdf": "pdf",
+            "video": "วิดีโอ",
+            "audio": "เสียง"
+        },
+        "formatting": {
+            "bold": "ตัวหนา",
+            "emphasis": "ตัวเน้น",
+            "underline": "เส้นใต้",
+            "strike": "ขีดฆ่า",
+            "clear": "ลบการจัดข้อความ"
+        }
+    },
+    "it": {
+        "cCode": "it",
+        "language": "Italiano",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Abilita animazione per lo scorrimento automatico",
+            "fileSent": "ha inviato alcuni file(s)",
+            "attachmentTxt": "Allegati",
+            "privateMessages": "DM",
+            "userId": "ID Utente"
+        },
+        "buttons": {
+            "clearLastMessages": "Cancella gli ultimi messaggi",
+            "editToken": "Modifica token",
+            "refreshChat": "Ricarica chat",
+            "changeLanguage": "Cambia lingua",
+            "send": "Invia",
+            "leave": "Abbandona il server",
+            "invite": "Invita"
+        },
+        "infos": {
+            "owner": "Proprietario",
+            "members": "Membri",
+            "vChannels": "Canali (vocali)",
+            "tChannels": "Canali (testuali)",
+            "roles": "Ruoli",
+            "channels": "Canali",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Ultimi messaggi",
+            "guildName": "Informazioni",
+            "autoScroll": "Scorrimento automatico",
+        },
+        "errors": {
+            "error": "ERRORE",
+            "dm": "ERRORE : DM",
+            "emptyMsg": "ERRORE : MESSAGGIO VUOTO",
+            "missingPermissions": "ERRORE : PERMESSI MANCANTI"
+        },
+        "token": {
+            "prompt": "Per favore inserisci il token del tuo bot",
+            "confirmation": "Sei sicuro ?",
+            "invalid": "Nessun token inserito oppure il token è invalido"
+        },
+        "messageType": {
+            "serverJoin": "è entrato nel server",
+            "pin": "ha fissato un messaggio",
+            "channelNews": "ha aggiunto un canale di news remoto",
+            "boost": "ha potenziato il server"
+        },
+        "fileType": {
+            "unknown": "non disponibile",
+            "img": "immagine",
+            "doc": "documento",
             "pdf": "pdf",
             "video": "video",
             "audio": "audio"
         },
         "formatting": {
-            "bold": "Bold",
-            "emphasis": "Emphasis",
-            "underline": "Underline",
-            "strike": "Strikethrough",
-            "clear": "Clear formatting"
+            "bold": "Grassetto",
+            "emphasis": "Corsivo",
+            "underline": "Sottolineato",
+            "strike": "Barrato",
+            "clear": "Formattazione ripristinata"
         }
     },
     "fr": {
