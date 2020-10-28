@@ -798,4 +798,5 @@ const locales = {
         "fileType": {
             "unknown": "desconhecido(a)",
             "img": "imagem",
+    }
 };
