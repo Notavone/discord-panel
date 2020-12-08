@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
-    }
+    },
+	"es": {
+        "cCode": "es",
+        "language": "Spanish",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Habilitar animacion auto-scrolling",
+            "fileSent": "envió algunos archivos",
+            "attachmentTxt": "Adjunto",
+            "privateMessages": "DM",
+            "userId": "User ID"
+        },
+        "buttons": {
+            "clearLastMessages": "Borrar últimos mensajes",
+            "editToken": "Editar Token",
+            "refreshChat": "Refresh chat",
+            "changeLanguage": "Cambiar Lenguaje",
+            "send": "Enviar",
+            "leave": "Abandonar Servidor",
+            "invite": "Invitar"
+        },
+        "infos": {
+            "owner": "Fundador",
+            "members": "Miembros",
+            "vChannels": "Canales (voz)",
+            "tChannels": "Canales (texto)",
+            "roles": "Roles",
+            "channels": "Canales",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Ultimos Mensajes",
+            "guildName": "Información",
+            "autoScroll": "Auto-Scroll",
+        },
+        "errors": {
+            "error": "ERROR",
+            "dm": "ERROR : DM",
+            "emptyMsg": "ERROR : MENSAJE VACIO",
+            "missingPermissions": "ERROR : PERMISOS FALTANTES"
+        },
+        "token": {
+            "prompt": "Por favor, ingresa el token de tu bot",
+            "confirmation": "Esta seguro ?",
+            "invalid": "No se proporcionó ningún token o el token no es válido"
+        },
+        "messageType": {
+            "serverJoin": "se unió al servidor",
+            "pin": "fijó un mensaje",
+            "channelNews": "agregó un nuevo canal de noticias",
+            "boost": "mejoró el servidor"
+        },
+        "fileType": {
+            "unknown": "desconocido",
+            "img": "imagen",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Bold",
+            "emphasis": "Énfasis",
+            "underline": "Subrayar",
+            "strike": "Tachado",
+            "clear": "Formato claro"
+        }
+    },
 };
