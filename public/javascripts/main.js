@@ -45,6 +45,16 @@ function escapeHtml(text) {
         .replace(/'/g, "&#039;");
 }
 
+/**
+ * Replaces markdown from discord to html tags
+ *
+ * @param text      input text
+ * @param markdown  type of markdown
+ * @param start     opening html tag
+ * @param end       closing html tag
+ * @param join      text used to join if there is no need to replace
+ * @returns {string|*}
+ */
 function replaceMarkdown(text, markdown, start, end, join) {
     if (text === "" || !text.includes(markdown)) {
         return text;
@@ -66,8 +76,13 @@ function replaceMarkdown(text, markdown, start, end, join) {
     }
 }
 
+/**
+ * Transforms text url into an html images
+ *
+ * @param element
+ * @returns {string}
+ */
 function embedLinks(element) {
-    console.log(element);
     let html = "<div>";
     if (element.iconURL) {
         html += `<a href="${element.iconURL}" target="_blank"><img class="avatarIMG" src="${element.iconURL}" alt=""></a>`;
@@ -81,6 +96,13 @@ function embedLinks(element) {
     return html;
 }
 
+/**
+ * Replace text from discord into human readable text
+ *
+ * @param content
+ * @param links
+ * @returns {string|*}
+ */
 function contentReplacement(content, links) {
     // noinspection HtmlUnknownTarget
     content = escapeHtml(content)
@@ -121,36 +143,58 @@ function format(command, value) {
     document.execCommand(command, false, value);
 }
 
-function delMsg(message) {
-    if (!message.deletable()) {
+/**
+ * Finds a message and deletes it
+ * @param id discord message id
+ */
+function delMsg(id) {
+    let guilds = $("#guilds");
+    let channels = $("#channels");
+    let channel;
+
+    if (guilds.val() === 'DM') {
+        channel = client.channels.cache.find((channel) => channel.type === "dm" && channel.recipient.id === channels.val());
+    } else {
+        let guild = client.guilds.cache.find((g) => g.id === guilds.val());
+        channel = guild.channels.cache.find((c) => c.id === channels.val());
+    }
+    let message = channel.messages.cache.find((m) => m.id === id);
+
+    if (!message.deletable) {
         return;
     }
 
-    let guilds = $("#guilds");
-    let channels = $("#channels");
-    if (guilds.val() === "DM") {
-        let channel = client.channels.cache.find((channel) => channel.type === "dm" && channel.recipient.id === channels.val());
-        channel.messages.cache.find((m) => m.id === message).delete().catch();
-    } else {
-        let guild = client.guilds.cache.find((g) => g.id === guilds.val());
-        let channel = guild.channels.cache.find((c) => c.id === channels.val());
-        channel.messages.cache.find((m) => m.id === message).delete().catch();
-    }
+    message.delete().catch((e) => {
+        console.log(e);
+    });
 }
 
+/**
+ * Generate a new timestamp with a format based on the actual language you're using
+ *
+ * @param timestamp
+ * @returns {string}
+ */
 function formatTimestamp(timestamp) {
     let date = new Date(timestamp);
     return `${date.toLocaleDateString(localeFile.cCode)} ${date.toLocaleTimeString(localeFile.cCode)}`;
 }
 
-function tempChange(DOM, text, time) {
-    let newText = `${$(DOM).text().replace(text, "")} ${text}`;
+/**
+ * Temporarily change the innerText of an element with another text
+ *
+ * @param HTMLElement
+ * @param text
+ * @param timeout
+ */
+function tempChange(HTMLElement, text, timeout) {
+    let newText = `${$(HTMLElement).text().replace(text, "")} ${text}`;
 
-    $(DOM).html(newText);
+    $(HTMLElement).html(newText);
 
     setTimeout(() => {
-        $(DOM).html(newText.replace(text, ""));
-    }, time);
+        $(HTMLElement).html(newText.replace(text, ""));
+    }, timeout);
 }
 
 function openNav() {

@@ -6,6 +6,11 @@
 
 ## Changelog
 
+### Version 1.3.10
+
+*  Now uses fontawesome
+*  **Added** documentation to some functions
+
 ### Version 1.3.9
 
 *  **Fixed** jQuery not working
