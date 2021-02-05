@@ -1,0 +1,16 @@
+div.message p {
+  margin: 0;
+}
+div.populated-div {
+  height: 70vh;
+  overflow-x: hidden;
+  word-break: break-all;
+  overflow-y: scroll;
+}
+
+img.emoji, img.avatar {
+  height: 30px;
+  width: auto;
+}
+
+/*# sourceMappingURL=main.css.map */
