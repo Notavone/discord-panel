@@ -798,7 +798,7 @@ const locales = {
             "audio": "áudio"
         },
         "formatting": {
-            "bold": "Bold",
+            "bold": "Negrito",
             "emphasis": "Ênfase",
             "underline": "Sublinhar",
             "strike": "Tachar",
