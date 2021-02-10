@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
-    }
+    },
+    "pt": {
+        "cCode": "pt",
+        "language": "Português",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Habilitar animação de rolagem automática",
+            "fileSent": "enviou algum(uns) arquivo(s)",
+            "attachmentTxt": "Anexos",
+            "privateMessages": "DM",
+            "userId": "ID do Usuário"
+        },
+        "buttons": {
+            "clearLastMessages": "Limpar últimas mensagens",
+            "editToken": "Editar token",
+            "refreshChat": "Atualizar chat",
+            "changeLanguage": "Mudar lingua",
+            "send": "Mandar",
+            "leave": "Deixar o servidor",
+            "invite": "Convite"
+        },
+        "infos": {
+            "owner": "Dono",
+            "members": "Membros",
+            "vChannels": "Canais (voz)",
+            "tChannels": "Canais (texto)",
+            "roles": "Funções",
+            "channels": "Canais",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Últimas mensagens",
+            "guildName": "Informação",
+            "autoScroll": "Rolagem automática",
+        },
+        "errors": {
+            "error": "ERRO",
+            "dm": "ERRO : DM",
+            "emptyMsg": "ERRO : MENSAGEM VAZIA",
+            "missingPermissions": "ERRO : SEM PERMISSÃO"
+        },
+        "token": {
+            "prompt": "Por favor informe seu token do Discord",
+            "confirmation": "Você tem certeza?",
+            "invalid": "Token não informado ou inválido"
+        },
+        "messageType": {
+            "serverJoin": "entrou no servidor",
+            "pin": "fixou uma mensagem",
+            "channelNews": "adicionou uma notícia de canal remoto",
+            "boost": "impulsionou o servidor"
+        },
+        "fileType": {
+            "unknown": "desconhecido",
+            "img": "imagem",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "vídeo",
+            "audio": "áudio"
+        },
+        "formatting": {
+            "bold": "Bold",
+            "emphasis": "Ênfase",
+            "underline": "Sublinhar",
+            "strike": "Tachar",
+            "clear": "Limpar formatação"
+        }
+    },
 };
