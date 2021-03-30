@@ -1,4 +1,71 @@
 const locales = {
+    "de": {
+        "cCode": "de",
+        "language": "Deutsch",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Enable auto-scrolling animation",
+            "fileSent": "Sende Datei(en)",
+            "attachmentTxt": "Anhänge",
+            "privateMessages": "DM",
+            "userId": "User ID"
+        },
+        "buttons": {
+            "clearLastMessages": "Letzte Nachrichten leeren",
+            "editToken": "Token bearbeiten",
+            "refreshChat": "Chat aktualisieren",
+            "changeLanguage": "Sprache wechseln",
+            "send": "Senden",
+            "leave": "Server verlassen",
+            "invite": "Einladung"
+        },
+        "infos": {
+            "owner": "Eigentümer",
+            "members": "Mitglieder",
+            "vChannels": "Kanäle (Audio)",
+            "tChannels": "Kanäle (Text)",
+            "roles": "Rollen",
+            "channels": "Kanäle",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Letzte Nachrichten",
+            "guildName": "Information",
+            "autoScroll": "Auto-Scroll",
+        },
+        "errors": {
+            "error": "FEHLER",
+            "dm": "FEHLER : DM",
+            "emptyMsg": "FEHLER : LEERE NACHRICHT",
+            "missingPermissions": "FEHLER : FEHLENDE BERECHTIGUNGEN"
+        },
+        "token": {
+            "prompt": "Bitte gebe deinen Discord Bot Token an...",
+            "confirmation": "Bist du sicher?",
+            "invalid": "Kein Token angegeben oder Token ungültig"
+        },
+        "messageType": {
+            "serverJoin": "Ist dem Server beigetreten",
+            "pin": "Hat eine Nachricht angepinnt",
+            "channelNews": "added a remote channel news",
+            "boost": "Hat den Server geboostet"
+        },
+        "fileType": {
+            "unknown": "Unbekannt",
+            "img": "Bild",
+            "doc": "Dokument",
+            "pdf": "PDF",
+            "video": "Video",
+            "audio": "Audio"
+        },
+        "formatting": {
+            "bold": "Fett",
+            "emphasis": "Hervorheben",
+            "underline": "Unterstrichen",
+            "strike": "Durchgestrichen",
+            "clear": "Formatierung zurücksetzen"
+        }
+    },    
     "en": {
         "cCode": "en",
         "language": "English",
@@ -41,7 +108,7 @@ const locales = {
         },
         "token": {
             "prompt": "Please enter your discord bot token",
-            "confirmation": "Are you sure ?",
+            "confirmation": "Are you sure?",
             "invalid": "No token provided or token is invalid"
         },
         "messageType": {
