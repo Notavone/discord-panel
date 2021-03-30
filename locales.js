@@ -60,7 +60,7 @@ const locales = {
         },
         "formatting": {
             "bold": "Fett",
-            "emphasis": "Hervorheben",
+            "emphasis": "Kursiv",
             "underline": "Unterstrichen",
             "strike": "Durchgestrichen",
             "clear": "Formatierung zurücksetzen"
