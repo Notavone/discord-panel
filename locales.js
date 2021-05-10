@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+    "pt": {
+        "cCode": "pt",
+        "language": "Portugues",
+        "text": {
+            "channelNameLabel": "Mensagens",
+            "scrollCheck": "Animação De Scroll",
+            "fileSent": "enviou algum(s) arquivo(s)",
+            "attachmentTxt": "Anexos",
+            "privateMessages": "PV",
+            "userId": "ID"
+        },
+        "buttons": {
+            "clearLastMessages": "Limpar Mensagens Novas",
+            "editToken": "Editar token",
+            "refreshChat": "Recarregar Mensagens",
+            "changeLanguage": "Mudar Idioma",
+            "send": "Enviar",
+            "leave": "Sair Do Servidor",
+            "invite": "Convite"
+        },
+        "infos": {
+            "owner": "Admin",
+            "members": "Membros",
+            "vChannels": "Canais (voz)",
+            "tChannels": "Canais (texto)",
+            "roles": "Cargos",
+            "channels": "Canais",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Novas Menssagens",
+            "guildName": "Dados",
+            "autoScroll": "Auto-Scroll",
+        },
+        "errors": {
+            "error": "ERRO",
+            "dm": "ERRO : PV",
+            "emptyMsg": "ERRO : MENSAGEM VAZIA",
+            "missingPermissions": "ERRO : SEM PERMISSÕES"
+        },
+        "token": {
+            "prompt": "Por Favor Coloque Seu Token",
+            "confirmation": "Pronto",
+            "invalid": "O Token é Invalido"
+        },
+        "messageType": {
+            "serverJoin": "Entrou No Servidor",
+            "pin": "Fixou Uma Mensagem",
+            "channelNews": "Adicionou Uma Mensagem No Canal De Noticias",
+            "boost": "Deu Boost No Servidor"
+        },
+        "fileType": {
+            "unknown": "Desconhecido",
+            "img": "imagem",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Negrito",
+            "emphasis": "Italico",
+            "underline": "Sublinhada",
+            "strike": "Tachada",
+            "clear": "Limpar Formatação"
+        }
     }
 };
