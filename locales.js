@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+    "es": {
+        "cCode": "es",
+        "language": "Español",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Activar animacion de auto-scroll",
+            "fileSent": "envió algún(os) archivo(s)",
+            "attachmentTxt": "Archivos adjuntos",
+            "privateMessages": "MD",
+            "userId": "ID de usuario"
+        },
+        "buttons": {
+            "clearLastMessages": "Borrar ultimo mensaje",
+            "editToken": "Editar token",
+            "refreshChat": "Recargar chat",
+            "changeLanguage": "Cambiar idioma",
+            "send": "Enviar",
+            "leave": "Salir del server",
+            "invite": "Invitar"
+        },
+        "infos": {
+            "owner": "Dueño",
+            "members": "Miembros",
+            "vChannels": "Canales (Voz)",
+            "tChannels": "Canales (Texto)",
+            "roles": "Roles",
+            "channels": "Canales",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Ultimos Mensajes",
+            "guildName": "Informacion",
+            "autoScroll": "Auto-Scroll",
+        },
+        "errors": {
+            "error": "ERROR",
+            "dm": "ERROR : MD",
+            "emptyMsg": "ERROR : MENSAJE VACIO",
+            "missingPermissions": "ERROR : PERMISOS FALTANTES"
+        },
+        "token": {
+            "prompt": "Ingresa el token del bot",
+            "confirmation": "Estas seguro ?",
+            "invalid": "No se añadio un token o es incorrecto"
+        },
+        "messageType": {
+            "serverJoin": "Se unió al servidor",
+            "pin": "Fijó un mensaje",
+            "channelNews": "Agregó un canal de noticias remoto",
+            "boost": "Impulsó el servidor"
+        },
+        "fileType": {
+            "unknown": "Desconocido",
+            "img": "Imagen",
+            "doc": "Documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Bold",
+            "emphasis": "Énfasis",
+            "underline": "Subrayar",
+            "strike": "Tachado",
+            "clear": "Borrar formato"
+        }
     }
 };
