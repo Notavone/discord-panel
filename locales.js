@@ -780,7 +780,7 @@ const locales = {
         },
         "token": {
             "prompt": "Ingresa el token del bot",
-            "confirmation": "Estas seguro ?",
+            "confirmation": "¿Estas seguro?",
             "invalid": "No se añadio un token o es incorrecto"
         },
         "messageType": {
