@@ -786,7 +786,7 @@ const locales = {
         "messageType": {
             "serverJoin": "Se unió al servidor",
             "pin": "Fijó un mensaje",
-            "channelNews": "Agregó un canal de noticias remoto",
+            "channelNews": "Agregó un canal de noticias",
             "boost": "Impulsó el servidor"
         },
         "fileType": {
