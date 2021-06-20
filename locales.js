@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+    "es": {
+        "cCode": "es",
+        "language": "Spanish",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Habilitar la animación de desplazamiento automático",
+            "fileSent": "algun/os archivo/s enviado/s",
+            "attachmentTxt": "Archivos adjuntos",
+            "privateMessages": "DM",
+            "userId": "ID de Usuario"
+        },
+        "buttons": {
+            "clearLastMessages": "Borra los últimos mensajes",
+            "editToken": "Editar token",
+            "refreshChat": "Refrescar el chat",
+            "changeLanguage": "Cambiar idioma",
+            "send": "Enviar",
+            "leave": "Salir del servidor",
+            "invite": "Invitar"
+        },
+        "infos": {
+            "owner": "Dueño",
+            "members": "Miembros",
+            "vChannels": "Canales (voz)",
+            "tChannels": "Canales (texto)",
+            "roles": "Roles",
+            "channels": "Canales",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Últimos mensajes",
+            "guildName": "Información",
+            "autoScroll": "Desplazamiento automático",
+        },
+        "errors": {
+            "error": "ERROR",
+            "dm": "ERROR : DM",
+            "emptyMsg": "ERROR : MENSAJE VACÍO",
+            "missingPermissions": "ERROR : PERMISOS FALTANTES"
+        },
+        "token": {
+            "prompt": "Coloca el token de tu bot de discord, por favor",
+            "confirmation": "¿Estás seguro?",
+            "invalid": "Ningún token fue proporcionado o fue inválido"
+        },
+        "messageType": {
+            "serverJoin": "entró al servidor",
+            "pin": "fijó un mensaje",
+            "channelNews": "agregó un canal de noticias remoto",
+            "boost": "boosteó el servidor" // sometimes we talk in spanglish, thats the reason we use "boost" or some words like that, but you can replace "boosteó" with "mejoró", if you want //
+        },
+        "fileType": {
+            "unknown": "desconocido",
+            "img": "imagen",
+            "doc": "documento",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "audio"
+        },
+        "formatting": {
+            "bold": "Negrilla",
+            "emphasis": "Enfasis",
+            "underline": "Subrayar",
+            "strike": "Tachado",
+            "clear": "Borrar formato"
+        }
     }
 };
