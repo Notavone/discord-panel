@@ -6,6 +6,10 @@
 
 ## Changelog
 
+### Version 1.3.11
+
+*  I honestly don't remember !
+
 ### Version 1.3.10
 
 *  Now uses fontawesome

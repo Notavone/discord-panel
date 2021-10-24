@@ -135,7 +135,7 @@ function contentReplacement(content, links) {
 }
 
 function addText(value) {
-    let toSend = $("#toSend");
+    let toSend = document.getElementById("toSend");
     toSend.html(`${toSend.html() + escapeHtml(value)} `);
 }
 
@@ -148,8 +148,8 @@ function format(command, value) {
  * @param id discord message id
  */
 function delMsg(id) {
-    let guilds = $("#guilds");
-    let channels = $("#channels");
+    let guilds = document.getElementById("guilds");
+    let channels = document.getElementById("channels");
     let channel;
 
     if (guilds.val() === 'DM') {

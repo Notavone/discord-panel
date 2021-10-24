@@ -1,20 +1,21 @@
 $("html").attr("lang", localeFile.cCode);
 
-const guilds = $("#guilds");
-const channels = $("#channels");
-const channelNameLabel = $("#channelNameLabel");
-const channelName = $("#channelName");
-const chat = $("#chat");
-const toSend = $("#toSend");
-const lastMessages = $("#lastMessages");
-const clearChat = $("#clearChat");
-const send = $("#send");
-const guildName = $("#guildName");
-const leaveGuild = $("#leaveGuild");
-const inviteBtn = $("#inviteBtn");
-const refreshToken = $("#refreshToken");
-const refreshChat = $("#refreshChat");
-const overlay = $("#overlay-content");
+let guilds = $("#guilds");
+let channels = $("#channels");
+let channelNameLabel = $("#channelNameLabel");
+let channelName = $("#channelName");
+let chat = $("#chat");
+let toSend = $("#toSend");
+let lastMessages = $("#lastMessages");
+let clearChat = $("#clearChat");
+let send = $("#send");
+let guildName = $("#guildName");
+let leaveGuild = $("#leaveGuild");
+let inviteBtn = $("#inviteBtn");
+let refreshToken = $("#refreshToken");
+let refreshChat = $("#refreshChat");
+let overlay = $("#overlay-content");
+let checkAnim2 = $("#chk2")[0];
 
 /*///////////////////////////////////////////
                 LOADING TRANSLATION
@@ -50,10 +51,6 @@ $("#emphasis").attr("title", localeFile.formatting.emphasis);
 $("#underline").attr("title", localeFile.formatting.underline);
 $("#strike").attr("title", localeFile.formatting.strike);
 $("#clear").attr("title", localeFile.formatting.clear);
-
-/*///////////////////////////////////////////
-                FUNCTIONS
-//////////////////////////////////////////*/
 
 /**
  * Creates a message to display in the chat section of the panel
@@ -141,17 +138,9 @@ function createMessage(message) {
             }
         }
 
-        if (embed.author) {
-            html += embedLinks(embed.author);
-        }
-
-        if (embed.title) {
-            html += `<div><b>${embed.title}</b></div>`;
-        }
-
-        if (embed.description) {
-            html += `<div style="word-break: break-word;">${contentReplacement(embed.description)}</div>`;
-        }
+        if (embed.author) html += embedLinks(embed.author);
+        if (embed.title) html += `<div><b>${embed.title}</b></div>`;
+        if (embed.description) html += `<div style="word-break: break-word;">${contentReplacement(embed.description)}</div>`;
 
         if (embed.fields.length > 0) {
             html += "<div>";
@@ -169,13 +158,9 @@ function createMessage(message) {
             html += `<div><video controls src="${embed.video.url}"></video></div>`;
         } else if (images.length) {
             html += `<div>${images.join('')}</div>`;
-        } else if (embed.thumbnail !== null) {
-            html += `<div><a href="${embed.thumbnail.url}" target="_blank"><img style="border-radius: 8px;width: 100%;height:300px;object-fit: cover;" src="${embed.thumbnail.url}" alt=""></a></div>`;
-        }
+        } else if (embed.thumbnail !== null) html += `<div><a href="${embed.thumbnail.url}" target="_blank"><img style="border-radius: 8px;width: 100%;height:300px;object-fit: cover;" src="${embed.thumbnail.url}" alt=""></a></div>`;
 
-        if (embed.footer) {
-            html += embedLinks(embed.footer);
-        }
+        if (embed.footer) html += embedLinks(embed.footer);
         html += "</div>";
         embeds.push(html);
     }
@@ -190,29 +175,20 @@ function createMessage(message) {
     } else if (message.type === "CHANNEL_FOLLOW_ADD") {
         html += `${localeFile.messageType.channelNews} `;
     } else if (message.type.includes("USER_PREMIUM_GUILD_SUBSCRIPTION")) {
-        html += `${localeFile.messageType.boost} `; // Covers all levels of boosting
-    } else if (message.content === "" && attachments.length > 0) {
-        html += `${localeFile.text.fileSent} `;
-    }
+        html += `${localeFile.messageType.boost} `;
+    } else if (message.content === "" && attachments.length > 0) html += `${localeFile.text.fileSent} `;
 
     // Timestamp & mention button
     html += `<span class="font-size-mini">${timestamp}</span> <button class="mini" data-value="<@!${userId}>" onclick="addText(this.dataset.value)">😐</button>`;
 
     // Delete button
-    if ((guilds.val() === "DM" && message.author.id === client.user.id) || message.guild.me.hasPermission("MANAGE_MESSAGES")) {
-        html += `<button class="mini" data-value="${message.id}" onclick="delMsg(this.dataset.value)">🗑️</button>`;
-    }
+    if (message.guild.me.hasPermission("MANAGE_MESSAGES")) html += `<button class="mini" data-value="${message.id}" onclick="delMsg(this.dataset.value)">🗑️</button>`;
     html += "</div>";
 
     html += `<div class="messageContent">${message.content ? contentReplacement(message.content, links) : ""}</div>`;
 
-    if (embeds.length) {
-        html += `${embeds.join("")}`;
-    }
-
-    if (attachments.length) {
-        html += `<div>${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</div>`;
-    }
+    if (embeds.length) html += `${embeds.join("")}`;
+    if (attachments.length) html += `<div>${localeFile.text.attachmentTxt} : ${attachments.join(', ')}</div>`;
 
     return `${html}</div>`;
 }
@@ -222,120 +198,78 @@ function createMessage(message) {
  */
 function updateChannel() {
     let channel;
-    let user;
+    channel = client.channels.cache.find((c) => c.id === channels.val());
 
-    chat.empty();
-    if (guilds.val() === "DM") {
-        user = client.users.cache.find((user) => user.id === channels.val());
-
-        channel = user.dmChannel;
-        let avatarUrl = user.avatarURL() || `./img/discord_defaults_avatars/${user.discriminator % 5}.png`;
-        guildName.html(`<a href="${avatarUrl}" target="_blank"><img alt="" src="${avatarUrl}" class="avatarIMG"/></a> ${escapeHtml(user.username)}`);
-        $("#guildInfo").html(`${localeFile.text.userId} : (${user.id}) <button class="mini" data-value="<@!${user.id}>" onclick="addText(this.dataset.value)">@</button>`);
-
-        channelNameLabel.text(`${localeFile.text.channelNameLabel} [${user.username}]`);
-        channelName.html(`<span class="fa fa-2x fa-comments avatarIMG"></span> #${escapeHtml(user.username)}`);
-
-        if (channel !== null) {
-            channel.messages.fetch().then((messages) => {
-                Array.from(messages).reverse().forEach((msg) => {
-                    chat.html(chat.html() + createMessage(msg[1]));
-                });
-            });
-        }
-    } else {
-        channel = client.channels.cache.find((c) => c.id === channels.val());
-
-        if (channel === null) {
-            return;
-        }
-
-        channelNameLabel.text(`${localeFile.text.channelNameLabel} [${channel.name}]`);
-        channelName.html(`<span class="fa fa-2x fa-comments avatarIMG"></span> #${escapeHtml(channel.name)}`);
-        channel.messages.fetch().then((messages) => {
-            Array.from(messages).reverse().forEach((msg) => {
-                chat.html(chat.html() + createMessage(msg[1]));
-            });
-        });
-        $("#chk2")[0].checked = true;
+    if (channel === null) {
+        return;
     }
+
+    channelNameLabel.text(`${localeFile.text.channelNameLabel} [${channel.name}]`);
+    channelName.html(`<span class="fa fa-2x fa-comments avatarIMG"></span> #${escapeHtml(channel.name)}`);
+    channel.messages.fetch().then((messages) => {
+        Array.from(messages).reverse().forEach((msg) => {
+            chat.html(chat.html() + createMessage(msg[1]));
+        });
+    });
+    checkAnim2.checked = true;
+
 }
 
 /**
  * Loads the guild channels and informations, same with the users
  */
 function updateGuild() {
-    let usersArray = [];
     let guildEmojis = [];
     let guildMembers = [];
     let guild;
     let html = "";
 
     channels.children("option").remove();
-    if (guilds.val() === "DM") {
-        // includes client self user and clyde
-        if (client.users.cache.size <= 2) {
-            return;
-        }
+    guild = client.guilds.cache.find((g) => g.id === guilds.val());
 
-        client.users.cache.forEach((user) => {
-            if (!user.bot) {
-                usersArray.push([escapeHtml(user.username.toLowerCase()), user.id, escapeHtml(user.tag)]);
+    if (guild.channels.cache.filter((c) => c.type === "text").size > 0) {
+        guild.channels.cache.filter((c) => c.type === "text").forEach((channel) => {
+            if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
+                channels.append(`<option value="${channel.id}">#${escapeHtml(channel.name)}</option>`);
             }
         });
-
-        usersArray.sort();
-
-        for (let i = 0; i < usersArray.length; i++) {
-            channels.append(`<option value="${usersArray[i][1]}">${escapeHtml(usersArray[i][2])}</option>`);
-        }
-    } else {
-        guild = client.guilds.cache.find((g) => g.id === guilds.val());
-
-        if (guild.channels.cache.filter((c) => c.type === "text").size > 0) {
-            guild.channels.cache.filter((c) => c.type === "text").forEach((channel) => {
-                if (channel.permissionsFor(guild.me).has("VIEW_CHANNEL")) {
-                    channels.append(`<option value="${channel.id}">#${escapeHtml(channel.name)}</option>`);
-                }
-            });
-        }
-
-        if (guild.iconURL()) {
-            guildName.html(`<a href="${guild.iconURL() || "./images/icon/info.png"}" target="_blank"><img alt="" src="${guild.iconURL() || "./images/icon/info.png"}" class="avatarIMG"/></a> ${escapeHtml(guild.name)}`);
-        }
-
-        // General information
-        html += `<div>${localeFile.infos.owner}: ${guild.owner.user.tag} <button data-value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.dataset.value)">@</button></div><div>${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}</div><div>${localeFile.infos.vChannels}: ${guild.channels.cache.filter((c) => c.type === "voice").size}</div><div>${localeFile.infos.tChannels}: ${guild.channels.cache.filter((c) => c.type === "text").size}</div><br>`;
-
-        // Members button
-        guild.members.cache.filter((member) => !member.user.bot).forEach((member) => {
-            let avatarUrl = member.user.avatarURL() || `./img/discord_defaults_avatars/${member.user.discriminator % 5}.png`;
-            guildMembers.push(`<div style="margin: 4px 0 4px 0"><a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button data-value="<@!${member.user.id}>" onclick="addText(this.dataset.value)" class="mini">@</button></div>`);
-        });
-        html += `<button onclick='$("#guildMembers").toggle("fast")'>${localeFile.infos.members}</button><div id="guildMembers" style="display:none;">${guildMembers.join('')}</div>`;
-
-        // Roles button
-        html += `<button onclick='$("#guildRoles").toggle("fast")'>${localeFile.infos.roles}</button><div id="guildRoles" style="display:none;">${guild.roles.cache.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>`;
-
-        // Channels button
-        if (guild.channels.cache.size > 0) {
-            html += `<button onclick='$("#guildChannels").toggle("fast")'>${localeFile.infos.channels}</button><div id="guildChannels" style="display:none;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`;
-        }
-
-        // Emoji button
-        if (guild.emojis.cache.size > 0) {
-            guild.emojis.cache.forEach((emoji) => {
-                if (emoji.animated) {
-                    guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<${emoji.identifier}>')"/>`);
-                } else {
-                    guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
-                }
-            });
-            html += `<button onclick='$("#guildEmojis").toggle("fast")'>${localeFile.infos.emojis}</button><div id="guildEmojis" style="display:none;">${guildEmojis.join(" ")}</div>`;
-        }
-
-        $("#guildInfo").html(html);
     }
+
+    if (guild.iconURL()) {
+        guildName.html(`<a href="${guild.iconURL()}" target="_blank"><img alt="" src="${guild.iconURL()}" class="avatarIMG"/></a> ${escapeHtml(guild.name)}`);
+    } else {
+        guildName.html(`<span class="fa fa-2x fa-info-circle avatarIMG"></span> ${escapeHtml(guild.name)}`);
+    }
+
+// General information
+    html += `<div>${localeFile.infos.owner}: ${guild.owner.user.tag} <button data-value="<@!${guild.owner.user.id}>" class="mini" onclick="addText(this.dataset.value)">@</button></div><div>${localeFile.infos.members}: ${guild.members.cache.filter((member) => !member.user.bot).size}</div><div>${localeFile.infos.vChannels}: ${guild.channels.cache.filter((c) => c.type === "voice").size}</div><div>${localeFile.infos.tChannels}: ${guild.channels.cache.filter((c) => c.type === "text").size}</div><br>`;
+
+// Members button
+    guild.members.cache.filter((member) => !member.user.bot).forEach((member) => {
+        let avatarUrl = member.user.avatarURL() || `./img/discord_defaults_avatars/${member.user.discriminator % 5}.png`;
+        guildMembers.push(`<div style="margin: 4px 0 4px 0"><a href="${avatarUrl}" target="_blank"><img alt="" style="display: inline;" class="avatarIMG" src="${avatarUrl}"/></a> ${member.user.tag} <button data-value="<@!${member.user.id}>" onclick="addText(this.dataset.value)" class="mini">@</button></div>`);
+    });
+    html += `<button onclick='$("#guildMembers").toggle("fast")'>${localeFile.infos.members}</button><div id="guildMembers" style="display:none;">${guildMembers.join('')}</div>`;
+    html += `<button onclick='$("#guildRoles").toggle("fast")'>${localeFile.infos.roles}</button><div id="guildRoles" style="display:none;">${guild.roles.cache.map((role) => `${escapeHtml(role.name)} (${role.id})`).join("<br>")}</div>`;
+
+// Channels button
+    if (guild.channels.cache.size > 0) {
+        html += `<button onclick='$("#guildChannels").toggle("fast")'>${localeFile.infos.channels}</button><div id="guildChannels" style="display:none;">${guild.channels.cache.map((channels) => `${escapeHtml(channels.name)} (${channels.id})`).join("<br>")}</div>`;
+    }
+
+// Emoji button
+    if (guild.emojis.cache.size > 0) {
+        guild.emojis.cache.forEach((emoji) => {
+            if (emoji.animated) {
+                guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<${emoji.identifier}>')"/>`);
+            } else {
+                guildEmojis.push(`<img alt="" class="emojiImg" src="${emoji.url}" onclick="addText('<:${emoji.identifier}>')"/>`);
+            }
+        });
+        html += `<button onclick='$("#guildEmojis").toggle("fast")'>${localeFile.infos.emojis}</button><div id="guildEmojis" style="display:none;">${guildEmojis.join(" ")}</div>`;
+    }
+
+    $("#guildInfo").html(html);
 
     updateChannel();
 }
@@ -354,7 +288,6 @@ function fetchGuilds() {
     client.guilds.cache.forEach((guild) => {
         guilds.append(`<option value="${guild.id}">${escapeHtml(guild.name)}</option>`);
     });
-    guilds.append(`<option value="DM">[${localeFile.text.privateMessages}]</option>`);
 
     updateGuild();
 }
@@ -363,8 +296,6 @@ function fetchGuilds() {
  * Transform an html message into a discord message and sends it
  */
 function sendMessage() {
-    let user;
-
     if (toSend.html() === "") {
         tempChange("#send", `[${localeFile.errors.emptyMsg}]`, 1000);
     } else {
@@ -386,14 +317,9 @@ function sendMessage() {
             .replace(/&amp;/g, "&")
             .replace(/<br>/g, "\n");
 
-        if (guilds.val() === "DM") {
-            user = client.users.cache.find((user) => user.id === channels.val());
-            user.send(formatted);
-        } else {
-            client.channels.cache.find((channel) => channel.id === channels.val()).send(formatted).catch(() => {
-                tempChange("#send", `[${localeFile.errors.missingPermissions}]`, 1000);
-            });
-        }
+        client.channels.cache.find((channel) => channel.id === channels.val()).send(formatted).catch(() => {
+            tempChange("#send", `[${localeFile.errors.missingPermissions}]`, 1000);
+        });
         toSend.html("");
     }
 }
@@ -435,7 +361,7 @@ client.on("message", (message) => {
         lastMessages.html(lastMessages.html() + `<br><b>[${localeFile.text.privateMessages}] ${escapeHtml(message.author.tag)} | ${message.author.id} </b> \n${contentReplacement(message.content)}`);
     }
 
-    localStorage.setItem("lastMessages", $("#lastMessages").html());
+    localStorage.setItem("lastMessages", lastMessages.html());
 });
 
 client.on("ready", () => {
@@ -476,14 +402,14 @@ client.on("guildUpdate", (oldGuild,) => {
     if (oldGuild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
 client.on("guildMemberAdd", (member) => {
     if (member.guild.id === guilds.val()) {
         updateGuild();
-        selectChannelOnReload()
+        selectChannelOnReload();
     }
 });
 
@@ -491,19 +417,19 @@ client.on("guildMemberRemove", (member) => {
     if (member.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
 client.on("channelCreate", (channel) => {
-    if (guilds.val() === "[DM]" || channel.type === "dm") {
+    if (channel.type === "dm") {
         return;
     }
 
     if (channel.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
@@ -511,7 +437,7 @@ client.on("channelDelete", (channel) => {
     if (channel.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
@@ -519,7 +445,7 @@ client.on("channelUpdate", (oldChannel) => {
     if (oldChannel.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
@@ -527,7 +453,7 @@ client.on("emojiCreate", (emoji) => {
     if (emoji.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
@@ -535,7 +461,7 @@ client.on("emojiDelete", (emoji) => {
     if (emoji.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
@@ -543,7 +469,7 @@ client.on("emojiUpdate", (oldEmoji) => {
     if (oldEmoji.guild.id === guilds.val()) {
         let channel = channels.val();
         updateGuild();
-        selectChannelOnReload(channel)
+        selectChannelOnReload(channel);
     }
 });
 
@@ -576,30 +502,23 @@ send.click(() => {
 
 clearChat.click(() => {
     localStorage.setItem("lastMessages", "");
-    $("#lastMessages").empty();
+    lastMessages.empty();
 });
 
 leaveGuild.click(() => {
-    if (guilds.val() !== "DM") {
-        if (window.confirm(localeFile.token.confirmation)) {
-            client.guilds.cache.find((guild) => guild.id === guilds.val()).leave().catch(() => {
-                tempChange("#leaveGuild", `[${localeFile.errors.error}]`, 1000);
-            });
-        }
+    if (window.confirm(localeFile.token.confirmation)) {
+        client.guilds.cache.find((guild) => guild.id === guilds.val()).leave().catch(() => {
+            tempChange("#leaveGuild", `[${localeFile.errors.error}]`, 1000);
+        });
     }
 });
 
 inviteBtn.click(() => {
-    if (guilds.val() === "DM") {
-        tempChange("#inviteBtn", `[${localeFile.errors.dm}]`, 1000);
-    } else {
-        client.channels.cache.find((channel) => channel.id === channels.val()).createInvite().then((invite) => {
-            alert(`discord.gg/${invite.code}`);
-        }).catch(() => {
-            tempChange("#inviteBtn", `[${localeFile.errors.missingPermissions}]`, 1000);
-        });
-    }
-
+    client.channels.cache.find((channel) => channel.id === channels.val()).createInvite().then((invite) => {
+        alert(`discord.gg/${invite.code}`);
+    }).catch(() => {
+        tempChange("#inviteBtn", `[${localeFile.errors.missingPermissions}]`, 1000);
+    });
 });
 
 refreshChat.click(() => {
@@ -637,18 +556,19 @@ document.addEventListener("keyup", (event) => {
 //////////////////////////////////////////*/
 
 lastMessages.bind("wheel", (event) => {
+    let check = $("#chk1")[0];
     if (event.originalEvent.deltaY < 0) {
-        $("#chk1")[0].checked = false;
-    } else if (event.originalEvent.deltaY > 0 && $("#lastMessages").scrollTop() + $("#lastMessages").innerHeight() >= $("#lastMessages")[0].scrollHeight - 100) {
-        $("#chk1")[0].checked = true;
+        check.checked = false;
+    } else if (event.originalEvent.deltaY > 0 && lastMessages.scrollTop() + lastMessages.innerHeight() >= lastMessages[0].scrollHeight - 100) {
+        check.checked = true;
     }
 });
 
 chat.bind("wheel", (event) => {
     if (event.originalEvent.deltaY < 0) {
-        $("#chk2")[0].checked = false;
-    } else if (event.originalEvent.deltaY > 0 && $("#chat").scrollTop() + $("#chat").innerHeight() >= $("#chat")[0].scrollHeight - 100) {
-        $("#chk2")[0].checked = true;
+        checkAnim2.checked = false;
+    } else if (event.originalEvent.deltaY > 0 && chat.scrollTop() + chat.innerHeight() >= chat[0].scrollHeight - 100) {
+        checkAnim2.checked = true;
     }
 });
 
