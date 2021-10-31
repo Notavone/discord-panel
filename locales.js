@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+    "vi": {
+        "cCode": "vi",
+        "language": "Tiếng Việt",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Bật hiệu ứng tự động cuộn",
+            "fileSent": "đã gửi một số file!",
+            "attachmentTxt": "Đính kèm",
+            "privateMessages": "Tin nhắn trực tiếp",
+            "userId": "ID Người dùng"
+        },
+        "buttons": {
+            "clearLastMessages": "Xóa các tin nhắn gần đây",
+            "editToken": "Sửa token",
+            "refreshChat": "Làm mới chat",
+            "changeLanguage": "Đổi ngôn ngữ",
+            "send": "Gửi",
+            "leave": "Rời Server",
+            "invite": "Mời"
+        },
+        "infos": {
+            "owner": "Chủ Server",
+            "members": "Thành viên",
+            "vChannels": "Kênh voice",
+            "tChannels": "Kênh text",
+            "roles": "Vai trò",
+            "channels": "Kênh",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Tin nhắn gần đây",
+            "guildName": "Thông tin",
+            "autoScroll": "Tự động cuộn",
+        },
+        "errors": {
+            "error": "LỖI",
+            "dm": "LỖI : TIN NHẮN TRỰC TIẾP",
+            "emptyMsg": "LỖI : TIN NHẮN TRỐNG",
+            "missingPermissions": "LỖI : THIẾU QUYỀN HẠN"
+        },
+        "token": {
+            "prompt": "Vui lòng nhập Token Bot của bạn",
+            "confirmation": "Bạn chắc chứ?",
+            "invalid": "Không tìm thấy Token hoặc Token sai"
+        },
+        "messageType": {
+            "serverJoin": "đã vào Server",
+            "pin": "đã ghim tin nhắn",
+            "channelNews": "đã theo dõi kênh thông báo",
+            "boost": "đã nâng cấp Server"
+        },
+        "fileType": {
+            "unknown": "không rõ",
+            "img": "ảnh",
+            "doc": "tài liệu",
+            "pdf": "pdf",
+            "video": "video",
+            "audio": "âm thanh"
+        },
+        "formatting": {
+            "bold": "Tô đậm",
+            "emphasis": "In nghiêng",
+            "underline": "Gạch chân",
+            "strike": "Gạch ngang",
+            "clear": "Bỏ toàn bộ hiệu ứng"
+        }
     }
 };
