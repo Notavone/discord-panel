@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+    "ar": {
+        "cCode": "ar",
+        "language": "العربية",
+        "text": {
+            "channelNameLabel": "دردشة",
+            "scrollCheck": "تمكين التمرير التلقائي بتأثيرات متحركة",
+            "fileSent": "أرسل بعض الملفات",
+            "attachmentTxt": "المرفقات",
+            "privateMessages": "رسالة مباشرة",
+            "userId": "معرف المستخدم"
+        },
+        "buttons": {
+            "clearLastMessages": "حذف آخر الرسائل",
+            "editToken": "تعديل التوكن",
+            "refreshChat": "تحديث رسائل الدردشة",
+            "changeLanguage": "تغيير اللغة",
+            "send": "إرسال",
+            "leave": "مغادرة الخادم",
+            "invite": "دعوة"
+        },
+        "infos": {
+            "owner": "المالك",
+            "members": "الأعضاء",
+            "vChannels": "قنوات (صوتية)",
+            "tChannels": "قنوات (نصية)",
+            "roles": "أدوار",
+            "channels": "قنوات",
+            "emojis": "رموز تعبيرية"
+        },
+        "headings": {
+            "lastMessages": "آخر الرسائل",
+            "guildName": "معلومات",
+            "autoScroll": "تمرير-تلقائي",
+        },
+        "errors": {
+            "error": "خطأ",
+            "dm": "خطأ : بالرسائل المباشرة",
+            "emptyMsg": "خطأ : رسالة فارغة",
+            "missingPermissions": "خطأ :صلاحيات مفقودة"
+        },
+        "token": {
+            "prompt": "يرجى إدخال رمز (توكن) البوت خاصتك",
+            "confirmation": "هل أنت متأكد؟",
+            "invalid": "لم يتم إدخال اي توكن او أنه غير صالح"
+        },
+        "messageType": {
+            "serverJoin": "انضممت إلى الخادم",
+            "pin": "ثبّت الرسالة",
+            "channelNews": "تم إضافة قناة للأخبار",
+            "boost": "عززت الخادم"
+        },
+        "fileType": {
+            "unknown": "مجهول",
+            "img": "صورة",
+            "doc": "وثيقة",
+            "pdf": "pdf",
+            "video": "فيديو",
+            "audio": "صوت"
+        },
+        "formatting": {
+            "bold": "عريض",
+            "emphasis": "تشديد",
+            "underline": "خط بالأسفل",
+            "strike": "خط بالمنتصف",
+            "clear": "تنظيف"
+        }
     }
 };
