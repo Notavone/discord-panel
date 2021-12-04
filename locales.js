@@ -737,5 +737,72 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+
+    "de": {
+        "cCode": "de",
+        "language": "deutsch",
+        "text": {
+            "channelNameLabel": "Chat",
+            "scrollCheck": "Aktiviere Auto-Scrolling animation",
+            "fileSent": "Dateien wurden versendet",
+            "attachmentTxt": "Anhang",
+            "privateMessages": "PN",
+            "userId": "User ID"
+        },
+        "buttons": {
+            "clearLastMessages": "Lösche die letzten Nachrichten",
+            "editToken": "Token ändern",
+            "refreshChat": "Aktualisiere den Chat",
+            "changeLanguage": "Sprache Wechseln",
+            "send": "Senden",
+            "leave": "Server Verlassen",
+            "invite": "Einladung"
+        },
+        "infos": {
+            "owner": "Eigentümer",
+            "members": "Mitglieder",
+            "vChannels": "Sprachchannel",
+            "tChannels": "Textchannel",
+            "roles": "Rollen",
+            "channels": "Channels",
+            "emojis": "Emojis"
+        },
+        "headings": {
+            "lastMessages": "Letzte Nachrichten",
+            "guildName": "Information",
+            "autoScroll": "Auto-Scroll",
+        },
+        "errors": {
+            "error": "FEHLER",
+            "dm": "FEHLER : PN",
+            "emptyMsg": "FEHLER : LEERE NACHRICHT",
+            "missingPermissions": "FEHLER :FEHLENDE BERECHTIGUNG"
+        },
+        "token": {
+            "prompt": "Bitte trage hier deinen Discord Bot Token ein.",
+            "confirmation": "Bist du dir sicher?",
+            "invalid": "Es wurde kein Token eingetragen oder er ist ungültig"
+        },
+        "messageType": {
+            "serverJoin": "Server betreten",
+            "pin": "Nachricht Angepinnt",
+            "channelNews": "Remote Channel News wurden hinzugefügt",
+            "boost": "Server geboostet"
+        },
+        "fileType": {
+            "unknown": "Fehler",
+            "img": "Bild",
+            "doc": "Dokument",
+            "pdf": "pdf",
+            "video": "Video",
+            "audio": "Audio"
+        },
+        "formatting": {
+            "bold": "Fett",
+            "emphasis": "emphasis",
+            "underline": "Unterschreichen",
+            "strike": "Lösche Formatierung"
+        }
     }
 };
