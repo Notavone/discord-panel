@@ -737,5 +737,141 @@ const locales = {
             "strike": "Barrato",
             "clear": "Formattazione ripristinata"
         }
+    },
+
+    "zh-tw": {
+        "cCode": "zh-tw",
+        "language": "繁體中文(臺灣)",
+        "text": {
+            "channelNameLabel": "聊天頻道",
+            "scrollCheck": "啟用自動滑動動畫",
+            "fileSent": "傳送檔案",
+            "attachmentTxt": "附件",
+            "privateMessages": "私人訊息",
+            "userId": "使用者ID"
+        },
+        "buttons": {
+            "clearLastMessages": "刪除最近的訊息",
+            "editToken": "編輯金鑰",
+            "refreshChat": "重新整理",
+            "changeLanguage": "改變語言",
+            "send": "傳送",
+            "leave": "離開伺服器",
+            "invite": "邀請"
+        },
+        "infos": {
+            "owner": "擁有者",
+            "members": "成員",
+            "vChannels": "語音頻道",
+            "tChannels": "文字頻道",
+            "roles": "身分組",
+            "channels": "頻道",
+            "emojis": "表情符號"
+        },
+        "headings": {
+            "lastMessages": "最近的訊息",
+            "guildName": "關於",
+            "autoScroll": "自動滑動",
+        },
+        "errors": {
+            "error": "錯誤",
+            "dm": "錯誤：私人訊息",
+            "emptyMsg": "錯誤：沒有訊息",
+            "missingPermissions": "錯誤：沒有權限"
+        },
+        "token": {
+            "prompt": "請輸入你的Discord機器人金鑰",
+            "confirmation": "你確定嗎?",
+            "invalid": "沒有金鑰或是金鑰無效"
+        },
+        "messageType": {
+            "serverJoin": "加入伺服器",
+            "pin": "釘選訊息",
+            "channelNews": "新增了一個跨伺服器公告頻道",
+            "boost": "加成了伺服器"
+        },
+        "fileType": {
+            "unknown": "未知",
+            "img": "圖片",
+            "doc": "文件",
+            "pdf": "pdf",
+            "video": "影片",
+            "audio": "音訊"
+        },
+        "formatting": {
+            "bold": "粗體",
+            "emphasis": "斜體",
+            "underline": "底線",
+            "strike": "刪除線",
+            "clear": "清除格式"
+        }
+    },
+
+    "zh-cn": {
+        "cCode": "zh-tw",
+        "language": "简体中文(中国)",
+        "text": {
+            "channelNameLabel": "聊天频道",
+            "scrollCheck": "启用自动滑动动画",
+            "fileSent": "传送文件",
+            "attachmentTxt": "附件",
+            "privateMessages": "私信",
+            "userId": "用户ID"
+        },
+        "buttons": {
+            "clearLastMessages": "删除最近的信息",
+            "editToken": "编辑令牌",
+            "refreshChat": "刷新",
+            "changeLanguage": "改变语言",
+            "send": "发送",
+            "leave": "离开服务器",
+            "invite": "邀请"
+        },
+        "infos": {
+            "owner": "所有者",
+            "members": "成员",
+            "vChannels": "语音频道",
+            "tChannels": "文字频道",
+            "roles": "身分组",
+            "channels": "频道",
+            "emojis": "表情符号"
+        },
+        "headings": {
+            "lastMessages": "最近的信息",
+            "guildName": "关于",
+            "autoScroll": "自动滑动",
+        },
+        "errors": {
+            "error": "错误",
+            "dm": "错误：私信",
+            "emptyMsg": "错误：没有信息",
+            "missingPermissions": "错误：没有权限"
+        },
+        "token": {
+            "prompt": "请输入你的Discord机器人令牌",
+            "confirmation": "你确定吗?",
+            "invalid": "没有令牌或是令牌无效"
+        },
+        "messageType": {
+            "serverJoin": "加入服务器",
+            "pin": "标注信息",
+            "channelNews": "添加了一个跨服务器的公告频道",
+            "boost": "助力了服务器"
+        },
+        "fileType": {
+            "unknown": "未知",
+            "img": "图片",
+            "doc": "文件",
+            "pdf": "pdf",
+            "video": "视频",
+            "audio": "音讯"
+        },
+        "formatting": {
+            "bold": "粗体",
+            "emphasis": "斜体",
+            "underline": "底线",
+            "strike": "删除线",
+            "clear": "清除格式"
+        }
     }
 };
