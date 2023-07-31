@@ -1,6 +1,7 @@
 /* ///////////////////////////////////////////
                     GENERAL
 ////////////////////////////////////////// */
+
 :root {
   --red: #d3514c;
   --redHover: #d41109;
@@ -11,6 +12,7 @@
   --contentColor: rgb(39, 39, 41);
 }
 
+/* Global styles */
 * {
   font-family: Helvetica, sans-serif;
   outline: none;
@@ -19,10 +21,10 @@
 
 body {
   background-color: var(--bodyColor);
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
 }
 
+/* Header styles */
 .header {
   border: 2px solid var(--bodyColor);
   box-shadow: 0 0 5px var(--bodyColor);
@@ -32,10 +34,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
+/* Figure and multimedia styles */
 figure {
   margin: 0;
 }
@@ -48,10 +50,10 @@ video {
   max-width: 100%;
 }
 
+/* Miscellaneous styles */
 .messageId {
   display: none;
 }
-
 .messageContent {
   margin: 0;
 }
@@ -338,7 +340,8 @@ input:checked + .slider::before {
   display: block;
   transition: 0.3s;
 }
-.overlay a:hover, .overlay a:focus {
+.overlay a:hover,
+.overlay a:focus {
   color: #f1f1f1;
 }
 .overlay .closeBtn {
