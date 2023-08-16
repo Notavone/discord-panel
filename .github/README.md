@@ -127,6 +127,7 @@ Please refer to [TRANSLATION.md](TRANSLATION.md)
 | [Pyrox](https://github.com/Pyr0x1)                      | Italian                  |
 | [Vatunyoo Suwannapisit](https://github.com/kerlos)      | Thai                     |
 | [Antonio Sarro](https://github.com/asarro99)            | Italian                  |
+| [Astrid](https://github.com/RobertsSpaceIndustries)     | Dutch                    |
 
 ### Other 👍
 
