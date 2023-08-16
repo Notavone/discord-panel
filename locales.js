@@ -277,7 +277,7 @@ const locales = {
             "scrollCheck": "Schakel automatisch scrollende animatie in",
             "fileSent": "heeft bestand(en) gestuurd",
             "attachmentTxt": "Bijlagen",
-            "privateMessages": "DB",
+            "privateMessages": "PM",
             "userId": "Gebruikersnaam"
         },
         "buttons": {
@@ -292,8 +292,8 @@ const locales = {
         "infos": {
             "owner": "Eigenaar",
             "members": "Leden",
-            "vChannels": "Kanalen (spraak)",
-            "tChannels": "Kanalen (tekst)",
+            "vChannels": "Spraak kanalen",
+            "tChannels": "Tekst Kanalen",
             "roles": "Rollen",
             "channels": "Kanalen",
             "emojis": "Emoji's"
@@ -305,7 +305,7 @@ const locales = {
         },
         "errors": {
             "error": "FOUT",
-            "dm": "FOUT : DB",
+            "dm": "FOUT : PM",
             "emptyMsg": "FOUT : LEEG BERICHT",
             "missingPermissions": "FOUT : ONTBREKENDE TOESTEMMINGEN"
         },
